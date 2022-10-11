@@ -24,6 +24,7 @@ const routes = [
          },
          {path : '/admin/category/add', name : 'addCategory', component:() => import('src/pages/product/AddCategory.vue')},
          {path : '/admin/product/add', name : 'addProduct', component:() => import('src/pages/product/AddProduct.vue')},
+         {path : '/admin/product', name : 'adminProduct', component:() => import('src/pages/admin/ProductAdmin.vue')},
          {path : '/admin/category/add/:id', name : 'categoryDetail', component:() => import('src/pages/product/AddCategory.vue')},
          {path : '/admin/product/add/:id', name : 'categoryDetail', component:() => import('src/pages/product/AddProduct.vue')},
          {path : '/admin/category/edit', name : 'editCategory', component:() => import('src/pages/product/EditCategory.vue')},
