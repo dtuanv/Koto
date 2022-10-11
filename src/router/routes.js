@@ -11,8 +11,8 @@ const routes = [
 
        { path : '/customer', name :'customer', component:() => import('src/pages/customer/Customer.vue')},
        { path : '/customer/:customerId', name :'detail', component:() => import('src/pages/customer/Detail.vue')},
-       { path : '/product', name :'productAll', component:() => import('src/pages/product/Product.vue')},
-       { path : '/product/:id', name :'product', props:true, component:() => import('src/pages/product/Product.vue')},
+       { path : '/product', name :'product', component:() => import('src/pages/product/Product.vue')},
+      //  { path : '/product/:id', name :'product', props:true, component:() => import('src/pages/product/Product.vue')},
        { path : '/product/1',
          name:'product_1',
          component:() => import('src/pages/product/Product_1.vue')},

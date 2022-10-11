@@ -1,6 +1,20 @@
 export const SET_PRODUCT= (state, product) => {
   // console.log("SET_Product")
   state.products = product
+  state.vorspeiseProducts= product.filter((pr) => {
+    return pr.category === "vorspeise";
+  });
+  state.hauptgangProducts= product.filter((pr) => {
+    return pr.category === "hauptgang";
+  });
+  state.sushiMixProducts= product.filter((pr) => {
+    return pr.category === "sushiMix";
+  });
+  state.sushiProducts= product.filter((pr) => {
+    return pr.category === "sushi";
+  });
+
+
   // console.log("product in mutation ", state.products )
   // console.log("product in mutation per String",  JSON.parse(JSON.stringify(state.products)) )
 }
