@@ -1,200 +1,210 @@
 <template>
-  <q-layout view="hHh lpR fFf" class="bg-grey-1" > <!-- Be sure to play with the Layout demo on docs -->
+  <q-layout view="hHh lpR fFf" class="bg-grey-1">
+    <!-- Be sure to play with the Layout demo on docs -->
 
     <!-- (Optional) The Header -->
-    <q-header  elevated class="bg-white text-grey-8 q-py-xs" height-hint="58" >
+    <q-header elevated class="bg-white text-grey-8 q-py-xs" height-hint="58">
       <q-toolbar>
-
         <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
 
         <q-btn flat no-caps no-wrap class="q-ml-xs" to="/">
-          <q-avatar><img src="/img/KotoLogo.png" alt=""></q-avatar>
+          <q-avatar><img src="/img/KotoLogo.png" alt="" /></q-avatar>
           <q-toolbar-title shrink class="text-weight-bold">
             Koto
           </q-toolbar-title>
         </q-btn>
 
+        <q-tabs
+          v-if="$q.screen.gt.sm"
+          class="
+            GL__toolbar-link
+            q-ml-xs q-gutter-md
+            text-body2 text-weight-bold
+            row
+            items-center
+            no-wrap
+          "
+        >
+          <!-- <q-tabs v-if="true" class="GL__toolbar-link q-ml-xs q-gutter-md text-body2 text-weight-bold row items-center no-wrap" > -->
+          <q-route-tab :to="'/'" label="Home" />
+          <q-route-tab :to="{ name: 'customer' }" label="Customer" />
+          <q-route-tab
+            :to="{ name: 'product', params: { id: 1 } }"
+            replace
+            label="Product"
+          />
+        </q-tabs>
 
-
-<q-tabs v-if="$q.screen.gt.sm" class="GL__toolbar-link q-ml-xs q-gutter-md text-body2 text-weight-bold row items-center no-wrap" >
-<!-- <q-tabs v-if="true" class="GL__toolbar-link q-ml-xs q-gutter-md text-body2 text-weight-bold row items-center no-wrap" > -->
-  <q-route-tab :to='"/"' label="Home" />
-        <q-route-tab :to="{name:'customer'}" label="Customer"/>
-        <q-route-tab
-          :to="{name:'product', params:{id:1}}"
-          replace
-          label="Product"
-        />
-
-
-      </q-tabs>
-
-      <q-btn class="absolute-top-right q-mt-sm q-mr-md" flat icon="shop" to="/shopping">
-        <q-badge color="red" floating transparent>
-        {{cartItemCount}}
-      </q-badge>
-      </q-btn>
-</q-toolbar>
-
+        <q-btn
+          class="absolute-top-right q-mt-sm q-mr-md"
+          flat
+          icon="shop"
+          to="/shopping"
+        >
+          <q-badge color="red" floating transparent>
+            {{ cartItemCount }}
+          </q-badge>
+        </q-btn>
+      </q-toolbar>
     </q-header>
+
     <q-drawer
-        v-model="drawer"
-        show-if-above
+      v-model="drawer"
+      show-if-above
+      :mini="!drawer || miniState"
+      @click.capture="drawerClick"
+      :width="200"
+      :breakpoint="500"
+      bordered
+      class="bg-grey-3"
+    >
+      <q-scroll-area class="fit">
+        <q-list padding>
+          <q-item clickable v-ripple to="/product">
+            <q-item-section avatar>
+              <q-icon name="shopping_bag" />
+            </q-item-section>
 
-        :mini="!drawer || miniState"
-        @click.capture="drawerClick"
+            <q-item-section> Menü </q-item-section>
+          </q-item>
+          <q-item clickable v-ripple to="/reservation">
+            <q-item-section avatar>
+              <q-icon name="book_online" />
+            </q-item-section>
 
-        :width="200"
-        :breakpoint="500"
-        bordered
-        class="bg-grey-3"
-      >
-        <q-scroll-area class="fit">
-          <q-list padding>
+            <q-item-section> Reservation </q-item-section>
+          </q-item>
 
-            <q-item  clickable v-ripple to="/product">
-              <q-item-section avatar>
-                <q-icon name="shopping_bag" />
-              </q-item-section>
+          <q-item clickable v-ripple to="/contact">
+            <q-item-section avatar>
+              <q-icon name="send" />
+            </q-item-section>
 
-              <q-item-section>
-                Menü
-              </q-item-section>
-            </q-item>
-            <q-item clickable v-ripple to="/reservation">
-              <q-item-section avatar>
-                <q-icon name="book_online" />
-              </q-item-section>
+            <q-item-section> Contact </q-item-section>
+          </q-item>
 
-              <q-item-section>
-                Reservation
-              </q-item-section>
-            </q-item>
+          <q-item clickable v-ripple to="/admin">
+            <q-item-section avatar>
+              <q-icon name="person" />
+            </q-item-section>
 
-            <q-item clickable v-ripple to="/contact">
-              <q-item-section avatar>
-                <q-icon name="send" />
-              </q-item-section>
+            <q-item-section> Admin </q-item-section>
+          </q-item>
+          <q-item clickable v-ripple to="/login">
+            <q-item-section avatar>
+              <q-icon name="drafts" />
+            </q-item-section>
 
-              <q-item-section>
-                Contact
-              </q-item-section>
-            </q-item>
+            <q-item-section> Login </q-item-section>
+          </q-item>
+        </q-list>
+      </q-scroll-area>
 
-            <q-item clickable v-ripple to="/admin">
-              <q-item-section avatar>
-                <q-icon name="person" />
-              </q-item-section>
-
-              <q-item-section>
-                Admin
-              </q-item-section>
-            </q-item>
-            <q-item clickable v-ripple to="/login">
-              <q-item-section avatar>
-                <q-icon name="drafts" />
-              </q-item-section>
-
-              <q-item-section>
-                Login
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-scroll-area>
-
-        <!--
+      <!--
           in this case, we use a button (can be anything)
           so that user can switch back
           to mini-mode
         -->
-        <div class="q-mini-drawer-hide absolute" style="top: 15px; right: -17px">
-          <q-btn
-            dense
-            round
-            unelevated
-            color="accent"
-            icon="chevron_left"
-            @click="miniState = true"
-          />
-        </div>
-      </q-drawer>
-      <div>hihi</div>
+      <div class="q-mini-drawer-hide absolute" style="top: 15px; right: -17px">
+        <q-btn
+          dense
+          round
+          unelevated
+          color="accent"
+          icon="chevron_left"
+          @click="miniState = true"
+        />
+      </div>
+    </q-drawer>
 
     <!-- (Optional) The Footer -->
     <q-footer>
       <q-tabs switch-indicator>
-
-
         <q-route-tab
           icon="restaurant_menu"
-          :to="{name:'product', params:{id:1}}"
+          :to="{ name: 'product', params: { id: 1 } }"
           replace
           label="Menü"
-        color="positive"
-
+          color="positive"
         />
         <q-route-tab
           icon="book_online"
           to="/reservation"
-
           replace
           label="Reservierung"
         />
       </q-tabs>
-
     </q-footer>
 
-
-
-    <q-page-container class="q-mb-xl" style="padding:16px 0px;"  >
+    <!-- <q-page-container class="q-mb-xl" style="padding: 16px 0px">
+      <router-view />
+      <div>HI</div>
+    </q-page-container> -->
+    <q-page-container>
       <!-- This is where pages get injected -->
       <router-view />
-      <!-- <q-page></q-page> -->
+      <!-- <q-page>Hih new</q-page> -->
+      <!-- <div>HIhi</div> -->
+      <div
+        class=""
+        style="
+          color: red;
+          position: relative;
+          color: red;
+          bottom: 0vh;
+          padding: 7vh;
+          background-color: #342a2a;
+        "
+      >
+        <div>Hi</div>
 
+        <div >Copyright © 2022 Jasmin </div>
+      </div>
     </q-page-container>
-
   </q-layout>
 </template>
 
 <script>
-import { ref } from 'vue'
-import { useStore } from 'vuex';
+import { ref } from "vue";
+import { useStore } from "vuex";
 
 export default {
   // name: 'LayoutName',
   // props:{countCart},
-  computed:{
-    cartItemCount(){
-      return this.$store.getters['cache/cartItemCount'];
-    }
+  computed: {
+    cartItemCount() {
+      return this.$store.getters["cache/cartItemCount"];
+    },
   },
-  setup () {
-    const miniState = ref(false)
-    const leftDrawerOpen = ref(false)
-    const amountItem =ref(0)
-    const $store = useStore()
+  setup() {
+    const miniState = ref(false);
+    const amountItem = ref(0);
+    const leftDrawerOpen = ref(false);
+
+    const $store = useStore();
 
     return {
-      amountItem ,
+      amountItem,
       leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      },
+
       drawer: ref(false),
       miniState,
-
-      drawerClick (e) {
+      toggleLeftDrawer() {
+        leftDrawerOpen.value = !leftDrawerOpen.value;
+      },
+      drawerClick(e) {
         // if in "mini" state and user
         // click on drawer, we switch it to "normal" mode
         if (miniState.value) {
-          miniState.value = false
+          miniState.value = false;
 
           // notice we have registered an event with capture flag;
           // we need to stop further propagation as this click is
           // intended for switching drawer to "normal" mode only
-          e.stopPropagation()
-    }
-  }
-    }}
-  }
+          e.stopPropagation();
+        }
+      },
+    };
+  },
+};
 </script>

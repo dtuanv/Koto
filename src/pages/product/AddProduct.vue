@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <q-page class="q-pa-md">
     <!-- make form in center -->
     <div class="">
       <q-form @submit="addproduct()">
@@ -25,7 +25,7 @@
         </div>
       </q-form>
     </div>
-  </div>
+  </q-page>
   <!-- <div class="col-6"></div> -->
   <!-- <div class="col-6"></div> -->
 </template>

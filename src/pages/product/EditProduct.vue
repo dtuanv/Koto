@@ -91,7 +91,7 @@ export default {
 
       this.$q.dialog({
         title: 'Confirm',
-        message: 'Would you like to turn on the wifi?',
+        message: 'Möchten Sie wirklich diese Product löschen?',
         ok: {
           push: true
         },

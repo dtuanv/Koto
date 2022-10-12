@@ -22,6 +22,7 @@ const routes = [
           component:() => import('src/pages/Contact.vue')
 
          },
+        //  Admin
          {path : '/admin/category/add', name : 'addCategory', component:() => import('src/pages/product/AddCategory.vue')},
          {path : '/admin/product/add', name : 'addProduct', component:() => import('src/pages/product/AddProduct.vue')},
          {path : '/admin/product', name : 'adminProduct', component:() => import('src/pages/admin/ProductAdmin.vue')},
@@ -30,7 +31,10 @@ const routes = [
          {path : '/admin/category/edit', name : 'editCategory', component:() => import('src/pages/product/EditCategory.vue')},
          {path : '/admin/product/edit', name : 'editProduct', component:() => import('src/pages/product/EditProduct.vue')},
          {path : '/admin/reservation', name : 'adminResieveren', component:() => import('src/pages/admin/ReservierungManager.vue')},
-         {path : '/loginIn', name : 'loginIn', component:() => import('src/pages/admin/LoginINte.vue')},
+         {path : '/onlyTuan/createNewUser', name : 'createNewUser', component:() => import('src/pages/admin/CreateUser.vue')},
+
+        //  Admin end
+        //  {path : '/loginIn', name : 'loginIn', component:() => import('src/pages/admin/LoginINte.vue')},
          {path : '/login', name : 'login', component:() => import('src/pages/admin/Login.vue')},
          {path : '/category', name : 'category', component:() => import('src/pages/product/Category.vue')},
 
