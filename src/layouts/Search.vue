@@ -34,8 +34,8 @@
             label="Product"
           />
         </q-tabs>
-
-        <q-btn
+          <!-- to shoping cart -->
+        <!-- <q-btn
           class="absolute-top-right q-mt-sm q-mr-md"
           flat
           icon="shop"
@@ -44,7 +44,14 @@
           <q-badge color="red" floating transparent>
             {{ cartItemCount }}
           </q-badge>
-        </q-btn>
+        </q-btn> -->
+        <q-btn v-if="loggedIn!= undefined"
+          class="absolute-top-right q-mt-sm q-mr-md"
+          flat
+          color="red"
+        label="Log Out"
+         @click="logOut"
+        />
       </q-toolbar>
     </q-header>
 
@@ -165,8 +172,12 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import { useStore } from "vuex";
+import { ref, computed, nextTick } from "vue";
+import axios from "axios";
+import { useQuasar } from "quasar";
+import { useRoute, useRouter } from "vue-router";
+import { WebApi } from "/src/apis/WebApi";
+
 
 export default {
   // name: 'LayoutName',
@@ -180,15 +191,35 @@ export default {
     const miniState = ref(false);
     const amountItem = ref(0);
     const leftDrawerOpen = ref(false);
+    const route = useRoute();
+    const $q = useQuasar();
+    const router = useRouter();
+    const loggedIn = localStorage.getItem('user');
+    console.log("loggedIn",loggedIn)
 
-    const $store = useStore();
 
     return {
       amountItem,
       leftDrawerOpen,
-
+      loggedIn,
       drawer: ref(false),
       miniState,
+      logOut(){
+        localStorage.removeItem('user')
+
+        console.log("loggedIn logout",loggedIn)
+        $q.notify({
+              message: "logout",
+
+              color: "positive",
+              avatar: "/img/trangTi.png",
+            });
+
+            router.replace("/");
+
+
+      }
+      ,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },

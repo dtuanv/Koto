@@ -9,6 +9,9 @@ export const getProduct = ({commit}) => {
   });
 
 }
+export const setToken = ({commit}) =>{
+  commit('SET_TOKEN')
+}
 
 // export const addNewTodo =({commit}, payload) => {
 //   commit('addNewTodo', payload)

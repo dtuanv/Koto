@@ -59,6 +59,7 @@ export default {
     const $store = useStore();
     const $q = useQuasar();
     const router = useRouter();
+    const route = useRoute();
 
     axios
       .get(`${WebApi.server}/userAccount`)
@@ -79,17 +80,40 @@ export default {
   methods: {
     onSubmit() {
       axios
-        .get(`${WebApi.server}/userAccount/` + user.value.userName + "/"+ user.value.password )
+        .get(
+          `${WebApi.server}/userAccount/` +
+            user.value.userName +
+            "/" +
+            user.value.password
+        )
         .then((re) => {
           return (userDb.value = re.data);
         })
         .catch((err) => {
           console.log(err);
         });
+      // const token = jwt.sign(userDb.value, process.env.JWT_KEY);
+      // console.log("token",token)
 
+      if (
+        user.value.userName != undefined &&
+        user.value.password != undefined
+      ) {
+        if (
+          user.value.userName === userDb.value.userName &&
+          user.value.password === userDb.value.password
+        ) {
+          window.localStorage.setItem("user", JSON.stringify(userDb.value));
+          window.localStorage.setItem("onlyAdmin", 1);
+
+        }
+      }
+      // this.$route.query.token
+      console.log(" this.$route.query.token", this.$route.query.token)
+      const userLocal = localStorage.getItem("user");
+      console.log("userLocal", userLocal);
 
       console.log("user.value", userDb.value.userName);
-
     },
   },
   // name: 'PageName',

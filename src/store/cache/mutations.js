@@ -84,3 +84,6 @@ export const RESET_STATUS = (state) => {
     re.status = false;
   });
 };
+export const SET_TOKEN = (state) =>{
+  state.token = '1Y'
+}

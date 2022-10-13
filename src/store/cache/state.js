@@ -7,6 +7,7 @@ export default function () {
     sushiProducts: [],
     cart: [],
     bills: [],
+    token:'',
     reservations: [
       { key: 1, imgUrl: "family.png", icon: "east", status: false },
       { key: 2, imgUrl: "calendar.png", icon: "east", status: false },
