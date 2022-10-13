@@ -93,7 +93,7 @@ export default {
               avatar: "/img/trangTi.png",
             });
             console.log("product saved");
-            router.replace("/admin/product/edit");
+            router.replace("/admin/product");
           })
           .catch((err) => {
             console.log(err);

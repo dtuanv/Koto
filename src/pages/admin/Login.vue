@@ -16,7 +16,7 @@
         <div class="flex justify-center text-h4">Login</div>
       </q-card-section>
 
-      <q-form @submit="onSubmit">
+      <q-form @submit.prevent="onSubmit">
         <q-input
           class="q-ml-sm q-mr-sm"
           v-model="user.userName"
@@ -25,6 +25,7 @@
         <q-input
           class="q-ml-sm q-mr-sm"
           v-model="user.password"
+          type="password"
           label="Password"
         ></q-input>
 
@@ -58,8 +59,9 @@ export default {
   setup() {
     const $store = useStore();
     const $q = useQuasar();
-    const router = useRouter();
+    const $router = useRouter();
     const route = useRoute();
+
 
     axios
       .get(`${WebApi.server}/userAccount`)
@@ -103,17 +105,24 @@ export default {
           user.value.userName === userDb.value.userName &&
           user.value.password === userDb.value.password
         ) {
-          window.localStorage.setItem("user", JSON.stringify(userDb.value));
-          window.localStorage.setItem("onlyAdmin", 1);
 
+          window.localStorage.setItem("user", JSON.stringify(userDb.value));
+          window.localStorage.setItem("onlyAdmin",'sdhushfuihdufhsidiasjdjsakd???=*ÄÖLkksaijd.s');
+          this.$store.dispatch('cache/setRole','ADMIN')
+          this.$store.dispatch('cache/setToken','hgfdhhjfdskfsdfkslfkdslfjdsfjkjdskfdsjfkdsjfkdsjfkdsjfkdsjf')
+
+          this.$q.notify({
+              message: "welcome Admin",
+
+              color: "positive",
+              avatar: "/img/trangTi.png",
+            });
+            user.value.userName ='',
+            user.value.password ='',
+          this.$router.replace("/admin")
         }
       }
-      // this.$route.query.token
-      console.log(" this.$route.query.token", this.$route.query.token)
-      const userLocal = localStorage.getItem("user");
-      console.log("userLocal", userLocal);
 
-      console.log("user.value", userDb.value.userName);
     },
   },
   // name: 'PageName',

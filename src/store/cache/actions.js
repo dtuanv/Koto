@@ -9,9 +9,7 @@ export const getProduct = ({commit}) => {
   });
 
 }
-export const setToken = ({commit}) =>{
-  commit('SET_TOKEN')
-}
+
 
 // export const addNewTodo =({commit}, payload) => {
 //   commit('addNewTodo', payload)
@@ -34,4 +32,15 @@ export const changeStatus = ({commit}, key,input) =>{
 }
 export const resetStatus = ({commit}) =>{
   commit('RESET_STATUS')
+}
+// Token
+export const setToken = ({commit},input) =>{
+  commit('SET_TOKEN',input)
+}
+// Role
+export const setRole = ({commit},input) =>{
+  commit('SET_ROLE',input)
+}
+export const logOut = ({commit},input) =>{
+  commit('LOG_OUT',input)
 }

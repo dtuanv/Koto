@@ -20,8 +20,8 @@ import routes from "./routes";
  * with the Router instance.
  */
 
-export default route(function (/* { store, ssrContext } */) {
-
+export default route(function ( { store, ssrContext } ) {
+  // console.log("Store",store)
   const createHistory = process.env.SERVER
     ? createMemoryHistory
     : process.env.VUE_ROUTER_MODE === "history"
@@ -44,20 +44,26 @@ export default route(function (/* { store, ssrContext } */) {
   // the vue router defines all of the routes for the application,
   //  and contains a function that runs before each route change
   //   to prevent unauthenticated users from accessing restricted routes.
-  window.localStorage.setItem("onlyAdmin", 2);
+
 
   Router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
-    const publicPages = ["/login", "/product", "/reservation", "/contact","/onlyTuan/createNewUser"];
+    const publicPages = ["/","/login", "/product", "/reservation", "/contact","/thank","/onlyTuan/createNewUser"];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = localStorage.getItem('user');
-    const token = localStorage.getItem('onlyAdmin')
+    const tokenLocal = localStorage.getItem('onlyAdmin')
 
+      if(authRequired && store.state.cache.token != 'hgfdhhjfdskfsdfkslfkdslfjdsfjkjdskfdsjfkdsjfkdsjfkdsjfkdsjf' ){
 
-
-    while(authRequired && !loggedIn && token !== 1){
+        return next('/login');
+      }
+    if(authRequired && tokenLocal != 'sdhushfuihdufhsidiasjdjsakd???=*ÄÖLkksaijd.s'){
       return next('/login');
-
+    }
+    if(authRequired && !loggedIn){
+      if(tokenLocal !== 1){
+        return next('/login');
+      }
     }
     // if (authRequired && !loggedIn && token !== 1) {
     //   return next('/login');

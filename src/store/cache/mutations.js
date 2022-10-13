@@ -84,6 +84,13 @@ export const RESET_STATUS = (state) => {
     re.status = false;
   });
 };
-export const SET_TOKEN = (state) =>{
-  state.token = '1Y'
+export const SET_TOKEN = (state,input) =>{
+  console.log("token save ",input)
+  state.token = input
+}
+export const SET_ROLE = (state,input) =>{
+  state.role = input
+}
+export const LOG_OUT = (state) =>{
+  state.role = ''
 }

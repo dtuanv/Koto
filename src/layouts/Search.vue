@@ -14,27 +14,20 @@
           </q-toolbar-title>
         </q-btn>
 
-        <q-tabs
-          v-if="$q.screen.gt.sm"
-          class="
+        <q-tabs v-if="$q.screen.gt.sm" class="
             GL__toolbar-link
             q-ml-xs q-gutter-md
             text-body2 text-weight-bold
             row
             items-center
             no-wrap
-          "
-        >
+          ">
           <!-- <q-tabs v-if="true" class="GL__toolbar-link q-ml-xs q-gutter-md text-body2 text-weight-bold row items-center no-wrap" > -->
           <q-route-tab :to="'/'" label="Home" />
           <q-route-tab :to="{ name: 'customer' }" label="Customer" />
-          <q-route-tab
-            :to="{ name: 'product', params: { id: 1 } }"
-            replace
-            label="Product"
-          />
+          <q-route-tab :to="{ name: 'product', params: { id: 1 } }" replace label="Product" />
         </q-tabs>
-          <!-- to shoping cart -->
+        <!-- to shoping cart -->
         <!-- <q-btn
           class="absolute-top-right q-mt-sm q-mr-md"
           flat
@@ -45,26 +38,13 @@
             {{ cartItemCount }}
           </q-badge>
         </q-btn> -->
-        <q-btn v-if="loggedIn!= undefined"
-          class="absolute-top-right q-mt-sm q-mr-md"
-          flat
-          color="red"
-        label="Log Out"
-         @click="logOut"
-        />
+        <q-btn v-if="role === 'ADMIN'" class="absolute-top-right q-mt-sm q-mr-md" flat color="red" label="Log Out"
+          @click="logOut" />
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="drawer"
-      show-if-above
-      :mini="!drawer || miniState"
-      @click.capture="drawerClick"
-      :width="200"
-      :breakpoint="500"
-      bordered
-      class="bg-grey-3"
-    >
+    <q-drawer v-model="drawer" show-if-above :mini="!drawer || miniState" @click.capture="drawerClick" :width="200"
+      :breakpoint="500" bordered class="bg-grey-3">
       <q-scroll-area class="fit">
         <q-list padding>
           <q-item clickable v-ripple to="/product">
@@ -90,14 +70,23 @@
             <q-item-section> Contact </q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple to="/admin">
+          <q-item v-if="role === 'ADMIN'" clickable v-ripple to="/admin">
             <q-item-section avatar>
               <q-icon name="person" />
             </q-item-section>
 
             <q-item-section> Admin </q-item-section>
           </q-item>
-          <q-item clickable v-ripple to="/login">
+
+          <q-item v-if="role === 'ADMIN'" clickable v-ripple @click="logOut">
+            <q-item-section avatar>
+              <q-icon name="drafts" />
+            </q-item-section>
+
+            <q-item-section> LogOut </q-item-section>
+          </q-item>
+
+          <q-item v-else clickable v-ripple to="/login">
             <q-item-section avatar>
               <q-icon name="drafts" />
             </q-item-section>
@@ -113,33 +102,16 @@
           to mini-mode
         -->
       <div class="q-mini-drawer-hide absolute" style="top: 15px; right: -17px">
-        <q-btn
-          dense
-          round
-          unelevated
-          color="accent"
-          icon="chevron_left"
-          @click="miniState = true"
-        />
+        <q-btn dense round unelevated color="accent" icon="chevron_left" @click="miniState = true" />
       </div>
     </q-drawer>
 
     <!-- (Optional) The Footer -->
     <q-footer>
       <q-tabs switch-indicator>
-        <q-route-tab
-          icon="restaurant_menu"
-          :to="{ name: 'product', params: { id: 1 } }"
-          replace
-          label="Menü"
-          color="positive"
-        />
-        <q-route-tab
-          icon="book_online"
-          to="/reservation"
-          replace
-          label="Reservierung"
-        />
+        <q-route-tab icon="restaurant_menu" :to="{ name: 'product', params: { id: 1 } }" replace label="Menü"
+          color="positive" />
+        <q-route-tab icon="book_online" to="/reservation" replace label="Reservierung" />
       </q-tabs>
     </q-footer>
 
@@ -152,31 +124,34 @@
       <router-view />
       <!-- <q-page>Hih new</q-page> -->
       <!-- <div>HIhi</div> -->
-      <div
-        class=""
-        style="
+      <div class="" style="
           color: red;
           position: relative;
           color: red;
           bottom: 0vh;
           padding: 7vh;
           background-color: #342a2a;
-        "
-      >
+        ">
         <div>Hi</div>
 
-        <div >Copyright © 2022 Jasmin </div>
+        <div>Copyright © 2022 Jasmin </div>
       </div>
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
+import { useStore } from "vuex";
 import { ref, computed, nextTick } from "vue";
-import axios from "axios";
-import { useQuasar } from "quasar";
-import { useRoute, useRouter } from "vue-router";
 import { WebApi } from "/src/apis/WebApi";
+import axios from "axios";
+import { useRoute, useRouter } from "vue-router";
+import ReservationBox from "/src/components/ReservationBox.vue";
+
+import { useQuasar } from "quasar";
+import { date } from "quasar";
+
+
 
 
 export default {
@@ -193,31 +168,34 @@ export default {
     const leftDrawerOpen = ref(false);
     const route = useRoute();
     const $q = useQuasar();
-    const router = useRouter();
-    const loggedIn = localStorage.getItem('user');
-    console.log("loggedIn",loggedIn)
+    const $router = useRouter();
+    const $store = useStore();
+
+
+    const role = computed({
+      get: () => $store.state.cache.role,
+    });
+    console.log("Role", role)
 
 
     return {
       amountItem,
       leftDrawerOpen,
-      loggedIn,
       drawer: ref(false),
       miniState,
-      logOut(){
-        localStorage.removeItem('user')
 
-        console.log("loggedIn logout",loggedIn)
+      role,
+      logOut() {
+        localStorage.removeItem('user')
+        localStorage.removeItem('onlyAdmin')
+        $store.dispatch("cache/logOut")
         $q.notify({
-              message: "logout",
+              message: "logOut",
 
               color: "positive",
               avatar: "/img/trangTi.png",
             });
-
-            router.replace("/");
-
-
+        $router.replace("/")
       }
       ,
       toggleLeftDrawer() {
