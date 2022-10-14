@@ -10,7 +10,7 @@
       <img v-else src="/img/dalat.jpg" style="width: 100%; height: 15vh" /> -->
       <!-- make form in center -->
 
-      <div class="q-mt-lg " v-if="true">
+      <div class="q-mt-lg" v-if="true">
         <div
           class="row shadow-15"
           style="
@@ -19,6 +19,7 @@
             background-color: khaki;
             padding: 10px;
             top: 6vh;
+            width:100%;
           "
         >
           <div class="col-12 flex justify-center">
@@ -64,7 +65,17 @@
         </q-card>
       </div>
       <!-- <div>vorspeiseProducts{{vorspeiseProducts}}</div> -->
-      <div
+      <div v-if="$q.screen.gt.sm"
+      >
+        <div class=" q-col-gutter-md row">
+          <div v-for="product in vorspeiseProducts" :key="product.id">
+            <productBox :product="product"></productBox>
+          </div>
+        </div>
+      </div>
+
+      <!-- mobil -->
+      <div v-else
         class="full-width row wrap justify-center items-start content-center"
       >
         <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
@@ -146,8 +157,6 @@
     <!-- <div class="col-6"></div> -->
     <!-- <div class="col-6"></div> -->
   </q-page>
-
-
 </template>
 <script >
 import { ref, computed, nextTick } from "vue";

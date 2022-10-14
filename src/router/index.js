@@ -54,7 +54,7 @@ export default route(function ( { store, ssrContext } ) {
     const tokenLocal = localStorage.getItem('onlyAdmin')
 
       if(authRequired && store.state.cache.token != 'hgfdhhjfdskfsdfkslfkdslfjdsfjkjdskfdsjfkdsjfkdsjfkdsjfkdsjf' ){
-
+         console.log("from store")
         return next('/login');
       }
     if(authRequired && tokenLocal != 'sdhushfuihdufhsidiasjdjsakd???=*ÄÖLkksaijd.s'){
