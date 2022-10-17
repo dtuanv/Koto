@@ -43,11 +43,7 @@ import { useRoute, useRouter } from "vue-router";
 
     setup(){
       // const store = useStore()
-
-
-
       return{
-
       }
     }
 

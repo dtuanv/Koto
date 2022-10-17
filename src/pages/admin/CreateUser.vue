@@ -33,18 +33,22 @@ import ReservationBox from "/src/components/ReservationBox.vue";
 
 import { useQuasar } from "quasar";
 import { date } from "quasar";
-const user = ref({})
+const user = ref({});
+const userDb = ref({});
 
 export default {
-
   setup() {
+    const $store = useStore();
+    const $q = useQuasar();
+    const $router = useRouter();
+    // const route = useRoute();
+
     const loginForm = ref(true)
     return {
       loginForm,
       user,
 
       onSubmit() {
-
         axios({
           method: "post",
           url: `${WebApi.server}/onlyTuan/createNewUser`,
@@ -56,20 +60,18 @@ export default {
         })
           .then(() => {
             $q.notify({
-              message: ' successfull',
+              message: ' new User created',
 
               color: 'positive',
               avatar: '/img/trangTi.png',
             })
-            console.log("product saved");
-            router.replace("/");
+            // console.log("product saved");
+            $router.replace("/")
           })
           .catch((err) => {
             console.log(err);
           });
       }
-
-
     }
   }
   // name: 'PageName',

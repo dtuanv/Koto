@@ -124,7 +124,7 @@
       <router-view />
       <!-- <q-page>Hih new</q-page> -->
       <!-- <div>HIhi</div> -->
-      <div class="" style="
+      <!-- <div class="" style="
           color: red;
           position: relative;
           color: red;
@@ -132,10 +132,10 @@
           padding: 7vh;
           background-color: #342a2a;
         ">
-        <div>Hi</div>
 
         <div>Copyright © 2022 Jasmin </div>
-      </div>
+      </div> -->
+      <Header></Header>
     </q-page-container>
   </q-layout>
 </template>
@@ -146,17 +146,17 @@ import { ref, computed, nextTick } from "vue";
 import { WebApi } from "/src/apis/WebApi";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
-import ReservationBox from "/src/components/ReservationBox.vue";
 
 import { useQuasar } from "quasar";
 import { date } from "quasar";
-
-
-
-
+import Header from "/src/components/header/Header.vue";
 export default {
   // name: 'LayoutName',
   // props:{countCart},
+  components: {
+    Header,
+  },
+
   computed: {
     cartItemCount() {
       return this.$store.getters["cache/cartItemCount"];
@@ -190,11 +190,11 @@ export default {
         localStorage.removeItem('onlyAdmin')
         $store.dispatch("cache/logOut")
         $q.notify({
-              message: "logOut",
+          message: "logOut",
 
-              color: "positive",
-              avatar: "/img/trangTi.png",
-            });
+          color: "positive",
+          avatar: "/img/trangTi.png",
+        });
         $router.replace("/")
       }
       ,

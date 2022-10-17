@@ -14,8 +14,8 @@
         <q-date v-model="formattedString" mask="DD-MM-YYYY" />
       </div> -->
 
-      <div v-if="reservations.length===0">Keine Reservierung</div>
-      <div class="q-mb-sm">
+    <div v-if="reservations.length===0">Keine Reservierung</div>
+    <div class="q-mb-sm">
       <q-badge color="teal">
         Model: {{ formattedString }}
       </q-badge>
@@ -40,14 +40,15 @@
           <!-- <div v-if="reservation.time > '18:00'">{{ reservation.time }}</div> -->
           <div>{{ reservation.time }}</div>
 
-          <q-btn label="Arrived"  class="float-right"  @click="changeStatus(reservation)" :color="reservation.status == 2 ? 'red': 'positive'"></q-btn>
+          <q-btn label="Arrived" class="float-right" @click="changeStatus(reservation)"
+            :color="reservation.status == 2 ? 'red': 'positive'"></q-btn>
         </q-card-section>
         <q-card-actions>
-          <div >
+          <div>
             <div class="q-mr-sm col-2">Name: {{ reservation.name }}</div>
             <div>Mobil: {{reservation.mobil}} </div>
-            <div >Number of Guests: {{ reservation.guestNum }}</div>
-            <div >Note of Guests: {{ reservation.note }}</div>
+            <div>Number of Guests: {{ reservation.guestNum }}</div>
+            <div>Note of Guests: {{ reservation.note }}</div>
           </div>
 
         </q-card-actions>
@@ -67,13 +68,13 @@ import { useQuasar } from "quasar";
 import { date } from "quasar";
 const reservations = ref([]);
 export default {
-  methods:{
-    changeStatus(reservation){
-      reservation.status = 1
-      console.log("reservation.status",reservation)
-      axios.put(`${WebApi.server}/admin/reservation/changeStatus/`+parseInt(reservation.id))
-},
+  methods: {
 
+changeStatus(reservation) {
+      reservation.status = 1
+      console.log("reservation.status", reservation)
+      axios.put(`${WebApi.server}/admin/reservation/changeStatus/` + parseInt(reservation.id))
+    },
   },
   setup() {
     const today = Date.now();
@@ -82,16 +83,16 @@ export default {
 
 
 
-    axios.get(`${WebApi.server}/admin/reservation/`+formattedString.value).then((response) => {
+    axios.get(`${WebApi.server}/admin/reservation/` + formattedString.value).then((response) => {
       reservations.value = response.data;
       for (var i = 1; i < reservations.value.length; i++)
-       for (var j = 0; j < i; j++)
-        if (reservations.value [i].time < reservations.value [j].time) {
-          console.log("check in array ", reservations.value [i].time < reservations.value [j].time)
-          var x = reservations.value [i];
-          reservations.value [i] = reservations.value [j];
-          reservations.value[j] = x;
-        }
+        for (var j = 0; j < i; j++)
+          if (reservations.value[i].time < reservations.value[j].time) {
+            console.log("check in array ", reservations.value[i].time < reservations.value[j].time)
+            var x = reservations.value[i];
+            reservations.value[i] = reservations.value[j];
+            reservations.value[j] = x;
+          }
 
     });
 
@@ -100,26 +101,26 @@ export default {
       formattedString,
       proxyDate,
 
-      updateProxy () {
+      updateProxy() {
         proxyDate.value = formattedString.value
       },
 
-      save () {
+      save() {
         formattedString.value = proxyDate.value
-        axios.get(`${WebApi.server}/admin/reservation/`+formattedString.value).then((response) => {
-      reservations.value = response.data;
-      // console.log("reservations adrii",reservations.value[0].time)
-      console.log("reservations adrii",reservations.value)
-      for (var i = 1; i < reservations.value.length; i++)
-       for (var j = 0; j < i; j++)
-        if (reservations.value [i].time < reservations.value [j].time) {
-          // console.log("check in array ", reservations.value [i].time < reservations.value [j].time)
-          var x = reservations.value [i];
-          reservations.value [i] = reservations.value [j];
-          reservations.value[j] = x;
-        }
+        axios.get(`${WebApi.server}/admin/reservation/` + formattedString.value).then((response) => {
+          reservations.value = response.data;
+          // console.log("reservations adrii",reservations.value[0].time)
+          console.log("reservations adrii", reservations.value)
+          for (var i = 1; i < reservations.value.length; i++)
+            for (var j = 0; j < i; j++)
+              if (reservations.value[i].time < reservations.value[j].time) {
+                // console.log("check in array ", reservations.value [i].time < reservations.value [j].time)
+                var x = reservations.value[i];
+                reservations.value[i] = reservations.value[j];
+                reservations.value[j] = x;
+              }
 
-    });
+        });
       }
     };
   },

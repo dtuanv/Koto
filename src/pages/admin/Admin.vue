@@ -1,43 +1,39 @@
 <template>
   <q-page class="q-mt-sm">
-    <div class="flex flex-center" >
-      <q-btn
-        class=" btn hoverButton"
-        style="width: 6vw"
-        flat
-        label="Nachricht"
-        to="/category"
-      >
-        <q-badge color="red" floating transparent>
-          {{ 2 }}
-        </q-badge>
+    <div class="flex flex-center">
+      <q-btn class=" btn hoverButton" style="width: 5vw" flat label="Nachricht" to="/admin/message">
+        <div v-if="$q.screen.gt.sm == true">
+          <q-badge color="red" floating transparent>
+            {{ NumUnseen }}
+          </q-badge>
+        </div>
+        <div v-else>
+          <q-badge color="red" floating transparent>
+            {{ NumUnseen }}
+          </q-badge>
+        </div>
       </q-btn>
     </div>
 
-    <q-btn
-      class="flex flex-center btn hoverButton"
-      flat
-      label="Admin Product"
-      to="admin/product"
-    />
-    <q-btn
-      class="flex flex-center hoverButton"
-      flat
-      label="Admin Gallery"
-      to="/category"
-    />
-    <q-btn
-      class="flex flex-center hoverButton"
-      flat
-      label="Order History"
-      to="/admin/history"
-    />
-    <q-btn
-      class="flex flex-center hoverButton"
-      flat
-      label="Reservierung"
-      to="/admin/reservation"
-    />
+    <!-- Reservierung ADMIN -->
+    <div class="flex flex-center">
+      <q-btn class="flex flex-center hoverButton" style="width: 5vw"  label="Reservierung" to="/admin/reservation" />
+      <div v-if="$q.screen.gt.sm == true">
+        <q-badge color="red"   transparent>
+          {{ NumReservationUnseen }}
+        </q-badge>
+      </div>
+      <div v-else>
+        <q-badge color="red"  transparent>
+          {{ NumReservationUnseen }}
+        </q-badge>
+      </div>
+
+    </div>
+
+    <q-btn class="flex flex-center btn hoverButton" flat label="Admin Product" to="admin/product" />
+    <!-- <q-btn class="flex flex-center hoverButton" flat label="Admin Gallery" to="/category" /> -->
+    <!-- <q-btn class="flex flex-center hoverButton" flat label="Order History" to="/admin/history" /> -->
     <!-- <q-btn  class="absolute-top-right q-mt-sm q-mr-md" flat color="red" label="Log Out"
       @click="logOut" /> -->
   </q-page>
@@ -50,14 +46,38 @@ import { useQuasar } from "quasar";
 import { useRoute, useRouter } from "vue-router";
 import { WebApi } from "/src/apis/WebApi";
 import { watch } from "vue";
+import { date } from "quasar";
+
 const loggedIn = localStorage.getItem("user");
 export default {
   setup() {
+    const NumUnseen = ref(0)
+    const NumReservationUnseen = ref(0)
     const route = useRoute();
     const $q = useQuasar();
     const router = useRouter();
+    const today = Date.now();
+    const formattedString = ref(date.formatDate(today, "DD-MM-YYYY"));
 
+
+    axios.get(`${WebApi.server}/countUnseenContact`)
+      .then(response => {
+        NumUnseen.value = response.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    // Reservation num
+    axios.get(`${WebApi.server}/admin/countUnseenReservation/` + formattedString.value)
+      .then(response => {
+        NumReservationUnseen.value = response.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
     return {
+      NumUnseen,
+      NumReservationUnseen,
       logOut() {
         localStorage.removeItem("user");
         localStorage.removeItem("onlyAdmin");
