@@ -5,11 +5,7 @@
     </q-dialog> -->
     <q-card
       class="q-mt-xl"
-      :style="
-        $q.screen.gt.sm == true
-          ? 'width:15vw; height:40vh; background-color:blanchedalmond;'
-          : 'width:60vw; background-color:blanchedalmond; height:40vh;'
-      "
+      :style="$q.screen.width > 400 && $q.screen.height > 700 ? 'background-color:bisque; width: 30vw; height: 35vh':'background-color:bisque; width: 70vw; height: 250px'"
     >
       <!-- <q-card  v-else style="width:15vw; height:40vh; background-color:blanchedalmond;"> -->
       <q-card-section>
@@ -121,6 +117,23 @@ export default {
             user.value.password ='',
           this.$router.replace("/admin")
         }
+        else{
+          this.$q.notify({
+              message: "Password or Username is not correct",
+
+              color: "negative",
+              avatar: "/img/trangTi.png",
+            });
+
+        }
+      }
+      else{
+        this.$q.notify({
+              message: "Biite geben Sie Password und Username ein ",
+
+              color: "negative",
+              avatar: "/img/trangTi.png",
+            });
       }
 
     },

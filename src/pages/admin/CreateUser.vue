@@ -13,6 +13,7 @@
       <q-form @submit.prevent="onSubmit">
         <q-input class="q-ml-sm q-mr-sm" v-model="user.userName" label="UserName"></q-input>
         <q-input class="q-ml-sm q-mr-sm" v-model="user.password" label="Password"></q-input>
+        <q-input class="q-ml-sm q-mr-sm" v-model="code" label="Code"></q-input>
 
         <q-btn label="Create" type="submit" filled class="float-right" flat color="positive"></q-btn>
 
@@ -41,15 +42,19 @@ export default {
     const $store = useStore();
     const $q = useQuasar();
     const $router = useRouter();
-    // const route = useRoute();
+    // const route = useRoute();,
+    const code = ref('')
 
     const loginForm = ref(true)
     return {
       loginForm,
       user,
+      code,
 
       onSubmit() {
-        axios({
+
+        if(code.value == 'chilijAdminwnoMoiduoc__koto##+#a__23555114DFGZHJH5784i3jejfkdksdjsdhsfhv'){
+          axios({
           method: "post",
           url: `${WebApi.server}/onlyTuan/createNewUser`,
           // data: JSON.stringify(product),
@@ -71,6 +76,15 @@ export default {
           .catch((err) => {
             console.log(err);
           });
+        }else{
+         $q.notify({
+              message: "Code is not correct!!!",
+
+              color: "negative",
+              avatar: "/img/trangTi.png",
+            });
+        }
+
       }
     }
   }

@@ -14,12 +14,12 @@
         <div
           class="row shadow-15"
           :style="
-            $q.screen.width > 400
+            $q.screen.width > 400 && $q.screen.height > 700
               ? 'position: fixed; z-index: 200; background-color: khaki; padding: 10px;top: 6vh; width: 100%;'
-              : 'position: fixed; z-index: 200; background-color: green; padding: 4px;top: 8vh; height:16vh; width: 100%;'
+              : 'position: fixed; z-index: 200; background-color: khaki; padding: 4px 0px 10px;top: 60px; height:100px; width: 100%;'
           "
         >
-          <div class="col-12 flex justify-center q-mt-sm">
+          <div class="col-12 flex justify-center q-mt-sm" >
             <q-btn
               class=""
               style="font-family: cursive; color: darkseagreen"
@@ -52,7 +52,7 @@
       </div>
 
       <!-- Vorspeisen -->
-      <div style="margin-top: 12vh">
+      <div :style="$q.screen.width > 400 && $q.screen.height > 700 ? 'margin-top: 13vh;':'margin-top:120px'">
         <q-card class="q-mb-lg q-ml-sm q-mr-sm">
           <q-card-actions class="flex justify-center text-h4">
             <div ref="vorspeisen" style="font-family: cursive; color: coral">
