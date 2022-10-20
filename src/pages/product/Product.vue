@@ -13,16 +13,13 @@
       <div class="q-mt-lg" v-if="true">
         <div
           class="row shadow-15"
-          style="
-            position: fixed;
-            z-index: 200;
-            background-color: khaki;
-            padding: 10px;
-            top: 6vh;
-            width:100%;
+          :style="
+            $q.screen.width > 400
+              ? 'position: fixed; z-index: 200; background-color: khaki; padding: 10px;top: 6vh; width: 100%;'
+              : 'position: fixed; z-index: 200; background-color: green; padding: 4px;top: 8vh; height:16vh; width: 100%;'
           "
         >
-          <div class="col-12 flex justify-center">
+          <div class="col-12 flex justify-center q-mt-sm">
             <q-btn
               class=""
               style="font-family: cursive; color: darkseagreen"
@@ -65,9 +62,8 @@
         </q-card>
       </div>
       <!-- <div>vorspeiseProducts{{vorspeiseProducts}}</div> -->
-      <div v-if="$q.screen.gt.sm"
-      >
-        <div class=" q-col-gutter-md row">
+      <div v-if="$q.screen.gt.sm">
+        <div class="q-col-gutter-md row">
           <div v-for="product in vorspeiseProducts" :key="product.id">
             <productBox :product="product"></productBox>
           </div>
@@ -75,7 +71,8 @@
       </div>
 
       <!-- mobil -->
-      <div v-else
+      <div
+        v-else
         class="full-width row wrap justify-center items-start content-center"
       >
         <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
@@ -145,6 +142,7 @@
         </q-card-actions>
       </q-card>
     </div>
+
     <!-- <div>sushiProducts..{{sushiProducts}}</div> -->
     <div class="full-width row wrap justify-center items-start content-center">
       <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
@@ -175,6 +173,8 @@ import { WebApi } from "/src/apis/WebApi";
 export default {
   component: { productBox },
   setup() {
+    const $q = useQuasar();
+    $q.screen.setSizes({ xs: 100 });
     // scroll To element
     const sushi = ref(null);
     const vorspeisen = ref(null);
@@ -195,7 +195,6 @@ export default {
     // End Scroll to Element
     const $store = useStore();
 
-    const $q = useQuasar();
     const router = useRouter();
     // axios.get("http://localhost:8686/product")
     //     .then(response => {

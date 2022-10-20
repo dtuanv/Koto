@@ -9,44 +9,52 @@
       background-color: #342a2a;
     "
   >
-
     <div class="row">
       <div class="col-6"></div>
-      <div class="col-6 ">
+      <div class="col-5">
         <q-btn
-
+          style="text-decoration-line: underline"
           label="Impressung"
-          class=""
+          class="float-right"
           @click="dialog_impressung = true"
         ></q-btn>
       </div>
     </div>
-    <div class="flex justify-center" style="margin-top:5vh">Copyright © 2022 Jasmin</div>
+    <div class="flex justify-center" style="margin-top: 5vh">
+      Copyright © 2022 Jasmin
+    </div>
   </div>
   <q-dialog v-model="dialog_impressung">
-    <q-card style="width: 90vw; height: 30vh">
+    <q-card :style="$q.screen.gt.sm ? 'width: 90vw; height: 30vh' : 'width: 90vw; height: 42vh'" >
       <q-card-section class="text-h4 flex justify-center">
         Impressung</q-card-section
       >
-      <q-card-actions style="width:100%">
-        <div class="" >
-          <div class="text-h6 flex justify-center">Koto Asian Kitchen</div>
-          <div class="row q-mt-sm">
-            <div class="q-mr-sm">Adresse:</div>
-            <div>Stummstraße 8, 66763 Dillingen/Saar</div>
-          </div>
-          <div class="row q-mt-sm">
-            <div>Email:</div>
-            <div>koto@gmail.com</div>
-          </div>
-          <div class="row q-mt-sm">
-            <div>Telefon:</div>
-            <div>0402654</div>
-          </div>
 
+      <div class="" style="width: 100%">
+        <div class="text-h6 flex justify-center">Koto Asian Kitchen</div>
+        <div class="row q-mt-lg">
+          <div v-if="$q.screen.gt.sm"  class="col-3"></div>
+          <div v-else  class="q-ml-sm"></div>
+          <div class="">Adresse:</div>
+          <div class="">Stummstraße 8, 66763 Dillingen/Saar</div>
+        </div>
+        <div class="row q-mt-sm">
+          <div class="col-3"></div>
+          <div>Email:</div>
+          <div>koto@gmail.com</div>
+        </div>
+        <div class="row q-mt-sm">
+          <div class="col-3"></div>
+
+          <div>Telefon:</div>
+          <div>0402654</div>
+        </div>
+        <div class="row">
+          <div v-if="$q.screen.gt.sm"  class="col-3"></div>
+          <div v-else  class="q-ml-sm"></div>
           <div class="q-mt-sm">Gesetzlicher Vertreter: Huu Hoang Anh Hoang</div>
         </div>
-      </q-card-actions>
+      </div>
     </q-card>
   </q-dialog>
 </template>
