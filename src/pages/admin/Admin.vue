@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-mt-sm">
     <div class="flex flex-center">
-      <q-btn class=" btn hoverButton" style="width: 5vw" flat label="Nachricht" to="/admin/message">
+      <q-btn class=" btn hoverButton" style="width: 120px" flat label="Nachricht" to="/admin/message">
         <div v-if="$q.screen.gt.sm == true">
           <q-badge color="red" floating transparent>
             {{ NumUnseen }}
@@ -17,18 +17,18 @@
 
     <!-- Reservierung ADMIN -->
     <div class="flex flex-center">
-      <q-btn class="flex flex-center hoverButton" style="width: 5vw"  label="Reservierung" to="/admin/reservation" />
+      <q-btn class="flex flex-center hoverButton" style="width: 120px" flat  label="Reservierung" to="/admin/reservation" >
       <div v-if="$q.screen.gt.sm == true">
-        <q-badge color="red"   transparent>
+        <q-badge color="red"  floating transparent >
           {{ NumReservationUnseen }}
         </q-badge>
       </div>
       <div v-else>
-        <q-badge color="red"  transparent>
+        <q-badge color="red" floating transparent >
           {{ NumReservationUnseen }}
         </q-badge>
       </div>
-
+      </q-btn>
     </div>
 
     <q-btn class="flex flex-center btn hoverButton" flat label="Admin Product" to="admin/product" />

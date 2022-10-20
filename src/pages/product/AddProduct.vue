@@ -7,22 +7,44 @@
         <!-- content -->
         <div class="q-gutter-md edit_product" style="max-width: 500px">
           <q-input filled v-model="product.name" label="Name" />
+          <q-select filled v-model="product.category" label="Category" :options="productCategory" map-options
+            emit-value></q-select>
+          <q-input filled v-model="product.price" label="Price" />
+
           <q-input filled v-model="product.imageUrl" label="Image Url" />
           <q-input filled v-model="product.decription" label="Decription" />
-          <q-input filled v-model="product.price" label="Price" />
-          <!-- <q-input filled v-model="product.category" label="Category" /> -->
-          <q-select
-            filled
-            v-model="product.category"
-            label="Category"
-            :options="productCategory"
-            map-options
-            emit-value
 
-          ></q-select>
+          <!-- <q-input filled v-model="product.category" label="Category" /> -->
+
+          <q-btn label="Subfood hinzufügen" @click="dialog_addSubFood=true">
+
+          </q-btn>
+          <div>
+            <q-dialog v-model="dialog_addSubFood">
+              <q-card>
+                <div class="q-ma-sm">
+
+                  <span slot="subFoods" slot-scope="subFoods">
+                  <div class="row" style="width:100%" v-for="(subFood,i) in subFoods" :key="subFood.id">
+                    <q-input :label="subFood.labelName" v-model="subFood.nameF" class="col-5"></q-input>
+                    <div class="col-2"></div>
+                    <q-input :label="subFood.labelPrice" v-model="subFood.price" class="col-5"></q-input>
+                  </div>
+                  </span>
+                  <!-- <div class="row">
+                    <q-input class="" label="Sub B"></q-input>
+                    <q-input label="Preis B"></q-input>
+                  </div>-->
+                </div>
+
+
+              </q-card>
+            </q-dialog>
+          </div>
 
           <q-btn color="primary" type="submit" icon="cloud_upload" />
         </div>
+
       </q-form>
     </div>
   </q-page>
@@ -35,9 +57,16 @@ import axios from "axios";
 import { useQuasar } from "quasar";
 import { useRoute, useRouter } from "vue-router";
 import { WebApi } from "/src/apis/WebApi";
-
+const    subFoods = ref([
+      {id:1,labelName:'Sub A',labelPrice:'Price',nameF:'',price:''},
+      {id:2,labelName:'Sub B',labelPrice:'Price',nameF:'',price:''},
+      {id:3,labelName:'Sub C',labelPrice:'Price',nameF:'',price:''},
+      {id:4,labelName:'Sub D',labelPrice:'Price',nameF:'',price:''},])
 const product = ref({});
 export default {
+  data(){
+
+  },
   setup() {
     const route = useRoute();
     const $q = useQuasar();
@@ -58,7 +87,12 @@ export default {
         });
     }
     return {
+      subFoods,
       product,
+      dialog_addSubFood: ref(false),
+      getIndex(list, id) {
+  return list.findIndex((e) => e.id == id)
+},
       // name: ref(""),
       // decription: ref(""),
       // imageUrl: ref(""),
@@ -76,11 +110,19 @@ export default {
         //   imageUrl: this.imageUrl,
         // };
 
+
         axios({
           method: "post",
           url: `${WebApi.server}/admin/product/add/`,
           // data: JSON.stringify(product),
-          data: product.value,
+          data: {
+           name: product.value.name,
+           decription: product.value.decription,
+           price:product.value.price,
+           imageUrl:product.value.imageUrl,
+           category:product.value.category,
+           subFoods:this.subFoods,
+          },
           headers: {
             "Content-Type": "application/json",
           },

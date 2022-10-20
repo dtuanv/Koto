@@ -1,16 +1,13 @@
 <template>
   <div class="">
     <q-card v-if="$q.screen.gt.sm">
-      <q-card-actions  style=" width: 20vw; height:11vw">
+      <q-card-actions style=" width: 20vw; height:11vw">
         <div>
-          <img
-            :src="'/img/' + product.imageUrl"
-            alt=""
-            style="height: 10vw; width: 10vw"
-          />
+          <img :src="'/img/' + product.imageUrl" alt="" style="height: 10vw; width: 10vw" />
         </div>
         <div class="q-ml-sm text-h5">
           {{ product.name }}
+
           <div class="q-ml-lg text-body1">{{ product.decription }}</div>
         </div>
       </q-card-actions>
@@ -21,18 +18,66 @@
       <q-card-actions>
         <div class="row">
           <div>
-            <img
-              :src="'/img/' + product.imageUrl"
-              alt=""
-              style="height: 22vw; width: 25vw"
-            />
+            <img :src="'/img/' + product.imageUrl" alt="" style="height: 22vw; width: 25vw" />
           </div>
-          <div class="q-ml-sm text-h5">
+          <div class="q-ml-sm text-h6">
             {{ product.name }}
-            <div class="q-ml-lg text-body1">{{ product.decription }}</div>
+
+
+            <div class="q-ml-sm text-body1">{{ product.decription }}</div>
+              <div class="row" style="width:64vw" v-for="subF in product.subFood" :key="subF.id">
+                <div class="q-ml-sm text-body2 col-4">
+                  {{subF.name}}a.  Gemüse
+                </div>
+                <div class="col-5"></div>
+                <div class="text-body2">
+                 {{subF.price}} 12.00$
+                </div>
+              </div>
+              <!-- sub food 2 -->
+              <!-- <div class="row" style="width:64vw">
+                <div class="q-ml-sm text-body2 col-4">
+                  b.  Huhn
+                </div>
+                <div class="col-5"></div>
+                <div class="text-body2">
+                  6.00$
+                </div>
+              </div> -->
+              <!-- end sub 2 -->
+              <!-- sub food 3 -->
+              <!-- <div class="row" style="width:64vw">
+                <div class="q-ml-sm text-body2 col-4">
+                 c.  Garnelen
+                </div>
+                <div class="col-5"></div>
+                <div class="text-body2">
+                  15.00$
+                </div>
+              </div> -->
+              <!-- end sub food  3 -->
+              <!-- sub food 4 -->
+              <!-- <div class="row" style="width:64vw">
+                <div class="q-ml-sm text-body2 col-4">
+                 c.  Garnelen
+                </div>
+                <div class="col-5"></div>
+                <div class="text-body2">
+                  15.00$
+                </div>
+              </div> -->
+              <!--end sub food 4 -->
+
+
           </div>
         </div>
+        <div class="row" style="width:100%">
+          <div class="col-9"></div>
+          <div class="">Preis: {{product.price}}</div>
+
+        </div>
       </q-card-actions>
+
     </q-card>
   </div>
 </template>

@@ -16,34 +16,34 @@
           :style="
             $q.screen.width > 400 && $q.screen.height > 700
               ? 'position: fixed; z-index: 200; background-color: khaki; padding: 10px;top: 6vh; width: 100%;'
-              : 'position: fixed; z-index: 200; background-color: khaki; padding: 4px 0px 10px;top: 60px; height:100px; width: 100%;'
+              : 'position: fixed; z-index: 200; background-color: khaki; padding: 4px 0px 10px;top: 56px; height:100px; width: 100%;'
           "
         >
           <div class="col-12 flex justify-center q-mt-sm" >
             <q-btn
               class=""
-              style="font-family: cursive; color: darkseagreen"
+              style="font-family: inherit; color: darkseagreen"
               label="Vorspeisen"
               @click="goToVorspeisen"
             ></q-btn>
             <q-btn
               class="q-ml-sm"
               label="Haupgang"
-              style="font-family: cursive; color: chocolate"
+              style="font-family: inherit; color: chocolate"
               @click="goToHauptgang"
             ></q-btn>
 
             <q-btn
               class="q-ml-sm"
               label="Sushi Mix"
-              style="font-family: cursive; color: blue"
+              style="font-family: inherit; color: blue"
               @click="goToSushiMix"
             ></q-btn>
           </div>
           <div class="col-12 flex justify-center q-mt-sm">
             <q-btn
               class="q-ml-sm"
-              style="font-family: cursive; color: lightseagreen"
+              style="font-family: inherit; color: lightseagreen"
               label="Sushi"
               @click="goToSushi"
             ></q-btn>
@@ -61,12 +61,15 @@
           </q-card-actions>
         </q-card>
       </div>
-      <!-- <div>vorspeiseProducts{{vorspeiseProducts}}</div> -->
+      <!-- <div>vorspeiseProducts{{vorspeiseProducts.subFoods}}</div> -->
       <div v-if="$q.screen.gt.sm">
         <div class="q-col-gutter-md row">
           <div v-for="product in vorspeiseProducts" :key="product.id">
+
             <productBox :product="product"></productBox>
+            <div>{{product.subFoods}} </div>
           </div>
+
         </div>
       </div>
 
@@ -147,6 +150,7 @@
     <div class="full-width row wrap justify-center items-start content-center">
       <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
         <div v-for="product in sushiProducts" :key="product.id">
+          <div>product: {{product.subFoods.value}}</div>
           <productBox :product="product"></productBox>
         </div>
       </div>
