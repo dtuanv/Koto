@@ -1,6 +1,6 @@
 import axios from 'axios'
 
   const Api = axios.create({
-    baseURL : 'http://localhost:8688/'
+    baseURL : process.env.DEV ? "http://localhost:8686" : "https://waxyrice.de/api"
   })
   export default Api;
