@@ -4,9 +4,22 @@ export const SET_PRODUCT = (state, product) => {
 
   state.products.forEach(product => {
     let newSubFoods = product.subFoods.sort((a,b) => a.key - b.key)
+
+  let check =  newSubFoods.find(sf =>{
+      return sf.nameF != undefined
+    })
+    if(check === undefined){
+      product.checkSubFood = 2
+    }
+
+    // console.log("Check SubF",check, "in",product.name )
     //  product.subFoods = newSubFoods
 
   });
+
+  // product.forEach((pr) => {
+  //   console.log("check product", pr)
+  // })
 
   // product.forEach((pr) => {
   //     if(state.sushiProducts.length > 0){

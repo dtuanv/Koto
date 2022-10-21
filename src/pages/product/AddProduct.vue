@@ -68,6 +68,8 @@ import { WebApi } from "/src/apis/WebApi";
       {key:2,labelName:'Sub B',labelPrice:'Price',},
       {key:3,labelName:'Sub C',labelPrice:'Price',},
       {key:4,labelName:'Sub D',labelPrice:'Price',},])
+
+
 const product = ref({});
 export default {
   data(){
