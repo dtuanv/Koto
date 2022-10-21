@@ -18,25 +18,103 @@
       <q-card-actions>
         <div class="row">
           <div class="col-3">
-            <img :src="'/img/' + product.imageUrl" alt="" style="height: 22vw; width: 25vw" />
-          </div>
 
-          <div class="q-ml-lg col-8 text-subtitle2">
+            <img :src="'/img/' + product.imageUrl" alt="" style="height: 25vw; width: 25vw" />
+            <div v-if="product.price == ''">
+              <q-btn class="q-mt-sm" color="green" @click="dialog_zutat=true" label="Zutat Anzeigen"></q-btn>
+            </div>
+          </div>
+          <q-dialog v-model="dialog_zutat">
+            <q-card>
+              <q-card-selection>
+                <div class="flex justify-center q-mt-xs " style="color:red;">
+                  ALLE GERICHTE OHNE GLUTAMAT
+
+                </div>
+              </q-card-selection>
+              <q-card-actions>
+                <div class="">
+                  <div style="color:red;">
+                    Zusatzstoffe :
+                  </div>
+                  <ol>
+                    <li>
+                      mit Konservierungsstoff.
+                    </li>
+                    <li>mit Geschmacksverstärkern</li>
+                  </ol>
+
+                </div>
+
+                <div class="row">
+                  <div style="color:red;">
+                    Allergene :
+                  </div>
+                  <ol style="list-style-type: lower-alpha;">
+                    <li>
+                      Glutenhaltiges Getreide:weizen.
+                    </li>
+                    <li>Krebstiere</li>
+                    <li>Eier und Eiererzeugnisse </li>
+                    <li>Fisch und Fischererzeugnisse</li>
+                    <li>Erdnüsse und Erdnusserzeugnisse</li>
+                    <li>Soja und Sojaerzeugnisse</li>
+                    <li>Milch und Milchererzeugnisse</li>
+                    <div class="row">
+
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                    </div>
+
+                    <li>Sesamsamenerzeugnisse</li>
+                    <li></li>
+                    <li></li>
+
+
+                    <li>Weichtiere( Muscheln, Kalamri, Austern,Schnecken)</li>
+                  </ol>
+
+                </div>
+
+
+                <div>
+
+
+
+                </div>
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
+
+          <div style="margin-left:12px" class="col-8 text-subtitle2">
+            <div class="float-right" v-if="product.checkSubFood ==2">Preis: {{product.price}}</div>
+
             {{ product.name }}
 
+            <div class="q-ml-sm " style="font-size: 12px;">{{ product.decription }}</div>
+            <!-- button zutat begin -->
+            <div v-if="product.price !== ''" style="width: 70px;" class="q-mt-sm float-right">
+              <q-btn class="" color="green" @click="dialog_zutat=true" label="Zutat Anzeigen"></q-btn>
+            </div>
+            <!-- button zutat end -->
 
-            <div class="q-ml-sm text-weight-regular">{{ product.decription }}</div>
-              <div class="row" style="width:64vw" v-for="subF in product.subFoods" :key="subF">
-                <div class="q-ml-lg text-caption col-7">
-                  {{subF.nameF}}
-                </div>
-                <div class="col-1"></div>
-                <div  class="text-caption">
-                 {{subF.price}}
-                </div>
+            <div class="row" style="width:80vw" v-for="subF in product.subFoods" :key="subF">
+              <div class="q-ml-sm text-caption col-8">
+
+                {{subF.nameF}}
+                <q-badge v-if="subF.ingredient != undefined" color="red" align="top">
+                  {{ subF.ingredient }}
+                </q-badge>
+
               </div>
-              <!-- sub food 2 -->
-              <!-- <div class="row" style="width:64vw">
+              <!-- <div class="col-1"></div> -->
+              <div style="" class="text-caption col-1.5">
+                {{subF.price}}
+              </div>
+            </div>
+            <!-- sub food 2 -->
+            <!-- <div class="row" style="width:64vw">
                 <div class="q-ml-sm text-body2 col-4">
                   b.  Huhn
                 </div>
@@ -45,9 +123,9 @@
                   6.00$
                 </div>
               </div> -->
-              <!-- end sub 2 -->
-              <!-- sub food 3 -->
-              <!-- <div class="row" style="width:64vw">
+            <!-- end sub 2 -->
+            <!-- sub food 3 -->
+            <!-- <div class="row" style="width:64vw">
                 <div class="q-ml-sm text-body2 col-4">
                  c.  Garnelen
                 </div>
@@ -56,9 +134,9 @@
                   15.00$
                 </div>
               </div> -->
-              <!-- end sub food  3 -->
-              <!-- sub food 4 -->
-              <!-- <div class="row" style="width:64vw">
+            <!-- end sub food  3 -->
+            <!-- sub food 4 -->
+            <!-- <div class="row" style="width:64vw">
                 <div class="q-ml-sm text-body2 col-4">
                  c.  Garnelen
                 </div>
@@ -67,17 +145,19 @@
                   15.00$
                 </div>
               </div> -->
-              <!--end sub food 4 -->
+            <!--end sub food 4 -->
+
+
+            <!-- <div class="col-9"></div> -->
+
+
 
 
           </div>
-        </div>
-        <div class="row" style="width:100%">
-          <div class="col-9"></div>
-          <div class="" v-if="product.checkSubFood ==2">Preis: {{product.price}}</div>
 
 
         </div>
+
       </q-card-actions>
 
     </q-card>
@@ -139,6 +219,7 @@ export default {
       countItem,
       subtractItem,
       countCart,
+      dialog_zutat: ref(false),
       // addToCart,
     };
   },

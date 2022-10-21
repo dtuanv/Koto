@@ -7,6 +7,7 @@
         <!-- content -->
         <div class="q-gutter-md edit_product" style="max-width: 500px">
           <q-input filled v-model="product.name" label="Name" />
+          <q-input filled v-model="product.num" label="Nummer" />
           <q-select filled v-model="product.category" label="Category" :options="productCategory" map-options
             emit-value></q-select>
           <q-input filled v-model="product.price" label="Price" />
@@ -27,8 +28,10 @@
                   <span >
                   <div class="row" style="width:100%" v-for="(subFood) in subFoods" :key="subFood.labelName">
                     <q-input :label="subFood.labelName" v-model="subFood.nameF" class="col-5"></q-input>
-                    <div class="col-2"></div>
-                    <q-input :label="subFood.labelPrice" v-model="subFood.price" class="col-5"></q-input>
+                    <div class="col-1"></div>
+                    <q-input  label="Zutat" class="col-2 q-mr-lg" v-model="subFood.ingredient"></q-input>
+
+                    <q-input :label="subFood.labelPrice" v-model="subFood.price" class="col-2"></q-input>
                   </div>
                   </span>
                   <!-- <div class="row">
@@ -167,12 +170,14 @@ export default {
           url: `${WebApi.server}/admin/product/edit/`+route.params.id,
           // data: JSON.stringify(product),
           data: {
+
            name: product.value.name,
            decription: product.value.decription,
            price:product.value.price,
            imageUrl:product.value.imageUrl,
            category:product.value.category,
            subFoods:this.subFoods,
+           num:product.value.num,
           },
           headers: {
             "Content-Type": "application/json",

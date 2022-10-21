@@ -11,11 +11,14 @@ export const SET_PRODUCT = (state, product) => {
     if(check === undefined){
       product.checkSubFood = 2
     }
+    // state.products.sort((a,b) => b.name - a.name)
 
     // console.log("Check SubF",check, "in",product.name )
     //  product.subFoods = newSubFoods
 
   });
+  console.log("state.products",state.products)
+
 
   // product.forEach((pr) => {
   //   console.log("check product", pr)
@@ -35,9 +38,12 @@ export const SET_PRODUCT = (state, product) => {
 
     return pr.category === "vorspeise";
   });
+
   state.hauptgangProducts = product.filter((pr) => {
     return pr.category === "hauptgang";
   });
+  state.hauptgangProducts.sort((a,b) => a.num - b.num)
+  console.log("state.hauptgangProducts",state.hauptgangProducts)
   state.sushiMixProducts = product.filter((pr) => {
     return pr.category === "sushiMix";
   });
