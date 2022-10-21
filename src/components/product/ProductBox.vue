@@ -21,17 +21,17 @@
             <img :src="'/img/' + product.imageUrl" alt="" style="height: 22vw; width: 25vw" />
           </div>
 
-          <div class="q-ml-lg col-8 text-h6">
+          <div class="q-ml-lg col-8 text-subtitle2">
             {{ product.name }}
 
 
-            <div class="q-ml-sm text-body1">{{ product.decription }}</div>
+            <div class="q-ml-sm text-weight-regular">{{ product.decription }}</div>
               <div class="row" style="width:64vw" v-for="subF in product.subFoods" :key="subF">
-                <div class="q-ml-lg text-body2 col-4">
+                <div class="q-ml-lg text-caption col-7">
                   {{subF.nameF}}
                 </div>
-                <div class="col-5"></div>
-                <div  class="text-body2">
+                <div class="col-1"></div>
+                <div  class="text-caption">
                  {{subF.price}}
                 </div>
               </div>
