@@ -150,7 +150,7 @@
     <div class="full-width row wrap justify-center items-start content-center">
       <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
         <div v-for="product in sushiProducts" :key="product.id">
-          <div>product: {{product.subFoods.value}}</div>
+
           <productBox :product="product"></productBox>
         </div>
       </div>

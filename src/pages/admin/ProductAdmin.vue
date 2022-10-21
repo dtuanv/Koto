@@ -13,7 +13,7 @@
     <div class="row">
       <q-btn dense to="/admin/product/add/0" color="secondary" label="Add product" class="col-5" />
       <div class="col-2"></div>
-      <q-btn to="/admin/product/edit" color="secondary" icon="edit" label="Edit Resource" class="col-5"></q-btn>
+      <q-btn to="/admin/product/editResource" color="secondary" icon="edit" label="Edit Resource" class="col-5"></q-btn>
     </div>
 
 

@@ -24,8 +24,8 @@
               <q-card>
                 <div class="q-ma-sm">
 
-                  <span slot="subFoods" slot-scope="subFoods">
-                  <div class="row" style="width:100%" v-for="(subFood,i) in subFoods" :key="subFood.id">
+                  <span >
+                  <div class="row" style="width:100%" v-for="(subFood) in subFoods" :key="subFood.labelName">
                     <q-input :label="subFood.labelName" v-model="subFood.nameF" class="col-5"></q-input>
                     <div class="col-2"></div>
                     <q-input :label="subFood.labelPrice" v-model="subFood.price" class="col-5"></q-input>
@@ -57,11 +57,17 @@ import axios from "axios";
 import { useQuasar } from "quasar";
 import { useRoute, useRouter } from "vue-router";
 import { WebApi } from "/src/apis/WebApi";
-const    subFoods = ref([
-      {id:1,labelName:'Sub A',labelPrice:'Price',nameF:'',price:''},
-      {id:2,labelName:'Sub B',labelPrice:'Price',nameF:'',price:''},
-      {id:3,labelName:'Sub C',labelPrice:'Price',nameF:'',price:''},
-      {id:4,labelName:'Sub D',labelPrice:'Price',nameF:'',price:''},])
+
+// ,nameF:'',price:''
+// {id:0,labelName:'Sub A',labelPrice:'Price'},
+//       {id:0,labelName:'Sub B',labelPrice:'Price',nameF:'',price:''},
+//       {id:0,labelName:'Sub C',labelPrice:'Price',nameF:'',price:''},
+//       {id:0,labelName:'Sub D',labelPrice:'Price',nameF:'',price:''},])
+ const    subFoods = ref([
+      {key:1,labelName:'Sub A',labelPrice:'Price'},
+      {key:2,labelName:'Sub B',labelPrice:'Price',},
+      {key:3,labelName:'Sub C',labelPrice:'Price',},
+      {key:4,labelName:'Sub D',labelPrice:'Price',},])
 const product = ref({});
 export default {
   data(){
@@ -72,6 +78,8 @@ export default {
     const $q = useQuasar();
     const router = useRouter();
 
+
+
     if (route.params.id == 0) {
       product.value = {
         name: "",
@@ -79,13 +87,21 @@ export default {
         decription: "",
         price: "",
       };
+      subFoods.value = [
+      {key:1,labelName:'Sub A',labelPrice:'Price'},
+      {key:2,labelName:'Sub B',labelPrice:'Price',},
+      {key:3,labelName:'Sub C',labelPrice:'Price',},
+      {key:4,labelName:'Sub D',labelPrice:'Price',},]
     } else {
       axios
         .get(`${WebApi.server}/admin/product/add/` + route.params.id + "/")
         .then((response) => {
           product.value = response.data;
+          subFoods.value= product.value.subFoods
         });
     }
+
+
     return {
       subFoods,
       product,
@@ -111,7 +127,8 @@ export default {
         // };
 
 
-        axios({
+        if(route.params.id == 0){
+          axios({
           method: "post",
           url: `${WebApi.server}/admin/product/add/`,
           // data: JSON.stringify(product),
@@ -140,6 +157,40 @@ export default {
           .catch((err) => {
             console.log(err);
           });
+        }
+        else{
+          console.log("route.params.id",route.params.id)
+          axios({
+          method: "put",
+          url: `${WebApi.server}/admin/product/edit/`+route.params.id,
+          // data: JSON.stringify(product),
+          data: {
+           name: product.value.name,
+           decription: product.value.decription,
+           price:product.value.price,
+           imageUrl:product.value.imageUrl,
+           category:product.value.category,
+           subFoods:this.subFoods,
+          },
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then(() => {
+            $q.notify({
+              message: " product was updated",
+
+              color: "positive",
+              avatar: "/img/trangTi.png",
+            });
+            console.log("product updated");
+            router.replace("/admin/product");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        }
+
       },
     };
   },

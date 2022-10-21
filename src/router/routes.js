@@ -67,14 +67,19 @@ const routes = [
         component: () => import("src/pages/product/AddProduct.vue"),
       },
       {
+        path: "/admin/product/add/:id",
+        name: "addProduct",
+        component: () => import("src/pages/product/AddProduct.vue"),
+      },
+      {
         path: "/admin/product",
         name: "adminProduct",
         component: () => import("src/pages/admin/ProductAdmin.vue"),
       },
 
       {
-        path: "/admin/product/add/:id",
-        name: "categoryDetail",
+        path: "/admin/product/edit/:id",
+        name: "editProductById",
         component: () => import("src/pages/product/AddProduct.vue"),
       },
       {
@@ -83,9 +88,9 @@ const routes = [
         component: () => import("src/pages/product/EditCategory.vue"),
       },
       {
-        path: "/admin/product/edit",
-        name: "editProduct",
-        component: () => import("src/pages/product/EditProduct.vue"),
+        path: "/admin/product/editResource",
+        name: "editProductResource",
+        component: () => import("src/pages/product/ProductSrc.vue"),
       },
       {
         path: "/admin/reservation",

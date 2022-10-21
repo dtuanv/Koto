@@ -2,6 +2,12 @@ export const SET_PRODUCT = (state, product) => {
   // console.log("SET_Product")
   state.products = product;
 
+  state.products.forEach(product => {
+    let newSubFoods = product.subFoods.sort((a,b) => a.key - b.key)
+    //  product.subFoods = newSubFoods
+
+  });
+
   // product.forEach((pr) => {
   //     if(state.sushiProducts.length > 0){
   //       if (!state.sushiProducts.includes(pr)) {
@@ -11,6 +17,9 @@ export const SET_PRODUCT = (state, product) => {
   //     }
   // });
   state.vorspeiseProducts= product.filter((pr) => {
+
+
+
     return pr.category === "vorspeise";
   });
   state.hauptgangProducts = product.filter((pr) => {
@@ -85,7 +94,6 @@ export const RESET_STATUS = (state) => {
   });
 };
 export const SET_TOKEN = (state,input) =>{
-  console.log("token save ",input)
   state.token = input
 }
 export const SET_ROLE = (state,input) =>{

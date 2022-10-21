@@ -17,21 +17,22 @@
     <q-card v-else>
       <q-card-actions>
         <div class="row">
-          <div>
+          <div class="col-3">
             <img :src="'/img/' + product.imageUrl" alt="" style="height: 22vw; width: 25vw" />
           </div>
-          <div class="q-ml-sm text-h6">
+
+          <div class="q-ml-lg col-8 text-h6">
             {{ product.name }}
 
 
             <div class="q-ml-sm text-body1">{{ product.decription }}</div>
-              <div class="row" style="width:64vw" v-for="subF in product.subFood" :key="subF.id">
-                <div class="q-ml-sm text-body2 col-4">
-                  {{subF.name}}a.  Gemüse
+              <div class="row" style="width:64vw" v-for="subF in product.subFoods" :key="subF">
+                <div class="q-ml-lg text-body2 col-4">
+                  {{subF.nameF}}
                 </div>
                 <div class="col-5"></div>
-                <div class="text-body2">
-                 {{subF.price}} 12.00$
+                <div  class="text-body2">
+                 {{subF.price}}
                 </div>
               </div>
               <!-- sub food 2 -->
@@ -73,7 +74,8 @@
         </div>
         <div class="row" style="width:100%">
           <div class="col-9"></div>
-          <div class="">Preis: {{product.price}}</div>
+          <div class="" v-if="product.checkSubFood ==2">Preis: {{product.price}}</div>
+
 
         </div>
       </q-card-actions>
