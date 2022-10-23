@@ -14,27 +14,28 @@
         </div>
       </q-btn>
     </div>
-    <q-separator/>
+    <q-separator />
     <!-- Reservierung ADMIN -->
     <div class="flex flex-center">
-      <q-btn class="flex flex-center hoverButton" style="width: 120px" flat  label="Reservierung" to="/admin/reservation" >
-      <div v-if="$q.screen.gt.sm == true">
-        <q-badge color="red"  floating transparent >
-          {{ NumReservationUnseen }}
-        </q-badge>
-      </div>
-      <div v-else>
-        <q-badge color="red" floating transparent >
-          {{ NumReservationUnseen }}
-        </q-badge>
-      </div>
+      <q-btn class="flex flex-center hoverButton" style="width: 120px" flat label="Reservierung"
+        to="/admin/reservation">
+        <div v-if="$q.screen.gt.sm == true">
+          <q-badge color="red" floating transparent>
+            {{ NumReservationUnseen }}
+          </q-badge>
+        </div>
+        <div v-else>
+          <q-badge color="red" floating transparent>
+            {{ NumReservationUnseen }}
+          </q-badge>
+        </div>
       </q-btn>
     </div>
 
-    <q-separator/>
+    <q-separator />
 
     <q-btn class="flex flex-center btn hoverButton" flat label="Admin Product" to="admin/product" />
-    <q-separator/>
+    <q-separator />
 
     <!-- <q-btn class="flex flex-center hoverButton" flat label="Admin Gallery" to="/category" /> -->
     <!-- <q-btn class="flex flex-center hoverButton" flat label="Order History" to="/admin/history" /> -->
@@ -91,7 +92,8 @@ export default {
           message: "logout",
 
           color: "positive",
-          avatar: "/img/trangTi.png",
+          avatar: "/img/icon/hAnh.png",
+
         });
 
         router.replace("/");

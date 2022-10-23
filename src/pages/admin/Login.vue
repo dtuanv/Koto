@@ -3,36 +3,18 @@
     <!-- <q-dialog v-model="loginForm">
       <q-input label="User Name"></q-input>
     </q-dialog> -->
-    <q-card
-      class="q-mt-xl"
-      :style="$q.screen.width > 400 && $q.screen.height > 700 ? 'background-color:bisque; width: 30vw; height: 35vh':'background-color:bisque; width: 70vw; height: 250px'"
-    >
+    <q-card class="q-mt-xl"
+      :style="$q.screen.width > 400 && $q.screen.height > 700 ? 'background-color:bisque; width: 30vw; height: 35vh':'background-color:bisque; width: 70vw; height: 250px'">
       <!-- <q-card  v-else style="width:15vw; height:40vh; background-color:blanchedalmond;"> -->
       <q-card-section>
         <div class="flex justify-center text-h4">Login</div>
       </q-card-section>
 
       <q-form @submit.prevent="onSubmit">
-        <q-input
-          class="q-ml-sm q-mr-sm"
-          v-model="user.userName"
-          label="UserName"
-        ></q-input>
-        <q-input
-          class="q-ml-sm q-mr-sm"
-          v-model="user.password"
-          type="password"
-          label="Password"
-        ></q-input>
+        <q-input class="q-ml-sm q-mr-sm" v-model="user.userName" label="UserName"></q-input>
+        <q-input class="q-ml-sm q-mr-sm" v-model="user.password" type="password" label="Password"></q-input>
 
-        <q-btn
-          label="Submit"
-          type="submit"
-          filled
-          class="float-right"
-          flat
-          color="positive"
-        ></q-btn>
+        <q-btn label="Submit" type="submit" filled class="float-right" flat color="positive"></q-btn>
       </q-form>
     </q-card>
   </q-page>
@@ -80,9 +62,9 @@ export default {
       axios
         .get(
           `${WebApi.server}/userAccount/` +
-            user.value.userName +
-            "/" +
-            user.value.password
+          user.value.userName +
+          "/" +
+          user.value.password
         )
         .then((re) => {
           return (userDb.value = re.data);
@@ -103,37 +85,40 @@ export default {
         ) {
 
           window.localStorage.setItem("user", JSON.stringify(userDb.value));
-          window.localStorage.setItem("onlyAdmin",'sdhushfuihdufhsidiasjdjsakd???=*ÄÖLkksaijd.s');
-          this.$store.dispatch('cache/setRole','ADMIN')
-          this.$store.dispatch('cache/setToken','hgfdhhjfdskfsdfkslfkdslfjdsfjkjdskfdsjfkdsjfkdsjfkdsjfkdsjf')
+          window.localStorage.setItem("onlyAdmin", 'sdhushfuihdufhsidiasjdjsakd???=*ÄÖLkksaijd.s');
+          this.$store.dispatch('cache/setRole', 'ADMIN')
+          this.$store.dispatch('cache/setToken', 'hgfdhhjfdskfsdfkslfkdslfjdsfjkjdskfdsjfkdsjfkdsjfkdsjfkdsjf')
 
           this.$q.notify({
-              message: "welcome Admin",
+            message: "welcome Admin",
 
-              color: "positive",
-              avatar: "/img/trangTi.png",
-            });
-            user.value.userName ='',
-            user.value.password ='',
-          this.$router.replace("/admin")
+            color: "positive",
+            avatar: "/img/icon/hAnh.png",
+
+          });
+          user.value.userName = '',
+            user.value.password = '',
+            this.$router.replace("/admin")
         }
-        else{
+        else {
           this.$q.notify({
-              message: "Password or Username is not correct",
+            message: "Password or Username is not correct",
 
-              color: "negative",
-              avatar: "/img/trangTi.png",
-            });
+            color: "negative",
+            avatar: "/img/icon/hAnh.png",
+
+          });
 
         }
       }
-      else{
+      else {
         this.$q.notify({
-              message: "Biite geben Sie Password und Username ein ",
+          message: "Biite geben Sie Password und Username ein ",
 
-              color: "negative",
-              avatar: "/img/trangTi.png",
-            });
+          color: "negative",
+          avatar: "/img/icon/hAnh.png",
+
+        });
       }
 
     },

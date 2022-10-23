@@ -92,9 +92,10 @@
               </div>
               <div>Email: Kotobistrodillingen8@gmail.com
               </div>
-              <div>Telefon: 0402654
+              <div>Telefon: 06831 5053 643
               </div>
-              <div>Gesetzlicher Vertreter: Huu Hoang Anh Hoang .</div>
+              <div>Gesetzlicher Vertreter: Huu Hoang Anh Hoang </div>
+              <div>Steuer-Nr. 010/232/18131 .</div>
               <div class="q-mt-xs">Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
                 Verbraucherschlichtungsstelle teilzunehmen</div>
             </div>

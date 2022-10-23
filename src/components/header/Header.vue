@@ -28,16 +28,32 @@
           </div>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-6  " style="">
+        <div class="row " style="margin-left: 16px;">
+          <div style="color:blanchedalmond;font-size: 14px;padding-top: 16px;">Follow us:</div>
+          <div>
+            <q-btn flat style="    padding: 0px 0px 0px 0px;">
+              <q-avatar><img src="/img/icon/facebook.png " alt=""
+                  :style=" $q.screen.width > 500 && $q.screen.height > 700 ? 'height: 35px; width: 36px;margin-left: 9px;':'height: 8vw; width: 8vw'" />
+              </q-avatar>
+            </q-btn>
+          </div>
+          <div>
+            <q-btn flat style="    padding: 0px 0px 0px 0px;">
+              <q-avatar><img src="/img/icon/instagram.png " alt=""
+                  :style=" $q.screen.width > 500 && $q.screen.height > 700 ? 'height: 35px; width: 36px;margin-left: 9px;':'height: 8vw; width: 8vw'" />
+              </q-avatar>
+            </q-btn>
+          </div>
+        </div>
 
-        <div class="q-mt-lg">
+        <div class="">
           <q-btn flat style="text-decoration-line: underline;color:blanchedalmond;font-size: 11px;" label="Impressung"
             class="" @click="dialog_impressung = true"></q-btn>
 
           <q-btn flat style="text-decoration-line: underline;color:blanchedalmond;font-size: 11px;"
             label="Datenschutzerklärung" class=" " to="/datenschutzErklaerung"></q-btn>
         </div>
-
       </div>
     </div>
     <div class="flex justify-center" style="margin-top: 2vh;margin-bottom: 5px;color:red;">
@@ -47,7 +63,7 @@
   <!-- dialog_impressung -->
   <q-dialog v-model="dialog_impressung">
     <q-card
-      :style="$q.screen.width > 400 && $q.screen.height > 700 ? 'width: 90vw; height: 30vh' : 'width: 90vw; height: 300px'">
+      :style="$q.screen.width > 400 && $q.screen.height > 700 ? 'width: 90vw; height: 35vh' : 'width: 90vw; height: 350px'">
       <q-card-section class="text-h4 flex justify-center">
         Impressung</q-card-section>
 
@@ -68,12 +84,18 @@
           <div class="col-3"></div>
 
           <div>Telefon:</div>
-          <div class="q-ml-xs">0402654</div>
+          <div class="q-ml-xs">06831 5053 643</div>
+        </div>
+        <div class="row q-mt-sm">
+          <div class="col-3"></div>
+
+          <div>Steuer-Nr:</div>
+          <div class="q-ml-xs">010/232/18131</div>
         </div>
         <div class="row">
           <div v-if="$q.screen.width > 400 && $q.screen.height > 700" class="col-3"></div>
           <div v-else class="q-ml-sm"></div>
-          <div class="q-mt-sm">Gesetzlicher Vertreter: Huu Hoang Anh Hoang</div>
+          <div class="q-mt-sm">Gesetzlicher Vertreter: Inh. Huu Hoang Anh Hoang</div>
         </div>
         <div class="q-ml-lg q-mt-sm">Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
           Verbraucherschlichtungsstelle teilzunehmen</div>

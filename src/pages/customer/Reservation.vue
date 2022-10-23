@@ -393,7 +393,8 @@ export default {
               message: "Danke dir!!!^^",
 
               color: "positive",
-              avatar: "/img/trangTi.png",
+              avatar: "/img/icon/hAnh.png",
+
             });
 
             router.replace("/thank");

@@ -154,7 +154,8 @@ export default {
             message: "You have no items",
 
             color: "negative",
-            avatar: "/img/trangTi.png",
+             avatar: "/img/icon/hAnh.png",
+
           }).catch((err) => {
             console.log(err);
           });
@@ -189,7 +190,8 @@ export default {
               message: "checkouted",
 
               color: "positive",
-              avatar: "/img/trangTi.png",
+               avatar: "/img/icon/hAnh.png",
+
             });
 
             router.replace("/thank");

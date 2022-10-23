@@ -233,13 +233,14 @@ export default {
         this.$q.notify({
           message: "Added to cart.",
           color: "positive",
-          avatar: "/img/trangTi.png",
+          avatar: "/img/icon/hAnh.png",
         });
       } else {
         this.$q.notify({
           message: "Number of Item must be grater than 0.",
           color: "negative",
-          avatar: "/img/trangTi.png",
+          avatar: "/img/icon/hAnh.png",
+
         });
       }
     },

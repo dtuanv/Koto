@@ -154,7 +154,8 @@ export default {
               message: "new product was created",
 
               color: "positive",
-              avatar: "/img/trangTi.png",
+               avatar: "/img/icon/hAnh.png",
+
             });
             console.log("product saved");
             router.replace("/admin/product");
@@ -188,7 +189,8 @@ export default {
               message: " product was updated",
 
               color: "positive",
-              avatar: "/img/trangTi.png",
+               avatar: "/img/icon/hAnh.png",
+
             });
             console.log("product updated");
             router.replace("/admin/product");

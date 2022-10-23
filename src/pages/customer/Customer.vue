@@ -153,7 +153,8 @@ export default {
                   $q.notify({
                     message: "customer deleted!",
                     color: "positive",
-                    avatar: '/img/trangTi.png',
+                    avatar: "/img/icon/hAnh.png",
+
                   });
                 });
             })
@@ -161,7 +162,8 @@ export default {
               $q.notify({
                 message: "Cancel!",
                 color: "negative",
-                avatar: '/img/trangTi.png',
+                avatar: "/img/icon/hAnh.png",
+
               });
             });
 

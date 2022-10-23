@@ -1,5 +1,5 @@
 <template>
-  <q-page  class="q-pa-md  ">
+  <q-page class="q-pa-md  ">
     <div class="justify-center flex text-h5 	q-mb-lg">Edit Resource of Product</div>
     <!-- content -->
     <!-- <div class="q-gutter-md edit_Product  " style="max-width: 500px">
@@ -10,29 +10,18 @@
 
 
      </div> -->
-     <q-table
-     dense
-      :rows="rows"
-      :columns="columns"
-      row-key="name"
-      hide-bottom
+    <q-table dense :rows="rows" :columns="columns" row-key="name" hide-bottom :pagination.sync="pagination">
 
-      :pagination.sync="pagination"
+      <template v-slot:body-cell-action="props">
+        <q-td :props="props">
+          <q-btn icon="edit" @click='editProduct(props)' dense></q-btn>
+          <q-btn icon="delete" color="negative" @click='deleteProduct(props)' dense></q-btn>
 
-
-
-    >
-
-    <template v-slot:body-cell-action="props">
-      <q-td :props="props">
-        <q-btn icon="edit" @click='editProduct(props)' dense></q-btn>
-        <q-btn icon="delete" color="negative" @click='deleteProduct(props)' dense></q-btn>
-
-      </q-td>
+        </q-td>
 
 
-    </template>
-  </q-table>
+      </template>
+    </q-table>
   </q-page>
 </template>
 
@@ -40,18 +29,18 @@
 import axios from 'axios';
 import { ref, computed, nextTick } from 'vue'
 const columns = [
-  {name:'name', label:'Name', field:'name'},
-  {name:'imageUrl', label:'Image Url', field:'imageUrl'},
-  {name:'decription', label:'Decription', field:'decription'},
-  {name:'price', label:'Price', field:'price'},
-  {name:'category', label:'Category', field:'category'},
-  {name:'action', label:'Action', field:''},
+  { name: 'name', label: 'Name', field: 'name' },
+  { name: 'imageUrl', label: 'Image Url', field: 'imageUrl' },
+  { name: 'decription', label: 'Decription', field: 'decription' },
+  { name: 'price', label: 'Price', field: 'price' },
+  { name: 'category', label: 'Category', field: 'category' },
+  { name: 'action', label: 'Action', field: '' },
 
 ]
 const rows = ref([]);
 import { useRoute, useRouter } from "vue-router";
 import { useQuasar } from "quasar";
-import {WebApi} from "/src/apis/WebApi";
+import { WebApi } from "/src/apis/WebApi";
 
 const router = useRouter();
 const route = useRoute();
@@ -59,35 +48,35 @@ const checkPath = route;
 const $q = useQuasar()
 export default {
   // name: 'PageName',
-  setup(){
+  setup() {
     console.log("Route: ", checkPath);
 
     axios.get(`${WebApi.server}/product`)
-            .then(response => {
-            rows.value = response.data;
+      .then(response => {
+        rows.value = response.data;
 
-            console.log(rows.value);
-        })
-            .catch(err => {
-            console.log(err);
-        });
+        console.log(rows.value);
+      })
+      .catch(err => {
+        console.log(err);
+      });
 
-        return {
+    return {
 
 
-        rows,
-        columns,
-        pagination: { rowsPerPage: 0 },
-        };
+      rows,
+      columns,
+      pagination: { rowsPerPage: 0 },
+    };
   },
-  methods:{
-    editProduct(props){
-      console.log('Params: ',props.row.id)
-      this.$router.push('/admin/product/add/'+props.row.id+'/')
+  methods: {
+    editProduct(props) {
+      console.log('Params: ', props.row.id)
+      this.$router.push('/admin/product/add/' + props.row.id + '/')
 
 
     },
-    deleteProduct(props){
+    deleteProduct(props) {
 
       this.$q.dialog({
         title: 'Confirm',
@@ -103,18 +92,19 @@ export default {
       }).onOk(() => {
         console.log('>>>> OK')
 
-        axios.delete(`${WebApi.server}/admin/product/delete/`+props.row.id)
-      .then(response =>{
-       rows.value.splice(this.rows.indexOf(props.row), 1)
-       this.$q.notify({
-        message: 'Product was deleted.',
-          color: 'positive',
-          avatar: '/img/trangTi.png',
+        axios.delete(`${WebApi.server}/admin/product/delete/` + props.row.id)
+          .then(response => {
+            rows.value.splice(this.rows.indexOf(props.row), 1)
+            this.$q.notify({
+              message: 'Product was deleted.',
+              color: 'positive',
+              avatar: "/img/icon/hAnh.png",
 
 
-       })
-       console.log('is deleted: ')
-      })
+
+            })
+            console.log('is deleted: ')
+          })
       }).onCancel(() => {
         console.log('>>>> Cancel')
       }).onDismiss(() => {
@@ -128,10 +118,10 @@ export default {
 }
 </script>
 <style>
-  .edit_Product{
-    max-width: 500px;
-    text-align: center;
-    display: block;
-    margin-inline: auto;
-  }
+.edit_Product {
+  max-width: 500px;
+  text-align: center;
+  display: block;
+  margin-inline: auto;
+}
 </style>

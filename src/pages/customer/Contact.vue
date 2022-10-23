@@ -80,7 +80,8 @@ export default {
             message: "wir haben Ihre Nachricht bekommen!",
 
             color: "positive",
-            avatar: "/img/trangTi.png",
+            avatar: "/img/icon/hAnh.png",
+
           });
           this.$router.replace("/");
         })

@@ -74,7 +74,8 @@ export default {
               message:'new Category was created',
 
               color:'positive',
-              avatar:'/img/trangTi.png',
+               avatar: "/img/icon/hAnh.png",
+
             })
             console.log("Category saved");
             router.replace("/admin/category/edit");

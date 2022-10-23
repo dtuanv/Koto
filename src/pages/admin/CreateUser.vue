@@ -53,36 +53,38 @@ export default {
 
       onSubmit() {
 
-        if(code.value == 'chilijAdminwnoMoiduoc__koto##+#a__23555114DFGZHJH5784i3jejfkdksdjsdhsfhv'){
+        if (code.value == 'chilijAdminwnoMoiduoc__koto##+#a__23555114DFGZHJH5784i3jejfkdksdjsdhsfhv') {
           axios({
-          method: "post",
-          url: `${WebApi.server}/onlyTuan/createNewUser`,
-          // data: JSON.stringify(product),
-          data: user.value,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then(() => {
-            $q.notify({
-              message: ' new User created',
-
-              color: 'positive',
-              avatar: '/img/trangTi.png',
-            })
-            // console.log("product saved");
-            $router.replace("/")
+            method: "post",
+            url: `${WebApi.server}/onlyTuan/createNewUser`,
+            // data: JSON.stringify(product),
+            data: user.value,
+            headers: {
+              "Content-Type": "application/json",
+            },
           })
-          .catch((err) => {
-            console.log(err);
-          });
-        }else{
-         $q.notify({
-              message: "Code is not correct!!!",
+            .then(() => {
+              $q.notify({
+                message: ' new User created',
 
-              color: "negative",
-              avatar: "/img/trangTi.png",
+                color: 'positive',
+                avatar: "/img/icon/hAnh.png",
+
+              })
+              // console.log("product saved");
+              $router.replace("/")
+            })
+            .catch((err) => {
+              console.log(err);
             });
+        } else {
+          $q.notify({
+            message: "Code is not correct!!!",
+
+            color: "negative",
+            avatar: "/img/icon/hAnh.png",
+
+          });
         }
 
       }

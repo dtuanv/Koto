@@ -106,7 +106,8 @@ export default {
        this.$q.notify({
         message: 'Category was deleted.',
           color: 'positive',
-          avatar: '/img/trangTi.png',
+                   avatar: "/img/icon/hAnh.png",
+
 
 
        })

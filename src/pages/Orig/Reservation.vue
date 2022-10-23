@@ -265,7 +265,8 @@ export default {
             $q.notify({
               message: "Thank You",
               color: "positive",
-              avatar: "/img/trangTi.png",
+               avatar: "/img/icon/hAnh.png",
+
             });
             router.replace("/thank");
           })
