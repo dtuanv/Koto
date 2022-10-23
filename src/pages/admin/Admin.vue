@@ -14,7 +14,7 @@
         </div>
       </q-btn>
     </div>
-
+    <q-separator/>
     <!-- Reservierung ADMIN -->
     <div class="flex flex-center">
       <q-btn class="flex flex-center hoverButton" style="width: 120px" flat  label="Reservierung" to="/admin/reservation" >
@@ -31,7 +31,11 @@
       </q-btn>
     </div>
 
+    <q-separator/>
+
     <q-btn class="flex flex-center btn hoverButton" flat label="Admin Product" to="admin/product" />
+    <q-separator/>
+
     <!-- <q-btn class="flex flex-center hoverButton" flat label="Admin Gallery" to="/category" /> -->
     <!-- <q-btn class="flex flex-center hoverButton" flat label="Order History" to="/admin/history" /> -->
     <!-- <q-btn  class="absolute-top-right q-mt-sm q-mr-md" flat color="red" label="Log Out"

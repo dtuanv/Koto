@@ -19,7 +19,7 @@
             Telefon Nr: {{contact.mobil}}
           </div>
         </div>
-        <q-btn label="Đã đọc" class="float-right" @click="changeStatus(contact)"
+        <q-btn :label="contact.status == 2 ?'Đọc':'Đã Xem'" class="float-right" @click="changeStatus(contact)"
             :color="contact.status == 2 ? 'red': 'positive'"></q-btn>
       </q-card-selection>
       <q-card-actions>
