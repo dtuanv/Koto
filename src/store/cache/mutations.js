@@ -38,19 +38,51 @@ export const SET_PRODUCT = (state, product) => {
 
     return pr.category === "vorspeise";
   });
-
+  state.vorspeiseProducts.sort((a,b) => a.num - b.num)
+// ----------
   state.hauptgangProducts = product.filter((pr) => {
     return pr.category === "hauptgang";
   });
   state.hauptgangProducts.sort((a,b) => a.num - b.num)
-  console.log("state.hauptgangProducts",state.hauptgangProducts)
+  //////////
   state.sushiMixProducts = product.filter((pr) => {
     return pr.category === "sushiMix";
   });
+  state.sushiMixProducts.sort((a,b) => a.num - b.num)
+  ////////////
   state.sushiProducts = product.filter((pr) => {
     return pr.category === "sushi";
   });
+////////
+  state.makiProducts = product.filter((pr) => {
+    return pr.category === "maki";
+  });
+  state.makiProducts.sort((a,b) => a.num - b.num)
 
+  // -----------------
+  state.nigiriProducts = product.filter((pr) => {
+    return pr.category === "nigiri";
+  });
+  state.nigiriProducts.sort((a,b) => a.num - b.num)
+
+// ----------
+  state.insideOutProducts = product.filter((pr) => {
+    return pr.category === "insideOut";
+  });
+  state.insideOutProducts.sort((a,b) => a.num - b.num)
+
+  // -----------------------------------------------------
+  state.tempuraProducts = product.filter((pr) => {
+    return pr.category === "tempura";
+  });
+  state.tempuraProducts.sort((a,b) => a.num - b.num)
+
+  // ------------------------------------------------------------
+  state.spezialProducts = product.filter((pr) => {
+    return pr.category === "spezial";
+  });
+  state.spezialProducts.sort((a,b) => a.num - b.num)
+// -----------------------------------------------------------------
   // console.log("product in mutation ", state.products )
   // console.log("product in mutation per String",  JSON.parse(JSON.stringify(state.products)) )
 };

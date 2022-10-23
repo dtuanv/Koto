@@ -121,8 +121,14 @@ export default {
       productCategory: [
         { label: "Vorspeise", value: "vorspeise", field: "category" },
         { label: "Haupgang", value: "hauptgang", field: "category" },
-        { label: "Sushi", value: "sushi", field: "category" },
         { label: "Sushi Mix", value: "sushiMix", field: "category" },
+        { label: "Nigiri", value: "nigiri", field: "category" },
+        { label: "Maki", value: "maki", field: "category" },
+        { label: "Inside Out", value: "insideOut", field: "category" },
+        { label: "Tempura Roll", value: "tempura", field: "category" },
+        { label: "Spezial Koto", value: "spezial", field: "category" },
+        { label: "Saschimi", value: "saschimi", field: "category" },
+        { label: "Getränke", value: "getraenke", field: "category" },
       ],
       addproduct() {
         // const product = {

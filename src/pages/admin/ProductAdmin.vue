@@ -140,9 +140,21 @@
     </div>
 
     <!-- <div>sushiProducts..{{sushiProducts}}</div> -->
+<!-- maki product -->  <div class="">
+      <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
+        <q-card-actions class="flex justify-center text-h4">
+          <div ref="sushi" style="font-family: cursive; color: coral">
+             Maki Sushi
+          </div>
+        </q-card-actions>
+      </q-card>
+    </div>
+
+<!-- maki product -->
+
     <div class="full-width row wrap justify-center items-start content-center">
       <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
-        <div v-for="product in sushiProducts" :key="product.id">
+        <div v-for="product in makiProducts" :key="product.id">
 
           <productBox :product="product"></productBox>
         </div>
@@ -230,6 +242,13 @@ export default {
     const sushiProducts = computed({
       get: () => $store.state.cache.sushiProducts,
     });
+
+    const makiProducts = computed({
+      get: () => $store.state.cache.makiProducts,
+    });
+    const nigiriProducts = computed({
+      get: () => $store.state.cache.nigiriProducts,
+    });
     // console.log("sushiProducts", sushiProducts);
     return {
       productCategory,
@@ -239,6 +258,8 @@ export default {
       vorspeisen,
       hauptgang,
       sushiMix,
+      makiProducts,
+      nigiriProducts,
       goToSushi,
       goToSushiMix,
       goToHauptgang,
