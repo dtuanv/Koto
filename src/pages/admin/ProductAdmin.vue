@@ -23,14 +23,17 @@
 
 
     <!-- <div class="row"> -->
-    <div class="full-width row wrap justify-center items-start content-center ">
+      <div class="q-mt-lg" >
+        <div class="full-width row wrap justify-center items-start content-center ">
       <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
-        <div v-for="product in products" :key="product.id">
-          <productBox :product="product"></productBox>
+        <div  v-for="product in products" :key="product.id">
+          <productBox  :product="product"></productBox>
         </div>
 
       </div>
     </div>
+      </div>
+
   </div>
   <!-- <div class="col-6"></div> -->
   <!-- <div class="col-6"></div> -->

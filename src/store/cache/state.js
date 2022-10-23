@@ -32,6 +32,14 @@ export default function () {
         label: "4",
         value: 4,
       },
+      {
+        label: "5",
+        value: 5,
+      },
+      {
+        label: "6",
+        value: 6,
+      },
     ],
     guestInfo: {
       guestNum: 0,

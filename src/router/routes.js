@@ -133,7 +133,11 @@ const routes = [
         component: () => import("src/pages/customer/Reservation.vue"),
       },
       // Information
-
+      {
+        path: "/datenschutzErklaerung",
+        name: "datenschutzErklaerung",
+        component: () => import("src/pages/infos/Datenschutz.vue"),
+      },
 
     ],
   },

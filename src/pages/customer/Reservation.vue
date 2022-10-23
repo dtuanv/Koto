@@ -1,11 +1,10 @@
 <template>
   <q-page>
-    <div class="q-pa-md">
-      <div
-        class="text-h4 flex justify-center"
-        style="font-family: cursive; color: coral"
-      >
-        Reservation
+
+
+    <div :style=" $q.screen.width > 400 && $q.screen.height > 700 ? 'margin-top:50px':''">
+      <div class="text-h4 flex justify-center" style="font-family: cursive; color: coral">
+        Reservierung
       </div>
       <!-- icon -->
       <div class="row justify-center">
@@ -13,23 +12,60 @@
           <ReservationBox :reservation="reservation"> </ReservationBox>
         </div>
       </div>
+
+      <div style="width:100%" class="">
+        <div class="flex justify-center">
+          <q-card
+            :style=" $q.screen.width > 400 && $q.screen.height > 700 ?'position:fixed;z-index:100;margin-right: 12px; max-width:700px ':'position:fixed;z-index:100;margin-right: 14px;margin-left: 15px;  '"
+            class="shadow-12" v-if="dialog_gespeichertDaten">
+            <q-card-section style="padding-bottom: 0px">
+              <div class="flex justify-center "
+                style="font-size:17px; font-family:inherit;background-color: blanchedalmond;;">
+                Löschung bzw. Sperrung Ihrer Daten
+              </div>
+            </q-card-section>
+            <q-card-actions>
+              <div class="q-pa-sm">
+                <div>Wir halten uns an die Grundsätze der Datenvermeidung und Datensparsamkeit. </div>
+                <div>
+                  Wir speichern Ihre
+                  personenbezogenen Daten daher nur so lange, wie dies zur Erreichung der hier genannten Zwecke
+                  erforderlich
+                  ist oder wie es die vom Gesetzgeber vorgesehenen vielfältigen Speicherfristen vorsehen.
+                </div>
+                <div class="q-mt-sm">
+                  Nach Fortfall des
+                  jeweiligen Zweckes bzw. Ablauf dieser Fristen werden die entsprechenden Daten routinemäßig und
+                  entsprechend den gesetzlichen Vorschriften gesperrt oder gelöscht.
+                </div>
+
+                <div class="row q-mt-sm">
+                  <div class="col-8"></div>
+                  <div class="col-2">
+                    <q-btn @click="dialog_gespeichertDaten=false" color="positive" label="Akzeptieren"></q-btn>
+
+                  </div>
+                </div>
+
+              </div>
+            </q-card-actions>
+          </q-card>
+        </div>
+
+      </div>
+
+
       <!-- <q-btn v-if="button_next === true && button_time === true" label="Next" class="float-right q-mr-sm" color="positive"
     @click="dialog_reservation = true" dense></q-btn> -->
-      <q-card class="shadow-1 q-mt-xl">
+
+      <q-card class="shadow-4 q-mt-lg"
+        :style=" $q.screen.width > 400 && $q.screen.height > 700 ? 'margin-top:60px' : '' ">
         <q-card-section>
-          <div
-            class="text-h7"
-            style="color: cornflowerblue; font-family: cursive"
-            v-if="orGuestNum == ''"
-          >
-            Number of guests : {{ guestNum }}
+          <div class="text-h7" style="color: cornflowerblue; font-family: cursive" v-if="orGuestNum == ''">
+            Anzahl der Gäste : {{ guestNum }}
           </div>
-          <div
-            class="text-h7"
-            style="color: cornflowerblue; font-family: cursive"
-            v-if="orGuestNum != ''"
-          >
-            The desired number of guests: {{ orGuestNum }}
+          <div class="text-h7" style="color: cornflowerblue; font-family: cursive" v-if="orGuestNum != ''">
+            Ihre gewünschte Anzahl der Gäste : {{ orGuestNum }}
             <div>{{ changeStatus() }}</div>
           </div>
           <!-- <div v-if="guestNum!==0 || orGuestNum!=''">{{resetStatus()}}</div> -->
@@ -37,29 +73,23 @@
             {{ resetStatus() }}
           </div>
         </q-card-section>
-        <div class="row">
-          <q-card-actions v-for="guest in guests" :key="guest">
-            <q-btn
-              class="hoverButton"
-              style="width: 10vw"
-              :label="guest.label"
-              @click="chooseNumberGuests(guest), (date_card = true)"
-            ></q-btn>
+        <div class="row q-ml-md ">
+          <q-card-actions class="" v-for="guest in guests" :key="guest">
+            <q-btn class="hoverButton" style="width: 10vw" :label="guest.label"
+              @click="chooseNumberGuests(guest), (date_card = true)"></q-btn>
           </q-card-actions>
           <q-card-actions class="row">
-            <div class="text-h6 q-mr-xs">or :</div>
-            <q-input
-              v-model="orGuestNum"
-              color="positive"
-              filled
-              style="width: 22vw"
-              label="Number"
-            ></q-input>
+
+            <div class="q-mr-sm " style="color: cornflowerblue; font-family: cursive">oder die gewünschte Anzahl:</div>
+            <q-input v-model="orGuestNum" color="positive" style="max-width: 100%;" label="Anzahl" :rules="[
+              (val) =>
+                (!!val && val < 16 && val!=0 ||  val == '' ) || 'Bitte rufen Sie uns an, wenn Sie ein Tish für mehr 15 Personen reservieren',
+            ]"></q-input>
           </q-card-actions>
         </div>
       </q-card>
 
-      <q-card class="q-mt-lg" v-if="date_card">
+      <q-card class="q-mt-lg shadow-4" v-if="date_card==true && dialog_gespeichertDaten==false">
         <q-card-section>
           <!-- <div class="q-mb-sm">
           <q-badge color="teal"> Date: {{ dateInGermany }} </q-badge>
@@ -67,90 +97,64 @@
         <div class="q-mb-sm">
           <q-badge color="teal"> Time: {{ time }} </q-badge>
         </div> -->
-          <div class="row">
-            <div
-              class="text-h7"
-              style="color: cornflowerblue; font-family: cursive"
-            >
-              DATE : {{ dateInGermany }}
+          <div class="row" style="width:100%">
+            <div class="text-h7 col-7" style="color: cornflowerblue; font-family: cursive">
+              DATUM : {{ dateInGermany }}
             </div>
-            <div class="col-4"></div>
 
-            <div
-              class="text-h7"
-              style="color: cornflowerblue; font-family: cursive"
-            >
-              TIME : {{ time }}
+            <div class="text-h7" style="color: cornflowerblue; font-family: cursive">
+              Uhrzeit : {{ time }}
             </div>
-          </div>
-        </q-card-section>
-        <q-card-actions class="row">
-          <div>
-            <q-btn icon="event" round color="primary">
-              <q-popup-proxy
-                @before-show="updateProxy"
-                cover
-                transition-show="scale"
-                transition-hide="scale"
-              >
-                <q-date v-model="proxyDate" :options="fromCurrendate">
-                  <div class="row items-center justify-end q-gutter-sm">
-                    <q-btn label="Cancel" color="primary" flat v-close-popup />
-                    <q-btn
-                      label="OK"
-                      color="primary"
-                      flat
-                      @click="save(), (button_time = true)"
-                      v-close-popup
-                    />
-                  </div>
-                </q-date>
-              </q-popup-proxy>
-            </q-btn>
-          </div>
-          <div class="col-9"></div>
-          <div class="row">
-            <q-btn
-              v-if="button_time"
-              color="positive"
-              icon="timer"
-              @click="dialog_time = true"
-            ></q-btn>
-          </div>
-        </q-card-actions>
-      </q-card>
-      <br />
-      <q-btn
-        v-if="button_next === true && button_time === true"
-        label="Next"
-        class="float-right q-mr-sm"
-        color="positive"
-        @click="dialog_reservation = true"
-        dense
-      ></q-btn>
-    </div>
-
-    <q-dialog v-model="dialog_time">
-      <q-card>
-        <q-card-section>
-          <div
-            class="text-h4 flex justify-center"
-            style="font-family: cursive; color: cadetblue"
-          >
-            Time
           </div>
         </q-card-section>
         <q-card-actions>
-          <div v-for="(time, index) in times" :key="index">
-            <q-item style="margin-left: 3vw">
-              <q-btn
-                class="hoverButton"
-                @click="chooseTime(time), (button_next = true)"
-                v-close-popup
-                >{{ time.label }}
+          <div class="row" style="width:100%">
+            <div class="col-9">
+              <q-btn icon="event" round color="primary" label="Hier clicken">
+                <q-popup-proxy @before-show="updateProxy" cover transition-show="scale" transition-hide="scale">
+                  <q-date v-model="proxyDate" :options="fromCurrendate">
+                    <div class="row items-center justify-end q-gutter-sm">
+                      <q-btn label="Cancel" color="primary" flat v-close-popup />
+                      <q-btn label="OK" color="primary" flat
+                        @click="save(), (button_time = true),dialog_time = true,checkTimeToday()" v-close-popup />
+                    </div>
+                  </q-date>
+                </q-popup-proxy>
               </q-btn>
-            </q-item>
-            <div></div>
+
+            </div>
+            <div class="col-2">
+              <q-btn v-if="button_time" color="primary" icon="timer" @click="dialog_time = true"></q-btn>
+            </div>
+          </div>
+
+        </q-card-actions>
+      </q-card>
+      <br />
+      <q-btn v-if="button_next === true && button_time === true" label="Weiter" class="float-right q-mr-sm shadow-5"
+        color="positive" @click="dialog_reservation = true" dense></q-btn>
+    </div>
+    <div v-if="$q.screen.width < 400 && $q.screen.height < 700 && date_card === true" style="min-height:0px"></div>
+    <div id="bottom"></div>
+    <!-- <div min-height:500px >hi</div> -->
+    <q-dialog v-model="dialog_time">
+      <q-card>
+        <q-card-section>
+          <div class="text-h4 flex justify-center" style="font-family: cursive; color: cadetblue">
+            Uhrzeit
+          </div>
+        </q-card-section>
+        <q-card-actions style="margin-left: 2vh;">
+          <div v-for="(time, index) in times" :key="index">
+
+            <div class="">
+              <q-item style="">
+                <q-btn class="hoverButton" @click="chooseTime(time), (button_next = true)" v-close-popup>{{
+                time.label
+                }}
+                </q-btn>
+              </q-item>
+            </div>
           </div>
         </q-card-actions>
       </q-card>
@@ -158,25 +162,19 @@
     <!-- dialog_reservation -->
     <!-- <q-card> -->
     <q-dialog v-model="dialog_reservation" class="">
-      <q-card class="my-card" style="max-height: 42vh; margin-top: 18vh">
+      <q-card class="my-card" style="max-height: 55vh; margin-top: 18vh">
         <q-card-section>
-          <div class="text-h4 flex justify-center">Infor</div>
+          <div class="text-h4 flex justify-center">Information</div>
         </q-card-section>
         <q-separator />
 
         <q-card-actions vertical>
           <q-form @submit="reservationSave">
             <!-- Input Validation -->
-            <q-input
-              v-model="user.name"
-              class="col-4"
-              label="Name"
-              color="white"
-              :rules="[
-                (val) =>
-                  (!!val && val.length > 1) || 'Please write a correct name',
-              ]"
-            ></q-input>
+            <q-input v-model="user.name" class="col-4" label="Vorname" color="white" :rules="[
+              (val) =>
+                (!!val && val.length > 1) || 'Bitte geben Sie ihr richtiger Vorname ein',
+            ]"></q-input>
             <!-- <q-input
             v-model="user.adresse"
             class="col-4"
@@ -184,25 +182,16 @@
             color="white"
             :rules="adresseRules"
           ></q-input> -->
-            <q-input
-              v-model="user.mobil"
-              class="col-4"
-              label="Mobil"
-              color="white"
-              :rules="mobilRules"
-            ></q-input>
-            <q-input label="Note" v-model="user.note" autogrow />
-            <q-btn
-              class="q-mt-lg float-right"
-              label="Send"
-              color="primary"
-              type="submit"
-              dense
-            ></q-btn>
+            <q-input v-model="user.mobil" class="col-4" label="Telefonnummer" color="white" :rules="mobilRules">
+            </q-input>
+            <q-input label="Notiz" v-model="user.note" autogrow />
+            <q-btn class="q-mt-lg float-right" label="Send" color="primary" type="submit" dense></q-btn>
           </q-form>
         </q-card-actions>
       </q-card>
     </q-dialog>
+
+
   </q-page>
 </template>
 
@@ -237,6 +226,7 @@ export default {
       console.log("change");
     },
 
+
     // changeStatus(){
     //   guestInfo.value.status = true
 
@@ -246,6 +236,35 @@ export default {
     const $store = useStore();
     const $q = useQuasar();
     const router = useRouter();
+
+    //**  data define beginn **
+    const time = ref("");
+    const today = Date.now();
+    const formattedString = date.formatDate(today, "DD-MM-YYYY");
+    const dateInGermany = ref("");
+    const proxyDate = ref("");
+    const getTime = date.formatDate(today, "HH:mm");
+    // time list
+    // const times = computed({
+    //   get: () => $store.state.cache.times,
+    // });
+    const timesOrig = computed({
+      get: () => $store.state.cache.times,
+    });
+    const times = ref(timesOrig.value)
+
+    // time list end
+
+    // const date = ref("2019/03/01");
+
+    // **  date define end **
+
+
+    const goToNext = () => {
+      nextButton.value?.scrollIntoView({ behavior: "smooth", block: "center" });
+    };
+
+
 
     // const guestStore = computed({
     //   get: () => $store.state.cache.guestNum,
@@ -260,9 +279,6 @@ export default {
       get: () => $store.state.cache.guestInfo,
     });
 
-    const times = computed({
-      get: () => $store.state.cache.times,
-    });
     const reservations = $store.state.cache.reservations;
 
     const guestNum = ref(guestInfo.value.guestNum);
@@ -272,20 +288,7 @@ export default {
 
     // **guest in store** END
 
-    //**  data define beginn **
-    const time = ref("");
-    const today = Date.now();
-    const formattedString = date.formatDate(today, "DD-MM-YYYY");
-    const dateInGermany = ref("");
-    const proxyDate = ref("");
-    // const date = ref("2019/03/01");
 
-    // **  date define end **
-
-    // console.log("orGuestNum, ",orGuestNum)
-    // console.log("orGuestNum value, ",orGuestNum.value)
-    // console.log("guestNum, ",guestNum)
-    // console.log("guestStore, ",guestStore.value)
 
     // if(  orGuestNum.value !=0 || orGuestNum.value != "" ){
     if (true) {
@@ -294,21 +297,43 @@ export default {
     }
 
     return {
+      checkTimeToday() {
+
+        if (dateInGermany.value === formattedString) {
+          this.times = timesOrig.value.filter((pr) => {
+            return pr.value > getTime;
+          });
+        } else {
+          this.times = timesOrig.value
+        }
+      },
       reservations,
+      goToNext,
+      scrollToBottom() {
+        // const element = document.getElementById("bottom");
+        // element.scrollIntoView({ behavior: "smooth", block: "end" })
+
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        console.log("bottom")
+
+      },
       dialog_time: ref(false),
       date_card: ref(false),
       button_next: ref(false),
       button_time: ref(false),
       dialog_reservation: ref(false),
+      dialog_gespeichertDaten: ref(true),
       user,
       dateInGermany,
       time,
+
       // formattedString,
       proxyDate,
       guestNum,
       orGuestNum,
       guests,
       times,
+      timesOrig,
       fromCurrendate(d) {
         const heute = date.formatDate(today, "YYYY/MM/DD");
 
@@ -348,24 +373,24 @@ export default {
           // data: JSON.stringify(product),
 
           data:
-            // name : $store.state.cache.cart.getName,
-            {
-              // guestNum: (gue) => (gue.orGuestNum.value !=='' ? 15 : 12),
-              guestNum: guestNumber,
-              date: dateInGermany.value,
-              time: time.value,
-              name: user.value.name,
-              mobil: user.value.mobil,
-              note: user.value.note,
-              status: 2,
-            },
+          // name : $store.state.cache.cart.getName,
+          {
+            // guestNum: (gue) => (gue.orGuestNum.value !=='' ? 15 : 12),
+            guestNum: guestNumber,
+            date: dateInGermany.value,
+            time: time.value,
+            name: user.value.name,
+            mobil: user.value.mobil,
+            note: user.value.note,
+            status: 2,
+          },
           headers: {
             "Content-Type": "application/json",
           },
         })
           .then(() => {
             $q.notify({
-              message: "Thank You",
+              message: "Danke dir!!!^^",
 
               color: "positive",
               avatar: "/img/trangTi.png",
@@ -388,10 +413,12 @@ export default {
           (val !== null &&
             val !== "" &&
             !!val &&
-            val.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{5})$/g)) ||
-          "Please write a correct mobil",
+            val.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?.*$/g)) ||
+          // val.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{5})$/g)) ||
+          "Bitte geben Sie  richtige Telefonnummer ein",
         (val) =>
-          (val.includes(0) && !!val) || "A Mobil nummer must start with a  0",
+          (val.charAt(0) == 0 && !!val) || "Bitte geben Sie die richtige Telefonnummer mit 0 am Anfang ein",
+        // (val.includes(0) && !!val) || "Please write a correct mobil",
       ],
       //end Input validation
     };

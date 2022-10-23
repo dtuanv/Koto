@@ -54,6 +54,7 @@ export default route(function ({ store, ssrContext }) {
       "/thank",
       "/onlyTuan/createNewUser",
       "/impressung",
+      "/datenschutzErklaerung"
     ];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = localStorage.getItem("user");

@@ -107,7 +107,30 @@
     </q-drawer>
 
     <!-- (Optional) The Footer -->
+
     <q-footer>
+
+      <div v-if="card_cookie">
+        <q-card style="background-color:aqua;height: 120px;" >
+          <q-card-section style="padding-bottom:0px">
+            <div style="color:black">
+              Wir verwenden Cookies, um unsere Website und unseren Service zu optimieren.
+            </div>
+          </q-card-section>
+          <q-card-actions >
+
+            <div class="row" style="width:100%">
+              <div class="col-7"></div>
+              <div class="">
+                <q-btn class="" @click="card_cookie=false" color="positive" label="Akzeptieren"></q-btn>
+
+              </div>
+
+            </div>
+          </q-card-actions>
+        </q-card>
+      </div>
+
       <q-tabs switch-indicator>
         <q-route-tab icon="restaurant_menu" :to="{ name: 'product', params: { id: 1 } }" replace label="Menü"
           color="positive" />
@@ -119,8 +142,11 @@
       <router-view />
       <div>HI</div>
     </q-page-container> -->
-    <q-page-container>
+
+    <q-page-container >
       <!-- This is where pages get injected -->
+
+
       <router-view />
       <!-- <q-page>Hih new</q-page> -->
       <!-- <div>HIhi</div> -->
@@ -135,6 +161,7 @@
 
         <div>Copyright © 2022 Jasmin </div>
       </div> -->
+
       <Header></Header>
     </q-page-container>
   </q-layout>
@@ -183,6 +210,7 @@ export default {
       leftDrawerOpen,
       drawer: ref(false),
       miniState,
+      card_cookie:ref(true),
 
       role,
       logOut() {
