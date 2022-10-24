@@ -13,16 +13,16 @@
       <div class="q-mt-lg" v-if="true">
         <div class="row shadow-15" :style="
           $q.screen.width > 400 && $q.screen.height > 700
-            ? 'position: fixed; z-index: 200; background-color: gold; padding: 10px;top: 6vh; width: 100%;'
-            : 'position: fixed; z-index: 200; background-color: gold; padding: 4px 0px 10px;top: 56px; height:100px; width: 100%;'
+            ? 'position: fixed; z-index: 200; background-color: blanchedalmond; padding: 10px;top: 6vh; width: 100%;'
+            : 'position: fixed; z-index: 200; background-color: blanchedalmond; padding: 4px 0px 10px;top: 56px; height:100px; width: 100%;'
         ">
           <div class="col-12 flex justify-center q-mt-sm">
-            <q-btn class="" style="font-family: inherit; color: darkseagreen" label="Vorspeisen"
+            <q-btn class="" style="font-family: inherit; color:darkblue" label="Vorspeisen"
               @click="goToVorspeisen"></q-btn>
             <q-btn class="q-ml-sm" label="Haupgang" style="font-family: inherit; color: chocolate"
               @click="goToHauptgang"></q-btn>
 
-            <q-btn class="q-ml-sm" label="Sushi Mix" style="font-family: inherit; color: blue" @click="goToSushiMix">
+            <q-btn class="q-ml-sm" label="Sushi Menü" style="font-family: inherit; color: blue" @click="goToSushiMix">
             </q-btn>
           </div>
           <div class="col-12 flex justify-center q-mt-sm">
@@ -35,8 +35,8 @@
       <!-- Vorspeisen -->
       <div :style="$q.screen.width > 400 && $q.screen.height > 700 ? 'margin-top: 13vh;':'margin-top:120px'">
         <q-card class="q-mb-lg q-ml-sm q-mr-sm">
-          <q-card-actions class="flex justify-center text-h4">
-            <div ref="vorspeisen" style="font-family: cursive; color: coral">
+          <q-card-actions class="flex justify-center text-h4" style="background-color: aquamarine;">
+            <div ref="vorspeisen" style="font-family: cursive; color: coral;">
               Vorspeisen
             </div>
           </q-card-actions>
@@ -45,7 +45,7 @@
       <!-- <div>vorspeiseProducts{{vorspeiseProducts.subFoods}}</div> -->
       <div v-if="$q.screen.gt.sm">
         <div class="q-col-gutter-md row">
-          <div v-for="product in vorspeiseProducts" :key="product.id">
+          <div v-for="(product,index) in vorspeiseProducts" :key="index">
 
             <productBox :product="product"></productBox>
             <div>{{product.subFoods}} </div>
@@ -57,7 +57,7 @@
       <!-- mobil -->
       <div v-else class="full-width row wrap justify-center items-start content-center">
         <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
-          <div v-for="product in vorspeiseProducts" :key="product.id">
+          <div v-for="(product,index) in vorspeiseProducts" :key="index">
             <productBox :product="product"></productBox>
           </div>
         </div>
@@ -68,7 +68,7 @@
       <!-- <div class="row"> -->
       <!-- <div class="full-width row wrap justify-center items-start content-center">
         <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
-          <div v-for="product in products" :key="product.id">
+          <div v-for="(product,index) in products" :key="index">
             <productBox :product="product"></productBox>
           </div>
         </div>
@@ -76,7 +76,7 @@
       <!-- hauptgnag -->
       <div class="">
         <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
-          <q-card-actions class="flex justify-center text-h4">
+          <q-card-actions class="flex justify-center text-h4" style="background-color: antiquewhite;">
             <div ref="hauptgang" style="font-family: cursive; color: coral">
               Hauptgang
             </div>
@@ -85,7 +85,7 @@
       </div>
       <div class="full-width row wrap justify-center items-start content-center">
         <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
-          <div v-for="product in hauptgangProducts" :key="product.id">
+          <div v-for="(product,index) in hauptgangProducts" :key="index">
             <productBox :product="product"></productBox>
           </div>
         </div>
@@ -93,28 +93,10 @@
     </div>
     <!-- hauptgnag -->
 
-    <!-- product Sushi -->
-    <div class="">
-      <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
-        <q-card-actions class="flex justify-center text-h4">
-          <div ref="sushiMix" style="font-family: cursive; color: coral">
-            Sushi Mix
-          </div>
-        </q-card-actions>
-      </q-card>
-    </div>
-    <div class="full-width row wrap justify-center items-start content-center">
-      <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
-        <div v-for="product in sushiMixProducts" :key="product.id">
-          <productBox :product="product"></productBox>
-        </div>
-      </div>
-    </div>
 
-    <!-- product Sushi -->
     <div class="">
       <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
-        <q-card-actions class="flex justify-center text-h4">
+        <q-card-actions class="flex justify-center text-h4" style="background-color: steelblue;">
           <div ref="sushi" style="font-family: cursive; color: coral">
             Sushi
           </div>
@@ -125,7 +107,7 @@
     <!-- <div>sushiProducts..{{sushiProducts}}</div> -->
     <!-- <div class="full-width row wrap justify-center items-start content-center">
       <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
-        <div v-for="product in sushiProducts" :key="product.id">
+        <div v-for="(product,index) in sushiProducts" :key="index">
 
           <productBox :product="product"></productBox>
         </div>
@@ -137,8 +119,8 @@
     <div>
       <div class="">
         <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
-          <q-card-actions class="flex justify-center ">
-            <div ref="sushi" style="font-family: cursive; color: coral;font-size: 18px;">
+          <q-card-actions class="flex justify-center " style="background-color: honeydew;">
+            <div  style="font-family: emoji; color: coral;font-size: 18px;">
               Nigiri-SuShi( geformte Sushi, je 2 St.)
             </div>
           </q-card-actions>
@@ -146,7 +128,7 @@
       </div>
       <div class="full-width row wrap justify-center items-start content-center">
         <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
-          <div v-for="product in nigiriProducts" :key="product.id">
+          <div v-for="(product,index) in nigiriProducts" :key="index">
 
             <productBox :product="product"></productBox>
           </div>
@@ -162,8 +144,8 @@
     <div>
       <div class="">
         <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
-          <q-card-actions class="flex justify-center text-h6">
-            <div ref="sushi" style="font-family: cursive; color: coral">
+          <q-card-actions class="flex justify-center text-h6" style="background-color: antiquewhite">
+            <div ref="maki" style="font-family: emoji; color: coral">
               Maki-Sushi( je 8 St.)
             </div>
           </q-card-actions>
@@ -171,7 +153,7 @@
       </div>
       <div class="full-width row wrap justify-center items-start content-center">
         <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
-          <div v-for="product in makiProducts" :key="product.id">
+          <div v-for="(product,index) in makiProducts" :key="index">
 
             <productBox :product="product"></productBox>
           </div>
@@ -185,8 +167,8 @@
     <div>
       <div class="">
         <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
-          <q-card-actions class="flex justify-center text-h6">
-            <div ref="sushi" style="font-family: cursive; color: coral">
+          <q-card-actions class="flex justify-center text-h6" style="background-color: antiquewhite">
+            <div ref="insideOut" style="font-family: emoji; color: coral">
               Inside Out Roll( je 8St.)
             </div>
           </q-card-actions>
@@ -194,8 +176,7 @@
       </div>
       <div class="full-width row wrap justify-center items-start content-center">
         <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
-          <div v-for="product in insideOutProducts" :key="product.id">
-
+          <div v-for="(product,index) in insideOutProducts" :key="index">
             <productBox :product="product"></productBox>
           </div>
         </div>
@@ -207,8 +188,8 @@
     <div>
       <div class="">
         <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
-          <q-card-actions class="flex justify-center text-h6">
-            <div ref="sushi" style="font-family: cursive; color: coral">
+          <q-card-actions class="flex justify-center text-h6" style="background-color: antiquewhite">
+            <div style="font-family: emoji; color: coral">
               Tempura roll Sushi (je 6 St.)
             </div>
           </q-card-actions>
@@ -216,7 +197,7 @@
       </div>
       <div class="full-width row wrap justify-center items-start content-center">
         <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
-          <div v-for="product in tempuraProducts" :key="product.id">
+          <div v-for="(product,index) in tempuraProducts" :key="index">
             <productBox :product="product"></productBox>
           </div>
         </div>
@@ -228,8 +209,8 @@
     <div>
       <div class="">
         <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
-          <q-card-actions class="flex justify-center text-h6">
-            <div ref="sushi" style="font-family: cursive; color: coral">
+          <q-card-actions class="flex justify-center text-h6" style="background-color: antiquewhite">
+            <div  style="font-family: emoji; color: coral">
               Spezial Koto Sushi (je 8 St.)
             </div>
           </q-card-actions>
@@ -237,13 +218,33 @@
       </div>
       <div class="full-width row wrap justify-center items-start content-center">
         <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
-          <div v-for="product in spezialProducts" :key="product.id">
+          <div v-for="(product,index) in spezialProducts" :key="index">
             <productBox :product="product"></productBox>
           </div>
         </div>
       </div>
     </div>
     <!-- Spezial Koto end -->
+
+       <!-- product Sushi menü -->
+       <div class="">
+      <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
+        <q-card-actions class="flex justify-center text-h4" style="background-color: cadetblue;">
+          <div ref="sushiMix" style="font-family: cursive; color: coral">
+            Sushi Menü
+          </div>
+        </q-card-actions>
+      </q-card>
+    </div>
+    <div class="full-width row wrap justify-center items-start content-center">
+      <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
+        <div v-for="(product,index) in sushiMixProducts" :key="index">
+          <productBox :product="product"></productBox>
+        </div>
+      </div>
+    </div>
+
+    <!-- product Sushi  menü end -->
 
     <!-- <div class="col-6"></div> -->
   </q-page>
@@ -257,13 +258,14 @@ import { useQuasar } from "quasar";
 import { useRoute, useRouter } from "vue-router";
 import Detail from "../customer/Detail.vue";
 // import productBox from "src/components/product/ProductBoxOrig.vue";
+// import productBox from '@/path/to/product/ProductBox.vue'
 import productBox from "src/components/product/ProductBox.vue";
 import Product from "/src/apis/Product.js";
 import { WebApi } from "/src/apis/WebApi";
 
 // const products = ref([]);
 export default {
-  component: { productBox },
+  components: { productBox },
   setup() {
     const $q = useQuasar();
     $q.screen.setSizes({ xs: 100 });
@@ -300,7 +302,6 @@ export default {
     const products = computed({
       get: () => $store.state.cache.products,
     });
-    console.log("PR", products.value);
 
     const vorspeiseProducts = computed({
       get: () => $store.state.cache.vorspeiseProducts,
@@ -327,7 +328,7 @@ export default {
       get: () => $store.state.cache.makiProducts,
     });
     const insideOutProducts = computed({
-      get: () => $store.state.cache.insideProducts,
+      get: () => $store.state.cache.insideOutProducts,
     });
     const tempuraProducts = computed({
       get: () => $store.state.cache.tempuraProducts,
@@ -368,7 +369,6 @@ export default {
       var top = element.offsetTop;
 
       window.scrollTo(0, top);
-      console.log("move");
     },
   },
   components: { Detail, productBox },

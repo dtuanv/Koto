@@ -2,23 +2,21 @@ export const SET_PRODUCT = (state, product) => {
   // console.log("SET_Product")
   state.products = product;
 
-  state.products.forEach(product => {
-    let newSubFoods = product.subFoods.sort((a,b) => a.key - b.key)
+  state.products.forEach((product) => {
+    let newSubFoods = product.subFoods.sort((a, b) => a.key - b.key);
 
-  let check =  newSubFoods.find(sf =>{
-      return sf.nameF != undefined
-    })
-    if(check === undefined){
-      product.checkSubFood = 2
+    let check = newSubFoods.find((sf) => {
+      return sf.nameF != undefined;
+    });
+    if (check === undefined) {
+      product.checkSubFood = 2;
     }
     // state.products.sort((a,b) => b.name - a.name)
 
     // console.log("Check SubF",check, "in",product.name )
     //  product.subFoods = newSubFoods
-
   });
-  console.log("state.products",state.products)
-
+  // console.log("state.products",state.products)
 
   // product.forEach((pr) => {
   //   console.log("check product", pr)
@@ -32,57 +30,60 @@ export const SET_PRODUCT = (state, product) => {
   //       }
   //     }
   // });
-  state.vorspeiseProducts= product.filter((pr) => {
-
-
-
+  state.vorspeiseProducts = product.filter((pr) => {
     return pr.category === "vorspeise";
   });
-  state.vorspeiseProducts.sort((a,b) => a.num - b.num)
-// ----------
+  // console.log("state.vorspeiseProducts vor", state.vorspeiseProducts);
+  // state.vorspeiseProducts = product
+  //   .filter((pr) => {
+  //     return pr.category === "vorspeise";
+  //   }).sort((a, b) => parseInt(a.num) - parseInt(b.num));
+  // console.log("state.vorspeiseProducts", state.vorspeiseProducts);
+  // ----------
   state.hauptgangProducts = product.filter((pr) => {
     return pr.category === "hauptgang";
   });
-  state.hauptgangProducts.sort((a,b) => a.num - b.num)
+  // state.hauptgangProducts.sort((a, b) => a.num - b.num);
   //////////
   state.sushiMixProducts = product.filter((pr) => {
     return pr.category === "sushiMix";
   });
-  state.sushiMixProducts.sort((a,b) => a.num - b.num)
+  // state.sushiMixProducts.sort((a, b) => a.num - b.num);
   ////////////
   state.sushiProducts = product.filter((pr) => {
     return pr.category === "sushi";
   });
-////////
+  ////////
   state.makiProducts = product.filter((pr) => {
     return pr.category === "maki";
   });
-  state.makiProducts.sort((a,b) => a.num - b.num)
+  // state.makiProducts.sort((a, b) => a.num - b.num);
 
   // -----------------
   state.nigiriProducts = product.filter((pr) => {
     return pr.category === "nigiri";
   });
-  state.nigiriProducts.sort((a,b) => a.num - b.num)
+  // state.nigiriProducts.sort((a, b) => a.num - b.num);
 
-// ----------
+  // ----------
   state.insideOutProducts = product.filter((pr) => {
     return pr.category === "insideOut";
   });
-  state.insideOutProducts.sort((a,b) => a.num - b.num)
+  // console.log("state.insideOutProducts ",state.insideOutProducts )
+  // state.insideOutProducts.sort((a, b) => a.num - b.num);
 
   // -----------------------------------------------------
   state.tempuraProducts = product.filter((pr) => {
     return pr.category === "tempura";
   });
-  state.tempuraProducts.sort((a,b) => a.num - b.num)
+  // state.tempuraProducts.sort((a, b) => a.num - b.num);
 
   // ------------------------------------------------------------
   state.spezialProducts = product.filter((pr) => {
     return pr.category === "spezial";
   });
-  state.spezialProducts.sort((a,b) => a.num - b.num)
-// -----------------------------------------------------------------
+  // state.spezialProducts.sort((a, b) => a.num - b.num);
+  // -----------------------------------------------------------------
   // console.log("product in mutation ", state.products )
   // console.log("product in mutation per String",  JSON.parse(JSON.stringify(state.products)) )
 };
@@ -144,12 +145,12 @@ export const RESET_STATUS = (state) => {
     re.status = false;
   });
 };
-export const SET_TOKEN = (state,input) =>{
-  state.token = input
-}
-export const SET_ROLE = (state,input) =>{
-  state.role = input
-}
-export const LOG_OUT = (state) =>{
-  state.role = ''
-}
+export const SET_TOKEN = (state, input) => {
+  state.token = input;
+};
+export const SET_ROLE = (state, input) => {
+  state.role = input;
+};
+export const LOG_OUT = (state) => {
+  state.role = "";
+};

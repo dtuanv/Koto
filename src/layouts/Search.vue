@@ -11,9 +11,9 @@
           <q-avatar style="    width: 51px;
     height: 39px;"><img src="/img/KotoLogo.png" alt="" /></q-avatar>
           <q-toolbar-title shrink class="text-weight-bold">
-            <div class="q-ml-xl" >
-              <div style="font-family: cursive; font-size: 27px;color: darkslategray;" >
-              Koto
+            <div class="" >
+              <div style="font-family: cursive; font-size: 20px;color: darkslategray;" >
+              Koto AsianKitchen
             </div>
             </div>
 
@@ -44,7 +44,7 @@
             {{ cartItemCount }}
           </q-badge>
         </q-btn> -->
-        <q-btn v-if="role === 'ADMIN'" class="absolute-top-right q-mt-sm q-mr-md" flat color="red" label="Log Out"
+        <q-btn v-if="role === 'ADMIN'" class="absolute-top-right q-mt-sm q-mr-md"  color="red" label="Log Out"
           @click="logOut" />
       </q-toolbar>
     </q-header>
@@ -65,7 +65,7 @@
               <q-icon name="book_online" />
             </q-item-section>
 
-            <q-item-section> Reservation </q-item-section>
+            <q-item-section > Reservation </q-item-section>
           </q-item>
 
           <q-item v-if="role !== 'ADMIN'" clickable v-ripple to="/contact">
@@ -215,7 +215,7 @@ export default {
     const role = computed({
       get: () => $store.state.cache.role,
     });
-    // console.log("Role", role)
+    console.log("Role", role)
 
 
     return {

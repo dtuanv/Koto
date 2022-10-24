@@ -53,13 +53,13 @@ const $q = useQuasar()
 export default {
   // name: 'PageName',
   setup() {
-    console.log("Route: ", checkPath);
+    // console.log("Route: ", checkPath);
 
     axios.get(`${WebApi.server}/product`)
       .then(response => {
         rows.value = response.data;
 
-        console.log(rows.value);
+        // console.log(rows.value);
       })
       .catch(err => {
         console.log(err);
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     editProduct(props) {
-      console.log('Params: ', props.row.id)
+      // console.log('Params: ', props.row.id)
       this.$router.push('/admin/product/add/' + props.row.id + '/')
 
 

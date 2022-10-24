@@ -9,7 +9,7 @@
       <div class="row">
         <q-btn dense to="/admin/product/add/0" color="secondary" label="Add product" class="col-5" />
         <div class="col-2" style="background-color:aqua"></div>
-        <q-btn to="/admin/product/editResource" color="secondary"  label="Edit Resource" class="col-5">
+        <q-btn to="/admin/product/editResource" color="secondary" label="Edit Resource" class="col-5">
         </q-btn>
       </div>
 
@@ -25,7 +25,7 @@
 
       <!-- select part begin -->
 
-      <div class="q-mt-lg"  v-if="true">
+      <div class="q-mt-lg" v-if="true">
         <div class="row shadow-15" :style="
           $q.screen.width > 400 && $q.screen.height > 700
             ? 'position: fixed; z-index: 200; background-color: khaki; padding: 10px;top: 95px; width: 100%;'
@@ -37,7 +37,7 @@
             <q-btn class="q-ml-sm" label="Haupgang" style="font-family: inherit; color: chocolate"
               @click="goToHauptgang"></q-btn>
 
-            <q-btn class="q-ml-sm" label="Sushi Mix" style="font-family: inherit; color: blue" @click="goToSushiMix">
+            <q-btn class="q-ml-sm" label="Sushi Menü" style="font-family: inherit; color: blue" @click="goToSushiMix">
             </q-btn>
           </div>
           <div class="col-12 flex justify-center q-mt-sm">
@@ -48,9 +48,8 @@
       </div>
       <!-- select part end -->
 
-
       <!-- Vorspeisen -->
-      <div :style="$q.screen.width > 400 && $q.screen.height > 700 ? 'margin-top: 13vh;':'margin-top:50px'">
+      <div :style="$q.screen.width > 400 && $q.screen.height > 700 ? 'margin-top: 13vh;' : 'margin-top:120px'">
         <q-card class="q-mb-lg q-ml-sm q-mr-sm">
           <q-card-actions class="flex justify-center text-h4">
             <div ref="vorspeisen" style="font-family: cursive; color: coral">
@@ -65,7 +64,7 @@
           <div v-for="product in vorspeiseProducts" :key="product.id">
 
             <productBox :product="product"></productBox>
-            <div>{{product.subFoods}} </div>
+            <div>{{ product.subFoods }} </div>
           </div>
 
         </div>
@@ -115,7 +114,7 @@
       <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
         <q-card-actions class="flex justify-center text-h4">
           <div ref="sushiMix" style="font-family: cursive; color: coral">
-            Sushi Mix
+            Sushi Menü
           </div>
         </q-card-actions>
       </q-card>
@@ -128,7 +127,7 @@
       </div>
     </div>
 
-    <!-- product Sushi -->
+    <!-- product Sushi end -->
     <div class="">
       <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
         <q-card-actions class="flex justify-center text-h4">
@@ -140,28 +139,127 @@
     </div>
 
     <!-- <div>sushiProducts..{{sushiProducts}}</div> -->
-<!-- maki product -->  <div class="">
-      <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
-        <q-card-actions class="flex justify-center text-h4">
-          <div ref="sushi" style="font-family: cursive; color: coral">
-             Maki Sushi
-          </div>
-        </q-card-actions>
-      </q-card>
-    </div>
-
-<!-- maki product -->
-
-    <div class="full-width row wrap justify-center items-start content-center">
+    <!-- <div class="full-width row wrap justify-center items-start content-center">
       <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
-        <div v-for="product in makiProducts" :key="product.id">
+        <div v-for="product in sushiProducts" :key="product.id">
 
           <productBox :product="product"></productBox>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- <div class="col-6"></div> -->
+    <!-- nigiri product -->
+    <div>
+      <div class="">
+        <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
+          <q-card-actions class="flex justify-center ">
+            <div ref="sushi" style="font-family: cursive; color: coral;font-size: 18px;">
+              Nigiri-SuShi( geformte Sushi, je 2 St.)
+            </div>
+          </q-card-actions>
+        </q-card>
+      </div>
+      <div class="full-width row wrap justify-center items-start content-center">
+        <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
+          <div v-for="product in nigiriProducts" :key="product.id">
+
+            <productBox :product="product"></productBox>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- nigiri product -->
+
+
+    <!-- maki product -->
+    <div>
+      <div class="">
+        <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
+          <q-card-actions class="flex justify-center text-h6">
+            <div ref="sushi" style="font-family: cursive; color: coral">
+              Maki-Sushi( je 8 St.)
+            </div>
+          </q-card-actions>
+        </q-card>
+      </div>
+      <div class="full-width row wrap justify-center items-start content-center">
+        <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
+          <div v-for="product in makiProducts" :key="product.id">
+
+            <productBox :product="product"></productBox>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- maki product -->
+    <!-- Inside Out Roll -->
+    <div>
+      <div class="">
+        <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
+          <q-card-actions class="flex justify-center text-h6">
+            <div ref="sushi" style="font-family: cursive; color: coral">
+              Inside Out Roll( je 8St.)
+            </div>
+          </q-card-actions>
+        </q-card>
+      </div>
+      <div class="full-width row wrap justify-center items-start content-center">
+        <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
+          <div v-for="product in insideOutProducts" :key="product.id">
+
+            <productBox :product="product"></productBox>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Inside Out Roll end-->
+    <!-- Tempura Roll -->
+    <div>
+      <div class="">
+        <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
+          <q-card-actions class="flex justify-center text-h6">
+            <div ref="sushi" style="font-family: cursive; color: coral">
+              Tempura roll Sushi (je 6 St.)
+            </div>
+          </q-card-actions>
+        </q-card>
+      </div>
+      <div class="full-width row wrap justify-center items-start content-center">
+        <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
+          <div v-for="product in tempuraProducts" :key="product.id">
+            <productBox :product="product"></productBox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Tempura Roll end -->
+
+    <!-- Spezial Koto -->
+    <div>
+      <div class="">
+        <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
+          <q-card-actions class="flex justify-center text-h6">
+            <div ref="sushi" style="font-family: cursive; color: coral">
+              Spezial Koto Sushi (je 8 St.)
+            </div>
+          </q-card-actions>
+        </q-card>
+      </div>
+      <div class="full-width row wrap justify-center items-start content-center">
+        <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
+          <div v-for="product in spezialProducts" :key="product.id">
+            <productBox :product="product"></productBox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Spezial Koto end -->
     <!-- <div class="col-6"></div> -->
   </q-page>
 </template>
@@ -181,11 +279,12 @@ import { WebApi } from "/src/apis/WebApi";
 // const products = ref([]);
 export default {
   component: { productBox },
+
   setup() {
 
     const productCategory = [
-      {label:'Vorspeise', clickTo:"goToVorspeisen"},
-      {label:'Hauptgang'},
+      { label: 'Vorspeise', clickTo: "goToVorspeisen" },
+      { label: 'Hauptgang' },
     ]
     const category = ref('')
 
@@ -224,11 +323,12 @@ export default {
     const products = computed({
       get: () => $store.state.cache.products,
     });
-    console.log("PR", products.value);
 
     const vorspeiseProducts = computed({
       get: () => $store.state.cache.vorspeiseProducts,
     });
+
+
     // const sushiProducts = []
     // const vorspeiseProducts = products.value.filter((pr) => {
     //   return pr.category === "vorspeise";
@@ -243,16 +343,30 @@ export default {
       get: () => $store.state.cache.sushiProducts,
     });
 
+    // new
+    const nigiriProducts = computed({
+      get: () => $store.state.cache.nigiriProducts,
+    });
     const makiProducts = computed({
       get: () => $store.state.cache.makiProducts,
     });
-    const nigiriProducts = computed({
-      get: () => $store.state.cache.nigiriProducts,
+    const insideOutProducts = computed({
+      get: () => $store.state.cache.insideProducts,
+    });
+    const tempuraProducts = computed({
+      get: () => $store.state.cache.tempuraProducts,
+    });
+
+    const spezialProducts = computed({
+      get: () => $store.state.cache.spezialProducts,
     });
     // console.log("sushiProducts", sushiProducts);
     return {
       productCategory,
-    category,
+      insideOutProducts,
+      tempuraProducts,
+      spezialProducts,
+      category,
 
       sushi,
       vorspeisen,
@@ -269,6 +383,8 @@ export default {
       vorspeiseProducts,
       hauptgangProducts,
       sushiMixProducts,
+
+
     };
   },
   mounted() {
@@ -283,6 +399,7 @@ export default {
       window.scrollTo(0, top);
       console.log("move");
     },
+
   },
   components: { Detail, productBox },
 };

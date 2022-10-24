@@ -65,7 +65,6 @@ export default route(function ({ store, ssrContext }) {
       store.state.cache.token !=
         "hgfdhhjfdskfsdfkslfkdslfjdsfjkjdskfdsjfkdsjfkdsjfkdsjfkdsjf"
     ) {
-      console.log("from store");
       return next("/login");
     }
     if (

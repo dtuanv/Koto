@@ -41,8 +41,6 @@ export default {
 
     const day = date.formatDate(today, "DD-MM-YYYY");
 
-    console.log("tine,", time)
-    console.log("day,", day)
     // const route = useRoute();
     return {
       contact,
@@ -56,7 +54,6 @@ export default {
     onSubmit() {
       // console.log("time value",time.value)
       // console.log("time ",time)
-      console.log("time this ", this.time)
       axios({
         method: "post",
         url: `${WebApi.server}/saveContact`,
@@ -75,7 +72,6 @@ export default {
         }
       })
         .then(() => {
-          console.log("CHecjk")
           this.$q.notify({
             message: "wir haben Ihre Nachricht bekommen!",
 

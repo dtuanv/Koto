@@ -8,7 +8,7 @@
         <div class="q-gutter-md edit_product" style="max-width: 500px">
           <q-input filled v-model="product.name" label="Name" />
           <q-input filled v-model="product.ingredient" label="Zutat" />
-          <q-input filled v-model="product.num" label="Nummer" />
+          <q-input filled v-model="product.num" label="Nummer" :rules="productNum"/>
           <q-select filled v-model="product.category" label="Category" :options="productCategory" map-options
             emit-value></q-select>
           <q-input filled v-model="product.price" label="Price" />
@@ -97,7 +97,9 @@ export default {
         { key: 1, labelName: 'Sub A', labelPrice: 'Price' },
         { key: 2, labelName: 'Sub B', labelPrice: 'Price', },
         { key: 3, labelName: 'Sub C', labelPrice: 'Price', },
-        { key: 4, labelName: 'Sub D', labelPrice: 'Price', },]
+        { key: 4, labelName: 'Sub D', labelPrice: 'Price', },
+        { key: 5, labelName: 'Sub E', labelPrice: 'Price', },
+      ]
     } else {
       axios
         .get(`${WebApi.server}/admin/product/add/` + route.params.id + "/")
@@ -119,6 +121,18 @@ export default {
       // decription: ref(""),
       // imageUrl: ref(""),
       ///check new or old product
+      productNum: [
+        (val) =>
+          (val !== null &&
+            val !== "" &&
+            !!val &&
+            val.match(/^[0-9]{0,2}$/)) ||
+          // val.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{5})$/g)) ||
+          "Bitte geben Sie  richtige number des Gerrichtes ein",
+        (val) =>
+          (val.charAt(0) !== '0' ) || "Bitte geben Sie die richtige number des Gerrichtes nicht mit 0 am Anfang ein",
+        // (val.includes(0) && !!val) || "Please write a correct mobil",
+      ],
       productCategory: [
         { label: "Vorspeise", value: "vorspeise", field: "category" },
         { label: "Haupgang", value: "hauptgang", field: "category" },
@@ -151,7 +165,7 @@ export default {
               price: product.value.price,
               imageUrl: product.value.imageUrl,
               category: product.value.category,
-              num: product.value.category,
+              num: product.value.num,
               subFoods: this.subFoods,
             },
             headers: {

@@ -18,14 +18,14 @@
       <q-card-actions>
         <div class="row">
           <div class="col-3">
-              <div  v-if="product.imageUrl != ''">
-            <img :src="'/img/' + product.imageUrl" alt="" style="height: 25vw; width: 25vw" />
-              </div>
-            <div v-if="product.price == '' ">
-              <q-btn class="q-mt-sm" color="green" @click="dialog_zutat=true" label="Zutat Anzeigen"></q-btn>
+            <div v-if="product.imageUrl != ''">
+              <img :src="'/img/' + product.imageUrl" alt="" style="height: 25vw; width: 25vw" />
             </div>
-            <div v-if="product.price !== '' && product.imageUrl == '' ">
-              <q-btn class="q-mt-sm" color="green" @click="dialog_zutat=true" label="Zutat Anzeigen"></q-btn>
+            <div v-if="product.price == ''">
+              <q-btn class="q-mt-sm" color="green" @click="dialog_zutat = true" label="Zutat Anzeigen"></q-btn>
+            </div>
+            <div v-if="product.price !== '' && product.imageUrl == ''">
+              <q-btn class="q-mt-sm" color="green" @click="dialog_zutat = true" label="Zutat Anzeigen"></q-btn>
             </div>
           </div>
           <q-dialog v-model="dialog_zutat">
@@ -92,26 +92,29 @@
           </q-dialog>
 
           <div style="margin-left:12px" class="col-8 text-subtitle2">
-            <div class="float-right" v-if="product.checkSubFood ==2">{{product.price}}</div>
+            <div class="float-right" v-if="product.checkSubFood == 2">{{ product.price }}</div>
 
-           <div>{{ product.name }}
-            <q-badge v-if="product.ingredient != undefined" color="red" align="top">
-                  {{ product.ingredient }}
-                </q-badge>
-          </div>
+            <q-btn v-if="role === 'ADMIN'" class="float-right" icon="delete" color="negative" @click='deleteProduct(product)' dense></q-btn>
+
+
+            <div>{{ product.name }}
+              <q-badge v-if="product.ingredient != undefined" color="red" align="top">
+                {{ product.ingredient }}
+              </q-badge>
+            </div>
 
 
             <div class="q-ml-sm " style="font-size: 12px; ">{{ product.decription }}</div>
             <!-- button zutat begin -->
-            <div v-if="product.price !== '' && product.imageUrl != '' " style="width: 70px;" class="q-mt-sm float-right">
-              <q-btn class="" color="green" @click="dialog_zutat=true" label="Zutat Anzeigen"></q-btn>
+            <div v-if="product.price !== '' && product.imageUrl != ''" style="width: 70px;" class="q-mt-sm float-right">
+              <q-btn class="" color="green" @click="dialog_zutat = true" label="Zutat Anzeigen"></q-btn>
             </div>
             <!-- button zutat end -->
 
             <div class="row" style="width:80vw" v-for="subF in product.subFoods" :key="subF">
               <div class="q-ml-sm text-caption col-8">
 
-                {{subF.nameF}}
+                {{ subF.nameF }}
                 <q-badge v-if="subF.ingredient != undefined" color="red" align="top">
                   {{ subF.ingredient }}
                 </q-badge>
@@ -119,7 +122,7 @@
               </div>
               <!-- <div class="col-1"></div> -->
               <div style="" class="text-caption col-1.5">
-                {{subF.price}}
+                {{ subF.price }}
               </div>
             </div>
             <!-- sub food 2 -->
@@ -170,16 +173,30 @@
 </template>
 <script>
 // import { count } from 'console';
-import { ref } from "vue";
+import { ref, computed, nextTick } from "vue";
+import axios from "axios";
+
 import { useStore } from "vuex";
+
 import { useQuasar } from "quasar";
+import { useRoute, useRouter } from "vue-router";
+// import productBox from "src/components/product/ProductBoxOrig.vue";
+import productBox from "src/components/product/ProductBox.vue";
+import Product from "/src/apis/Product.js";
+import { WebApi } from "/src/apis/WebApi";
 const $q = useQuasar();
 export default {
   name: "productBox",
   props: ["product"],
   setup() {
     const $store = useStore();
-
+    const route = useRoute();
+    const $q = useQuasar();
+    const router = useRouter();
+    const axios = require("axios");
+    const role = computed({
+      get: () => $store.state.cache.role,
+    });
     let countItem = ref(0);
     let countCart = ref(0);
     // $store.state.cart.products.quantity
@@ -219,16 +236,57 @@ export default {
     //   })
     //  };
     return {
+      role,
       stars: ref(4),
       addItem,
       countItem,
       subtractItem,
       countCart,
       dialog_zutat: ref(false),
+      deleteProduct(product) {
+        $q.dialog({
+          title: 'Confirm',
+          message: 'Möchten Sie wirklich diese Product löschen?',
+          ok: {
+            push: true
+          },
+          cancel: {
+            push: true,
+            color: 'negative'
+          },
+          persistent: true
+        }).onOk(() => {
+          console.log('>>>> OK')
+
+          axios.delete(`${WebApi.server}/admin/product/delete/` + product.id)
+            .then(response => {
+          window.localStorage.setItem("productId", product.id);
+
+              // products.value.splice(this.products.indexOf(product.id), 1)
+
+              this.$q.notify({
+                message: 'Product was deleted.',
+                color: 'positive',
+                avatar: "/img/icon/hAnh.png",
+
+
+
+              })
+              console.log('is deleted: ')
+            })
+        }).onCancel(() => {
+          console.log('>>>> Cancel')
+        }).onDismiss(() => {
+          console.log('I am triggered on both OK and Cancel')
+        })
+
+
+      },
       // addToCart,
     };
   },
   methods: {
+
     addToCart() {
       this.$store.dispatch("cache/addProductToCart", {
         product: this.product,
