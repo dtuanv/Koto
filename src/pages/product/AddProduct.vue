@@ -149,6 +149,7 @@ export default {
            price:product.value.price,
            imageUrl:product.value.imageUrl,
            category:product.value.category,
+           num:product.value.category,
            subFoods:this.subFoods,
           },
           headers: {

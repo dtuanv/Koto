@@ -3,11 +3,11 @@
     <q-card v-if="$q.screen.gt.sm">
       <q-card-actions style=" width: 20vw; height:11vw">
         <div>
+
           <img :src="'/img/' + product.imageUrl" alt="" style="height: 10vw; width: 10vw" />
         </div>
         <div class="q-ml-sm text-h5">
           {{ product.name }}
-
           <div class="q-ml-lg text-body1">{{ product.decription }}</div>
         </div>
       </q-card-actions>
@@ -18,9 +18,13 @@
       <q-card-actions>
         <div class="row">
           <div class="col-3">
-
+              <div  v-if="product.imageUrl != ''">
             <img :src="'/img/' + product.imageUrl" alt="" style="height: 25vw; width: 25vw" />
-            <div v-if="product.price == ''">
+              </div>
+            <div v-if="product.price == '' ">
+              <q-btn class="q-mt-sm" color="green" @click="dialog_zutat=true" label="Zutat Anzeigen"></q-btn>
+            </div>
+            <div v-if="product.price !== '' && product.imageUrl == '' ">
               <q-btn class="q-mt-sm" color="green" @click="dialog_zutat=true" label="Zutat Anzeigen"></q-btn>
             </div>
           </div>
@@ -88,13 +92,13 @@
           </q-dialog>
 
           <div style="margin-left:12px" class="col-8 text-subtitle2">
-            <div class="float-right" v-if="product.checkSubFood ==2">Preis: {{product.price}}</div>
+            <div class="float-right" v-if="product.checkSubFood ==2">{{product.price}}</div>
 
             {{ product.name }}
 
             <div class="q-ml-sm " style="font-size: 12px;">{{ product.decription }}</div>
             <!-- button zutat begin -->
-            <div v-if="product.price !== ''" style="width: 70px;" class="q-mt-sm float-right">
+            <div v-if="product.price !== '' && product.imageUrl != '' " style="width: 70px;" class="q-mt-sm float-right">
               <q-btn class="" color="green" @click="dialog_zutat=true" label="Zutat Anzeigen"></q-btn>
             </div>
             <!-- button zutat end -->

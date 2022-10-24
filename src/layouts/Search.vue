@@ -8,9 +8,15 @@
         <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
 
         <q-btn flat no-caps no-wrap class="q-ml-xs" to="/">
-          <q-avatar><img src="/img/KotoLogo.png" alt="" /></q-avatar>
+          <q-avatar style="    width: 51px;
+    height: 39px;"><img src="/img/KotoLogo.png" alt="" /></q-avatar>
           <q-toolbar-title shrink class="text-weight-bold">
-            Koto
+            <div class="q-ml-xl" >
+              <div style="font-family: cursive; font-size: 27px;color: darkslategray;" >
+              Koto
+            </div>
+            </div>
+
           </q-toolbar-title>
         </q-btn>
 
@@ -123,7 +129,11 @@
           <q-card-actions>
 
             <div class="row" style="width:100%">
-              <div class="col-8"></div>
+              <div class=""></div>
+              <div class="col-2">
+                <q-btn @click="card_cookie=false" label="Ablehnen" color="negative"></q-btn>
+              </div>
+              <div class="col-6"></div>
               <div class="">
                 <q-btn class="" @click="card_cookie=false" color="positive" label="Akzeptieren"></q-btn>
 

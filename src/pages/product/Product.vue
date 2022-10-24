@@ -13,8 +13,8 @@
       <div class="q-mt-lg" v-if="true">
         <div class="row shadow-15" :style="
           $q.screen.width > 400 && $q.screen.height > 700
-            ? 'position: fixed; z-index: 200; background-color: khaki; padding: 10px;top: 6vh; width: 100%;'
-            : 'position: fixed; z-index: 200; background-color: khaki; padding: 4px 0px 10px;top: 56px; height:100px; width: 100%;'
+            ? 'position: fixed; z-index: 200; background-color: gold; padding: 10px;top: 6vh; width: 100%;'
+            : 'position: fixed; z-index: 200; background-color: gold; padding: 4px 0px 10px;top: 56px; height:100px; width: 100%;'
         ">
           <div class="col-12 flex justify-center q-mt-sm">
             <q-btn class="" style="font-family: inherit; color: darkseagreen" label="Vorspeisen"

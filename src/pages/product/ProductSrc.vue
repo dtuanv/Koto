@@ -1,6 +1,10 @@
 <template>
   <q-page class="q-pa-md  ">
     <div class="justify-center flex text-h5 	q-mb-lg">Edit Resource of Product</div>
+    <q-btn label="Back" to="/admin/product"></q-btn>
+    <div>Cai tren la cu! Xoa!!!
+    </div>
+    <div>Cai duoi la moi</div>
     <!-- content -->
     <!-- <div class="q-gutter-md edit_Product  " style="max-width: 500px">
 
