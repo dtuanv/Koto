@@ -7,6 +7,7 @@
         <!-- content -->
         <div class="q-gutter-md edit_product" style="max-width: 500px">
           <q-input filled v-model="product.name" label="Name" />
+          <q-input filled v-model="product.ingredient" label="Zutat" />
           <q-input filled v-model="product.num" label="Nummer" />
           <q-select filled v-model="product.category" label="Category" :options="productCategory" map-options
             emit-value></q-select>
@@ -17,7 +18,7 @@
 
           <!-- <q-input filled v-model="product.category" label="Category" /> -->
 
-          <q-btn label="Subfood hinzufügen" @click="dialog_addSubFood=true">
+          <q-btn label="Subfood hinzufügen" @click="dialog_addSubFood = true">
 
           </q-btn>
           <div>
@@ -25,14 +26,14 @@
               <q-card>
                 <div class="q-ma-sm">
 
-                  <span >
-                  <div class="row" style="width:100%" v-for="(subFood) in subFoods" :key="subFood.labelName">
-                    <q-input :label="subFood.labelName" v-model="subFood.nameF" class="col-5"></q-input>
-                    <div class="col-1"></div>
-                    <q-input  label="Zutat" class="col-2 q-mr-lg" v-model="subFood.ingredient"></q-input>
+                  <span>
+                    <div class="row" style="width:100%" v-for="(subFood) in subFoods" :key="subFood.labelName">
+                      <q-input :label="subFood.labelName" v-model="subFood.nameF" class="col-5"></q-input>
+                      <div class="col-1"></div>
+                      <q-input label="Zutat" class="col-2 q-mr-lg" v-model="subFood.ingredient"></q-input>
 
-                    <q-input :label="subFood.labelPrice" v-model="subFood.price" class="col-2"></q-input>
-                  </div>
+                      <q-input :label="subFood.labelPrice" v-model="subFood.price" class="col-2"></q-input>
+                    </div>
                   </span>
                   <!-- <div class="row">
                     <q-input class="" label="Sub B"></q-input>
@@ -66,16 +67,16 @@ import { WebApi } from "/src/apis/WebApi";
 //       {id:0,labelName:'Sub B',labelPrice:'Price',nameF:'',price:''},
 //       {id:0,labelName:'Sub C',labelPrice:'Price',nameF:'',price:''},
 //       {id:0,labelName:'Sub D',labelPrice:'Price',nameF:'',price:''},])
- const    subFoods = ref([
-      {key:1,labelName:'Sub A',labelPrice:'Price'},
-      {key:2,labelName:'Sub B',labelPrice:'Price',},
-      {key:3,labelName:'Sub C',labelPrice:'Price',},
-      {key:4,labelName:'Sub D',labelPrice:'Price',},])
+const subFoods = ref([
+  { key: 1, labelName: 'Sub A', labelPrice: 'Price' },
+  { key: 2, labelName: 'Sub B', labelPrice: 'Price', },
+  { key: 3, labelName: 'Sub C', labelPrice: 'Price', },
+  { key: 4, labelName: 'Sub D', labelPrice: 'Price', },])
 
 
 const product = ref({});
 export default {
-  data(){
+  data() {
 
   },
   setup() {
@@ -93,16 +94,16 @@ export default {
         price: "",
       };
       subFoods.value = [
-      {key:1,labelName:'Sub A',labelPrice:'Price'},
-      {key:2,labelName:'Sub B',labelPrice:'Price',},
-      {key:3,labelName:'Sub C',labelPrice:'Price',},
-      {key:4,labelName:'Sub D',labelPrice:'Price',},]
+        { key: 1, labelName: 'Sub A', labelPrice: 'Price' },
+        { key: 2, labelName: 'Sub B', labelPrice: 'Price', },
+        { key: 3, labelName: 'Sub C', labelPrice: 'Price', },
+        { key: 4, labelName: 'Sub D', labelPrice: 'Price', },]
     } else {
       axios
         .get(`${WebApi.server}/admin/product/add/` + route.params.id + "/")
         .then((response) => {
           product.value = response.data;
-          subFoods.value= product.value.subFoods
+          subFoods.value = product.value.subFoods
         });
     }
 
@@ -112,8 +113,8 @@ export default {
       product,
       dialog_addSubFood: ref(false),
       getIndex(list, id) {
-  return list.findIndex((e) => e.id == id)
-},
+        return list.findIndex((e) => e.id == id)
+      },
       // name: ref(""),
       // decription: ref(""),
       // imageUrl: ref(""),
@@ -138,73 +139,75 @@ export default {
         // };
 
 
-        if(route.params.id == 0){
+        if (route.params.id == 0) {
           axios({
-          method: "post",
-          url: `${WebApi.server}/admin/product/add/`,
-          // data: JSON.stringify(product),
-          data: {
-           name: product.value.name,
-           decription: product.value.decription,
-           price:product.value.price,
-           imageUrl:product.value.imageUrl,
-           category:product.value.category,
-           num:product.value.category,
-           subFoods:this.subFoods,
-          },
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then(() => {
-            $q.notify({
-              message: "new product was created",
-
-              color: "positive",
-               avatar: "/img/icon/hAnh.png",
-
-            });
-            console.log("product saved");
-            router.replace("/admin/product");
+            method: "post",
+            url: `${WebApi.server}/admin/product/add/`,
+            // data: JSON.stringify(product),
+            data: {
+              name: product.value.name,
+              ingredient: product.value.ingredient,
+              decription: product.value.decription,
+              price: product.value.price,
+              imageUrl: product.value.imageUrl,
+              category: product.value.category,
+              num: product.value.category,
+              subFoods: this.subFoods,
+            },
+            headers: {
+              "Content-Type": "application/json",
+            },
           })
-          .catch((err) => {
-            console.log(err);
-          });
+            .then(() => {
+              $q.notify({
+                message: "new product was created",
+
+                color: "positive",
+                avatar: "/img/icon/hAnh.png",
+
+              });
+              console.log("product saved");
+              router.replace("/admin/product");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }
-        else{
-          console.log("route.params.id",route.params.id)
+        else {
+          console.log("route.params.id", route.params.id)
           axios({
-          method: "put",
-          url: `${WebApi.server}/admin/product/edit/`+route.params.id,
-          // data: JSON.stringify(product),
-          data: {
+            method: "put",
+            url: `${WebApi.server}/admin/product/edit/` + route.params.id,
+            // data: JSON.stringify(product),
+            data: {
 
-           name: product.value.name,
-           decription: product.value.decription,
-           price:product.value.price,
-           imageUrl:product.value.imageUrl,
-           category:product.value.category,
-           subFoods:this.subFoods,
-           num:product.value.num,
-          },
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then(() => {
-            $q.notify({
-              message: " product was updated",
-
-              color: "positive",
-               avatar: "/img/icon/hAnh.png",
-
-            });
-            console.log("product updated");
-            router.replace("/admin/product");
+              name: product.value.name,
+              ingredient: product.value.ingredient,
+              decription: product.value.decription,
+              price: product.value.price,
+              imageUrl: product.value.imageUrl,
+              category: product.value.category,
+              subFoods: this.subFoods,
+              num: product.value.num,
+            },
+            headers: {
+              "Content-Type": "application/json",
+            },
           })
-          .catch((err) => {
-            console.log(err);
-          });
+            .then(() => {
+              $q.notify({
+                message: " product was updated",
+
+                color: "positive",
+                avatar: "/img/icon/hAnh.png",
+
+              });
+              console.log("product updated");
+              router.replace("/admin/product");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }
 
       },

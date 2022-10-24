@@ -94,9 +94,14 @@
           <div style="margin-left:12px" class="col-8 text-subtitle2">
             <div class="float-right" v-if="product.checkSubFood ==2">{{product.price}}</div>
 
-            {{ product.name }}
+           <div>{{ product.name }}
+            <q-badge v-if="product.ingredient != undefined" color="red" align="top">
+                  {{ product.ingredient }}
+                </q-badge>
+          </div>
 
-            <div class="q-ml-sm " style="font-size: 12px;">{{ product.decription }}</div>
+
+            <div class="q-ml-sm " style="font-size: 12px; ">{{ product.decription }}</div>
             <!-- button zutat begin -->
             <div v-if="product.price !== '' && product.imageUrl != '' " style="width: 70px;" class="q-mt-sm float-right">
               <q-btn class="" color="green" @click="dialog_zutat=true" label="Zutat Anzeigen"></q-btn>
@@ -153,10 +158,6 @@
 
 
             <!-- <div class="col-9"></div> -->
-
-
-
-
           </div>
 
 

@@ -60,7 +60,7 @@
 
             <q-item-section> Menü </q-item-section>
           </q-item>
-          <q-item clickable v-ripple to="/reservation">
+          <q-item v-if="role !== 'ADMIN'" clickable v-ripple to="/reservation">
             <q-item-section avatar>
               <q-icon name="book_online" />
             </q-item-section>
@@ -68,7 +68,7 @@
             <q-item-section> Reservation </q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple to="/contact">
+          <q-item v-if="role !== 'ADMIN'" clickable v-ripple to="/contact">
             <q-item-section avatar>
               <q-icon name="send" />
             </q-item-section>
@@ -215,7 +215,7 @@ export default {
     const role = computed({
       get: () => $store.state.cache.role,
     });
-    console.log("Role", role)
+    // console.log("Role", role)
 
 
     return {
