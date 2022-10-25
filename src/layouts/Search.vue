@@ -9,7 +9,7 @@
 
         <q-btn flat no-caps no-wrap class="q-ml-xs" to="/">
           <q-avatar style="    width: 51px;
-    height: 39px;"><img src="/img/KotoLogo.png" alt="" /></q-avatar>
+    height: 39px;"><img src="/img/koto/KotoLogo.png" alt="" /></q-avatar>
           <q-toolbar-title shrink class="text-weight-bold">
             <div class="" >
               <div style="font-family: cursive; font-size: 20px;color: darkslategray;" >

@@ -9,7 +9,7 @@
       <q-item-section side>
         <!-- <q-avatar  rounded size="60px"> -->
         <q-avatar  rounded :size="$q.screen.gt.sm ? '60px' : '2.5rem' ">
-          <img :src="'img/'+reservation.imgUrl " />
+          <img :src="'img/z_local/'+reservation.imgUrl " />
 
 
           <q-badge v-if="reservation.status" floating color="teal">

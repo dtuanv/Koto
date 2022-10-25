@@ -30,7 +30,7 @@
       </div>
       <div class="col-6  " style="">
         <div class="row " style="margin-left: 16px;">
-          <div style="color:blanchedalmond;font-size: 14px;padding-top: 16px;">Follow us:</div>
+          <div style="color:blanchedalmond;font-size: 14px;padding-top: 16px;">Folge uns:</div>
           <div>
             <q-btn flat style="    padding: 0px 0px 0px 0px;">
               <q-avatar><img src="/img/icon/facebook.png " alt=""
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="flex justify-center" style="margin-top: 2vh;margin-bottom: 5px;color:red;">
-      Copyright © 2022 Jasmin
+      Copyright © 2022 Waxyrice
     </div>
   </div>
   <!-- dialog_impressung -->
