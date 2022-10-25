@@ -93,6 +93,7 @@
 
           <div style="margin-left:12px" class="col-8 text-subtitle2">
             <div class="float-right" v-if="product.checkSubFood == 2">{{ product.price }}</div>
+            <q-btn v-if="role === 'ADMIN'" icon="edit" @click='editProduct(product)' dense></q-btn>
 
             <q-btn v-if="role === 'ADMIN'" class="float-right" icon="delete" color="negative" @click='deleteProduct(product)' dense></q-btn>
 
@@ -264,7 +265,7 @@ export default {
 
               // products.value.splice(this.products.indexOf(product.id), 1)
 
-              this.$q.notify({
+             $q.notify({
                 message: 'Product was deleted.',
                 color: 'positive',
                 avatar: "/img/icon/hAnh.png",
@@ -306,6 +307,10 @@ export default {
 
         });
       }
+    },
+    editProduct(product) {
+      // console.log('Params: ', props.row.id)
+      this.$router.push('/admin/product/add/' + product.id + '/')
     },
   },
   computed: {},

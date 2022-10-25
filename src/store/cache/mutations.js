@@ -82,6 +82,11 @@ export const SET_PRODUCT = (state, product) => {
   state.spezialProducts = product.filter((pr) => {
     return pr.category === "spezial";
   });
+  // sashimiProducts
+  state.sashimiProducts = product.filter((pr) => {
+    return pr.category === "saschimi";
+  });
+
   // state.spezialProducts.sort((a, b) => a.num - b.num);
   // -----------------------------------------------------------------
   // console.log("product in mutation ", state.products )

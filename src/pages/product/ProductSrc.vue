@@ -77,8 +77,6 @@ export default {
     editProduct(props) {
       // console.log('Params: ', props.row.id)
       this.$router.push('/admin/product/add/' + props.row.id + '/')
-
-
     },
     deleteProduct(props) {
 

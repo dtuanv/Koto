@@ -126,11 +126,11 @@ export default {
           (val !== null &&
             val !== "" &&
             !!val &&
-            val.match(/^[0-9]{0,2}$/)) ||
+            String(val).match(/^[0-9]{0,2}$/)) ||
           // val.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{5})$/g)) ||
           "Bitte geben Sie  richtige number des Gerrichtes ein",
         (val) =>
-          (val.charAt(0) !== '0' ) || "Bitte geben Sie die richtige number des Gerrichtes nicht mit 0 am Anfang ein",
+          (String(val).charAt(0) !== '0' ) || "Bitte geben Sie die richtige number des Gerrichtes nicht mit 0 am Anfang ein",
         // (val.includes(0) && !!val) || "Please write a correct mobil",
       ],
       productCategory: [

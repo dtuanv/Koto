@@ -246,6 +246,29 @@
 
     <!-- product Sushi  menü end -->
 
+    <!-- sashimi  -->
+    <div>
+      <div class="">
+        <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
+          <q-card-actions class="flex justify-center text-h6" style="background-color: antiquewhite">
+            <div ref="maki" style="font-family: emoji; color: coral">
+              Sashimi
+            </div>
+          </q-card-actions>
+        </q-card>
+      </div>
+      <div class="full-width row wrap justify-center items-start content-center">
+        <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
+          <div v-for="(product,index) in sashimiProducts" :key="index">
+
+            <productBox :product="product"></productBox>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- sashimi end -->
+
     <!-- <div class="col-6"></div> -->
   </q-page>
 </template>
@@ -337,6 +360,10 @@ export default {
     const spezialProducts = computed({
       get: () => $store.state.cache.spezialProducts,
     });
+
+    const sashimiProducts = computed({
+      get: () => $store.state.cache.sashimiProducts,
+    });
     // console.log("sushiProducts", sushiProducts);
     return {
       makiProducts,
@@ -344,6 +371,7 @@ export default {
       insideOutProducts,
       tempuraProducts,
       spezialProducts,
+      sashimiProducts,
       sushi,
       vorspeisen,
       hauptgang,
