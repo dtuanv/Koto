@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-md  ">
+  <q-page class="q-pa-md  " v-if="role == 'ADMIN'">
     <div class="justify-center flex text-h5 	q-mb-lg">Edit Resource of Product</div>
     <q-btn label="Back" to="/admin/product"></q-btn>
     <div>Cai tren la cu! Xoa!!!
@@ -32,6 +32,8 @@
 <script>
 import axios from 'axios';
 import { ref, computed, nextTick } from 'vue'
+
+import { useStore } from "vuex";
 const columns = [
   { name: 'name', label: 'Name', field: 'name' },
   { name: 'imageUrl', label: 'Image Url', field: 'imageUrl' },
@@ -54,7 +56,11 @@ export default {
   // name: 'PageName',
   setup() {
     // console.log("Route: ", checkPath);
+    const $store = useStore();
 
+    const role = computed({
+      get: () => $store.state.cache.role,
+    });
     axios.get(`${WebApi.server}/product`)
       .then(response => {
         rows.value = response.data;
@@ -66,8 +72,7 @@ export default {
       });
 
     return {
-
-
+      role,
       rows,
       columns,
       pagination: { rowsPerPage: 0 },

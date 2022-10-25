@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-mt-sm">
-    <div class="flex flex-center">
+    <div class="flex flex-center" v-if="role === 'ADMIN'">
       <q-btn class=" btn hoverButton" style="width: 120px" flat label="Nachricht" to="/admin/message">
         <div v-if="$q.screen.gt.sm == true">
           <q-badge color="red" floating transparent>
@@ -34,7 +34,7 @@
 
     <q-separator />
 
-    <q-btn class="flex flex-center btn hoverButton" flat label="Admin Product" to="admin/product" />
+    <q-btn v-if="role === 'ADMIN'" class="flex flex-center btn hoverButton" flat label="Admin Product" to="admin/product" />
     <q-separator />
 
     <!-- <q-btn class="flex flex-center hoverButton" flat label="Admin Gallery" to="/category" /> -->
@@ -52,6 +52,8 @@ import { useRoute, useRouter } from "vue-router";
 import { WebApi } from "/src/apis/WebApi";
 import { watch } from "vue";
 import { date } from "quasar";
+import { useStore } from "vuex";
+
 
 const loggedIn = localStorage.getItem("user");
 export default {
@@ -60,9 +62,14 @@ export default {
     const NumReservationUnseen = ref(0)
     const route = useRoute();
     const $q = useQuasar();
+    const $store = useStore();
+
     const router = useRouter();
     const today = Date.now();
     const formattedString = ref(date.formatDate(today, "DD-MM-YYYY"));
+    const role = computed({
+      get: () => $store.state.cache.role,
+    });
 
 
     axios.get(`${WebApi.server}/countUnseenContact`)
@@ -83,6 +90,7 @@ export default {
     return {
       NumUnseen,
       NumReservationUnseen,
+      role,
       logOut() {
         localStorage.removeItem("user");
         localStorage.removeItem("onlyAdmin");

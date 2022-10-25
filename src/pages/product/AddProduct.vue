@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-md">
+  <q-page class="q-pa-md" v-if="role == 'ADMIN'">
     <!-- make form in center -->
     <div class="">
       <q-form @submit="addproduct()">
@@ -8,7 +8,7 @@
         <div class="q-gutter-md edit_product" style="max-width: 500px">
           <q-input filled v-model="product.name" label="Name" />
           <q-input filled v-model="product.ingredient" label="Zutat" />
-          <q-input filled v-model="product.num" label="Nummer" :rules="productNum"/>
+          <q-input filled v-model="product.num" label="Nummer" :rules="productNum" />
           <q-select filled v-model="product.category" label="Category" :options="productCategory" map-options
             emit-value></q-select>
           <q-input filled v-model="product.price" label="Price" />
@@ -61,12 +61,8 @@ import axios from "axios";
 import { useQuasar } from "quasar";
 import { useRoute, useRouter } from "vue-router";
 import { WebApi } from "/src/apis/WebApi";
+import { useStore } from "vuex";
 
-// ,nameF:'',price:''
-// {id:0,labelName:'Sub A',labelPrice:'Price'},
-//       {id:0,labelName:'Sub B',labelPrice:'Price',nameF:'',price:''},
-//       {id:0,labelName:'Sub C',labelPrice:'Price',nameF:'',price:''},
-//       {id:0,labelName:'Sub D',labelPrice:'Price',nameF:'',price:''},])
 const subFoods = ref([
   { key: 1, labelName: 'Sub A', labelPrice: 'Price' },
   { key: 2, labelName: 'Sub B', labelPrice: 'Price', },
@@ -83,7 +79,11 @@ export default {
     const route = useRoute();
     const $q = useQuasar();
     const router = useRouter();
+    const $store = useStore();
 
+    const role = computed({
+      get: () => $store.state.cache.role,
+    });
 
 
     if (route.params.id == 0) {
@@ -111,6 +111,7 @@ export default {
 
 
     return {
+      role,
       subFoods,
       product,
       dialog_addSubFood: ref(false),
@@ -130,7 +131,7 @@ export default {
           // val.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{5})$/g)) ||
           "Bitte geben Sie  richtige number des Gerrichtes ein",
         (val) =>
-          (String(val).charAt(0) !== '0' ) || "Bitte geben Sie die richtige number des Gerrichtes nicht mit 0 am Anfang ein",
+          (String(val).charAt(0) !== '0') || "Bitte geben Sie die richtige number des Gerrichtes nicht mit 0 am Anfang ein",
         // (val.includes(0) && !!val) || "Please write a correct mobil",
       ],
       productCategory: [
@@ -163,7 +164,7 @@ export default {
               ingredient: product.value.ingredient,
               decription: product.value.decription,
               price: product.value.price,
-              imageUrl: product.value.imageUrl,
+              imageUrl: product.value.imageUrl !== "" ? product.value.category + '/' + product.value.imageUrl + '.png' : "",
               category: product.value.category,
               num: product.value.num,
               subFoods: this.subFoods,

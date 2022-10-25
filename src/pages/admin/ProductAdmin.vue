@@ -1,6 +1,6 @@
 <template>
   <!-- <div >{{products}}</div> -->
-  <q-page>
+  <q-page v-if="role == 'ADMIN'">
     <!-- adminn -->
     <div style=" position:fixed; z-index:150; width:100%;top: 58px;">
       <!-- <div class="row">
@@ -276,11 +276,18 @@ import productBox from "src/components/product/ProductBox.vue";
 import Product from "/src/apis/Product.js";
 import { WebApi } from "/src/apis/WebApi";
 
+
 // const products = ref([]);
 export default {
   component: { productBox },
 
   setup() {
+    const $store = useStore();
+    const router = useRouter();
+
+    const role = computed({
+      get: () => $store.state.cache.role,
+    });
 
     const productCategory = [
       { label: 'Vorspeise', clickTo: "goToVorspeisen" },
@@ -308,9 +315,7 @@ export default {
       sushiMix.value?.scrollIntoView({ behavior: "smooth", block: "center" });
     };
     // End Scroll to Element
-    const $store = useStore();
 
-    const router = useRouter();
     // axios.get("http://localhost:8686/product")
     //     .then(response => {
     //     products.value = response.data;
@@ -367,7 +372,7 @@ export default {
       tempuraProducts,
       spezialProducts,
       category,
-
+      role,
       sushi,
       vorspeisen,
       hauptgang,

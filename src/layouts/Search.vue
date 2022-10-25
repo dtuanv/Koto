@@ -44,7 +44,7 @@
             {{ cartItemCount }}
           </q-badge>
         </q-btn> -->
-        <q-btn v-if="role === 'ADMIN'" class="absolute-top-right q-mt-sm q-mr-md"  color="red" label="Log Out"
+        <q-btn v-if="role !== ''" class="absolute-top-right q-mt-sm q-mr-md"  color="red" label="Log Out"
           @click="logOut" />
       </q-toolbar>
     </q-header>
@@ -60,7 +60,7 @@
 
             <q-item-section> Menü </q-item-section>
           </q-item>
-          <q-item v-if="role !== 'ADMIN'" clickable v-ripple to="/reservation">
+          <q-item v-if="role == ''" clickable v-ripple to="/reservation">
             <q-item-section avatar>
               <q-icon name="book_online" />
             </q-item-section>
@@ -68,7 +68,7 @@
             <q-item-section > Reservation </q-item-section>
           </q-item>
 
-          <q-item v-if="role !== 'ADMIN'" clickable v-ripple to="/contact">
+          <q-item v-if="role == ''" clickable v-ripple to="/contact">
             <q-item-section avatar>
               <q-icon name="send" />
             </q-item-section>
@@ -76,7 +76,7 @@
             <q-item-section> Contact </q-item-section>
           </q-item>
 
-          <q-item v-if="role === 'ADMIN'" clickable v-ripple to="/admin">
+          <q-item v-if="role !== ''" clickable v-ripple to="/admin">
             <q-item-section avatar>
               <q-icon name="person" />
             </q-item-section>
@@ -215,7 +215,7 @@ export default {
     const role = computed({
       get: () => $store.state.cache.role,
     });
-    console.log("Role", role)
+    // console.log("Role", role)
 
 
     return {

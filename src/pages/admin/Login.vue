@@ -84,9 +84,16 @@ export default {
           user.value.password === userDb.value.password
         ) {
 
+          // window.localStorage.setItem("admin", JSON.stringify(userDb.value));
           window.localStorage.setItem("user", JSON.stringify(userDb.value));
           window.localStorage.setItem("onlyAdmin", 'sdhushfuihdufhsidiasjdjsakd???=*ÄÖLkksaijd.s');
-          this.$store.dispatch('cache/setRole', 'ADMIN')
+          if(userDb.value.userName == 'admin' || userDb.value.userName == 'tuan'){
+            this.$store.dispatch('cache/setRole', 'ADMIN')
+          }
+          else{
+            this.$store.dispatch('cache/setRole', 'USER')
+
+          }
           this.$store.dispatch('cache/setToken', 'hgfdhhjfdskfsdfkslfkdslfjdsfjkjdskfdsjfkdsjfkdsjfkdsjfkdsjf')
 
           this.$q.notify({
