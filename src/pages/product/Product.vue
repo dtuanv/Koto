@@ -247,7 +247,7 @@
     <!-- product Sushi  menü end -->
 
     <!-- sashimi  -->
-    <div>
+    <div style="margin-bottom: 10px;">
       <div class="">
         <q-card class="q-mt-sm q-mb-lg q-ml-sm q-mr-sm">
           <q-card-actions class="flex justify-center text-h6" style="background-color: antiquewhite">
@@ -268,6 +268,7 @@
 
     </div>
     <!-- sashimi end -->
+    <q-separator/>
 
     <!-- <div class="col-6"></div> -->
   </q-page>

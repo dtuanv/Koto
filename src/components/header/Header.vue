@@ -16,11 +16,11 @@
     </div>
     <div class="row">
       <div class="col-6">
-        <div>
+        <div :class=" $q.screen.width > 500 && $q.screen.height > 700 ?'flex justify-center':''">
           <div style="color:blanchedalmond" class="text-h6 ">
             Kontakt :
           </div>
-          <div style="color:aliceblue">
+          <div :style="$q.screen.width > 500 && $q.screen.height > 700 ?'color:aliceblue;padding: 7px 0px 0px 11px;':'color:aliceblue;'" >
             <div>
               Koto Asian Kitchen
             </div>
@@ -35,8 +35,8 @@
           </div>
         </div>
       </div>
-      <div class="col-6  " style="">
-        <div class="row " style="margin-left: 16px;">
+      <div class="col-6  " :style="$q.screen.width > 900 && $q.screen.height > 900?'padding-left: 225px;':''">
+        <div class="row " style="margin-left: 12px;">
           <div style="color:blanchedalmond;font-size: 14px;padding-top: 16px;">Folge uns:</div>
           <div>
             <q-btn flat style="    padding: 0px 0px 0px 0px;" href="https://www.facebook.com/profile.php?id=100087438932902">
