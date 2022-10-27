@@ -98,7 +98,7 @@ const routes = [
         component: () => import("src/pages/admin/ReservierungManager.vue"),
       },
       {
-        path: "/onlyTuan/createNewUser",
+        path: "/onlyAdmin/createNewUser",
         name: "createNewUser",
         component: () => import("src/pages/admin/CreateUser.vue"),
       },

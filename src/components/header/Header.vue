@@ -7,6 +7,13 @@
       padding: 2vh 0px 5px 10px;
       background-color: #342a2a;
     ">
+    <div>
+      <!-- <GoogleMap api-key="YOUR_GOOGLE_MAPS_API_KEY" style="width: 100%; height: 500px" :center="center" :zoom="15">
+        <Marker :options="{ position: center }" />
+      </GoogleMap> -->
+
+
+    </div>
     <div class="row">
       <div class="col-6">
         <div>
@@ -32,17 +39,19 @@
         <div class="row " style="margin-left: 16px;">
           <div style="color:blanchedalmond;font-size: 14px;padding-top: 16px;">Folge uns:</div>
           <div>
-            <q-btn flat style="    padding: 0px 0px 0px 0px;">
+            <q-btn flat style="    padding: 0px 0px 0px 0px;" href="https://www.facebook.com/profile.php?id=100087438932902">
               <q-avatar><img src="/img/icon/facebook.png " alt=""
-                  :style=" $q.screen.width > 500 && $q.screen.height > 700 ? 'height: 35px; width: 36px;margin-left: 9px;':'height: 8vw; width: 8vw'" />
+                  :style="$q.screen.width > 500 && $q.screen.height > 700 ? 'height: 35px; width: 36px;margin-left: 9px;' : 'height: 8vw; width: 8vw'" />
               </q-avatar>
             </q-btn>
           </div>
           <div>
-            <q-btn flat style="    padding: 0px 0px 0px 0px;">
+            <q-btn flat style="    padding: 0px 0px 0px 0px;" href="https://www.instagram.com/kotoasiankitchen/">
               <q-avatar><img src="/img/icon/instagram.png " alt=""
-                  :style=" $q.screen.width > 500 && $q.screen.height > 700 ? 'height: 35px; width: 36px;margin-left: 9px;':'height: 8vw; width: 8vw'" />
+                  :style="$q.screen.width > 500 && $q.screen.height > 700 ? 'height: 35px; width: 36px;margin-left: 9px;' : 'height: 8vw; width: 8vw'" />
               </q-avatar>
+
+
             </q-btn>
           </div>
         </div>
@@ -57,7 +66,7 @@
       </div>
     </div>
     <div class="flex justify-center" style="margin-top: 2vh;margin-bottom: 5px;color:red;">
-      Copyright © 2022 Waxyrice
+      Copyright © 2022 Koto Asian Kitchen
     </div>
   </div>
   <!-- dialog_impressung -->
@@ -78,7 +87,7 @@
         <div class="row q-mt-sm">
           <div class="col-3"></div>
           <div>Email:</div>
-          <div class="q-ml-xs">koto@gmail.com</div>
+          <div class="q-ml-xs">	info@koto-asiankitchen.de</div>
         </div>
         <div class="row q-mt-sm">
           <div class="col-3"></div>
@@ -107,11 +116,17 @@
 </template>
 <script>
 import { ref } from "vue";
+// import { GoogleMap, Marker } from 'vue3-google-map'
+
 
 export default {
+
   name: "Header",
+  // components: { GoogleMap, Marker },
   setup() {
+    const center = { lat: 40.689247, lng: -74.044502 }
     return {
+      center,
       dialog_impressung: ref(false),
     };
   },

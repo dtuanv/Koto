@@ -43,12 +43,12 @@
         </q-card>
       </div>
       <!-- <div>vorspeiseProducts{{vorspeiseProducts.subFoods}}</div> -->
-      <div v-if="$q.screen.gt.sm">
-        <div class="q-col-gutter-md row">
+      <div v-if="$q.screen.gt.sm" class="full-width row wrap justify-center items-start content-center">
+        <div class="col-xs-12 col-md-4 q-col-gutter-md wrap">
           <div v-for="(product,index) in vorspeiseProducts" :key="index">
 
             <productBox :product="product"></productBox>
-            <div>{{product.subFoods}} </div>
+            <!-- <div>{{product.subFoods}} </div> -->
           </div>
 
         </div>

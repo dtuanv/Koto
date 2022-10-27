@@ -217,7 +217,6 @@ export default {
                 avatar: "/img/icon/hAnh.png",
 
               });
-              console.log("product updated");
               router.replace("/admin/product");
             })
             .catch((err) => {

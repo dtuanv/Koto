@@ -86,7 +86,7 @@ export default {
 
     changeStatus(reservation) {
       reservation.status = 1
-      console.log("reservation.status", reservation)
+      // console.log("reservation.status", reservation)
       axios.put(`${WebApi.server}/admin/reservation/changeStatus/` + parseInt(reservation.id))
     },
   },
@@ -102,7 +102,7 @@ export default {
       for (var i = 1; i < reservations.value.length; i++)
         for (var j = 0; j < i; j++)
           if (reservations.value[i].time < reservations.value[j].time) {
-            console.log("check in array ", reservations.value[i].time < reservations.value[j].time)
+            // console.log("check in array ", reservations.value[i].time < reservations.value[j].time)
             var x = reservations.value[i];
             reservations.value[i] = reservations.value[j];
             reservations.value[j] = x;
@@ -124,7 +124,7 @@ export default {
         axios.get(`${WebApi.server}/admin/reservation/` + formattedString.value).then((response) => {
           reservations.value = response.data;
           // console.log("reservations adrii",reservations.value[0].time)
-          console.log("reservations adrii", reservations.value)
+          // console.log("reservations adrii", reservations.value)
           for (var i = 1; i < reservations.value.length; i++)
             for (var j = 0; j < i; j++)
               if (reservations.value[i].time < reservations.value[j].time) {

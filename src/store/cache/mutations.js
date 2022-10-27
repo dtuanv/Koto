@@ -3,18 +3,14 @@ export const SET_PRODUCT = (state, product) => {
   state.products = product;
 
   state.products.forEach((product) => {
-    let newSubFoods = product.subFoods.sort((a, b) => a.key - b.key);
+    // let newSubFoods = product.subFoods.sort((a, b) => a.key - b.key);
 
-    let check = newSubFoods.find((sf) => {
-      return sf.nameF != undefined;
+    let check = product.subFoods.find((sf) => {
+      return sf.price != undefined;
     });
     if (check === undefined) {
       product.checkSubFood = 2;
     }
-    // state.products.sort((a,b) => b.name - a.name)
-
-    // console.log("Check SubF",check, "in",product.name )
-    //  product.subFoods = newSubFoods
   });
   // console.log("state.products",state.products)
 

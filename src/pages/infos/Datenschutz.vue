@@ -90,7 +90,7 @@
               <div>
                 Adresse: Stummstraße 8, 66763 Dillingen/Saar
               </div>
-              <div>Email: Kotobistrodillingen8@gmail.com
+              <div>Email: 	info@koto-asiankitchen.de
               </div>
               <div>Telefon: 06831 5053 643
               </div>

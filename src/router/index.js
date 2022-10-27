@@ -52,7 +52,7 @@ export default route(function ({ store, ssrContext }) {
       "/reservation",
       "/contact",
       "/thank",
-      "/onlyTuan/createNewUser",
+      "/onlyAdmin/createNewUser",
       "/impressung",
       "/datenschutzErklaerung"
     ];

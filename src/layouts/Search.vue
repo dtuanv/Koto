@@ -30,7 +30,7 @@
           ">
           <!-- <q-tabs v-if="true" class="GL__toolbar-link q-ml-xs q-gutter-md text-body2 text-weight-bold row items-center no-wrap" > -->
           <q-route-tab :to="'/'" label="Home" />
-          <q-route-tab :to="{ name: 'customer' }" label="Customer" />
+          <!-- <q-route-tab :to="{ name: 'customer' }" label="Customer" /> -->
           <q-route-tab :to="{ name: 'product', params: { id: 1 } }" replace label="Product" />
         </q-tabs>
         <!-- to shoping cart -->
@@ -84,7 +84,7 @@
             <q-item-section> Admin </q-item-section>
           </q-item>
 
-          <q-item v-if="role === 'ADMIN'" clickable v-ripple @click="logOut">
+          <q-item v-if="role != ''" clickable v-ripple @click="logOut">
             <q-item-section avatar>
               <q-icon name="drafts" />
             </q-item-section>

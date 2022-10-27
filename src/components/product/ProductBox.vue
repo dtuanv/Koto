@@ -1,15 +1,114 @@
 <template>
   <div class="">
     <q-card v-if="$q.screen.gt.sm">
-      <q-card-actions style=" width: 20vw; height:11vw">
-        <div>
+      <q-card-actions>
+        <div class="row" style="width:100%">
 
-          <img :src="'/img/' + product.imageUrl" alt="" style="height: 10vw; width: 10vw" />
+          <div class="">
+            <div v-if="product.imageUrl != ''">
+              <img :src="'/img/' + product.imageUrl" alt="" style="height: 10vw; width: 145px;" />
+            </div>
+            <div v-else style="width:145px"></div>
+            <div v-if="product.price == ''">
+              <q-btn class="q-mt-sm q-ml-sm" color="green" @click="dialog_zutat = true" label="Zutat Anzeigen"></q-btn>
+            </div>
+            <div v-if="product.price !== '' && product.imageUrl == ''">
+              <q-btn class="q-mt-sm q-ml-sm" color="green" @click="dialog_zutat = true" label="Zutat Anzeigen"></q-btn>
+            </div>
+          </div>
+          <div style="margin-left:12px;width: 63%;" class="text-subtitle2 ">
+            <div class="float-right" v-if="product.checkSubFood == 2">{{ product.price }}</div>
+            <q-btn v-if="role === 'ADMIN'" icon="edit" @click='editProduct(product)' dense></q-btn>
+
+            <q-btn v-if="role === 'ADMIN'" class="float-right" icon="delete" color="negative"
+              @click='deleteProduct(product)' dense></q-btn>
+
+
+            <div class=" q-ml-sm col-5" style="font-size: 18px;">{{ product.name }}
+              <q-badge v-if="product.ingredient != undefined" color="red" align="top">
+                {{ product.ingredient }}
+              </q-badge>
+            </div>
+
+
+            <div class="q-ml-sm " style="font-size: 14px; width:90% ">{{ product.decription }}</div>
+            <!-- button zutat begin -->
+            <div v-if="product.price !== '' && product.imageUrl != ''" style="width: 70px;" class="q-mt-sm float-right">
+              <q-btn class="" color="green" @click="dialog_zutat = true" label="Zutat Anzeigen"></q-btn>
+            </div>
+            <!-- button zutat end -->
+
+            <div  style="" v-for="subF in product.subFoods" :key="subF">
+              <div class="row">
+                <div class="q-ml-sm text-caption col-9 " style=" font-size: 0.9rem;padding: 5px 2px 2px 0px;">
+                {{ subF.nameF }}
+                <q-badge v-if="subF.ingredient != undefined" color="red" align="top">
+                  {{ subF.ingredient }}
+                </q-badge>
+              </div>
+              <!-- <div class="col-1"></div> -->
+              <div style="padding: 5px 2px 2px 0px;" class="text-caption col-2">
+                {{ subF.price }}
+              </div>
+              </div>
+
+            </div>
+
+          </div>
         </div>
-        <div class="q-ml-sm text-h5">
-          {{ product.name }}
-          <div class="q-ml-lg text-body1">{{ product.decription }}</div>
-        </div>
+        <q-dialog v-model="dialog_zutat">
+          <q-card>
+            <q-card-selection>
+              <div class="flex justify-center q-mt-xs " style="color:red;">
+                ALLE GERICHTE OHNE GLUTAMAT
+
+              </div>
+            </q-card-selection>
+            <q-card-actions>
+              <div class="">
+                <div style="color:red;">
+                  Zusatzstoffe :
+                </div>
+                <ol>
+                  <li>
+                    mit Konservierungsstoff.
+                  </li>
+                  <li>mit Geschmacksverstärkern</li>
+                </ol>
+
+              </div>
+
+              <div class="row">
+                <div style="color:red;">
+                  Allergene :
+                </div>
+                <ol style="list-style-type: lower-alpha;">
+                  <li>
+                    Glutenhaltiges Getreide:weizen.
+                  </li>
+                  <li>Krebstiere</li>
+                  <li>Eier und Eiererzeugnisse </li>
+                  <li>Fisch und Fischererzeugnisse</li>
+                  <li>Erdnüsse und Erdnusserzeugnisse</li>
+                  <li>Soja und Sojaerzeugnisse</li>
+                  <li>Milch und Milchererzeugnisse</li>
+                  <div class="row">
+
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </div>
+                  <li>Sesamsamenerzeugnisse</li>
+                  <li></li>
+                  <li></li>
+                  <li>Weichtiere( Muscheln, Kalamri, Austern,Schnecken)</li>
+                </ol>
+              </div>
+              <div>
+              </div>
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
       </q-card-actions>
     </q-card>
 
@@ -70,22 +169,13 @@
                       <li></li>
                       <li></li>
                     </div>
-
                     <li>Sesamsamenerzeugnisse</li>
                     <li></li>
                     <li></li>
-
-
                     <li>Weichtiere( Muscheln, Kalamri, Austern,Schnecken)</li>
                   </ol>
-
                 </div>
-
-
                 <div>
-
-
-
                 </div>
               </q-card-actions>
             </q-card>
@@ -95,7 +185,8 @@
             <div class="float-right" v-if="product.checkSubFood == 2">{{ product.price }}</div>
             <q-btn v-if="role === 'ADMIN'" icon="edit" @click='editProduct(product)' dense></q-btn>
 
-            <q-btn v-if="role === 'ADMIN'" class="float-right" icon="delete" color="negative" @click='deleteProduct(product)' dense></q-btn>
+            <q-btn v-if="role === 'ADMIN'" class="float-right" icon="delete" color="negative"
+              @click='deleteProduct(product)' dense></q-btn>
 
 
             <div>{{ product.name }}
@@ -261,11 +352,11 @@ export default {
 
           axios.delete(`${WebApi.server}/admin/product/delete/` + product.id)
             .then(response => {
-          window.localStorage.setItem("productId", product.id);
+              window.localStorage.setItem("productId", product.id);
 
               // products.value.splice(this.products.indexOf(product.id), 1)
 
-             $q.notify({
+              $q.notify({
                 message: 'Product was deleted.',
                 color: 'positive',
                 avatar: "/img/icon/hAnh.png",

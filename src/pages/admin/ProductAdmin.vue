@@ -402,7 +402,7 @@ export default {
       var top = element.offsetTop;
 
       window.scrollTo(0, top);
-      console.log("move");
+      // console.log("move");
     },
 
   },

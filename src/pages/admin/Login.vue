@@ -41,14 +41,7 @@ export default {
     const route = useRoute();
 
 
-    axios
-      .get(`${WebApi.server}/userAccount`)
-      .then((re) => {
-        userDb.value = re.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
     const loginForm = ref(true);
     return {
       loginForm,
@@ -59,6 +52,15 @@ export default {
   computed: {},
   methods: {
     onSubmit() {
+      // axios
+      // .get(`${WebApi.server}/userAccount`)
+      // .then((re) => {
+      //   userDb.value = re.data;
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // });
+
       axios
         .get(
           `${WebApi.server}/userAccount/` +
