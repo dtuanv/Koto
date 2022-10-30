@@ -1,5 +1,6 @@
 <template>
-  <q-page class="q-pa-md" v-if="role == 'ADMIN'">
+  <!-- v-if="role == 'ADMIN'" -->
+  <q-page class="q-pa-md" >
     <!-- make form in center -->
     <div class="flex justify-center text-h5">Nachricht von Kunden</div>
     <div v-for="contact in contacts" :key="contact.id">
@@ -51,23 +52,33 @@ export default {
     const $q = useQuasar();
     const router = useRouter();
     const $store = useStore();
-
+    const jwt = computed(() => {
+      return $store.getters["loginModule/getJwt"];
+    });
     const role = computed({
-      get: () => $store.state.cache.role,
+      get: () => $store.state.loginModule.role,
     });
 
-    axios.get(`${WebApi.server}/admin/allContact`)
+    axios.get(`${WebApi.server}/admin/allContact`,
+     {
+      headers: {
+        Authorization: "Bearer " + jwt.value,
+      },
+      withCredentials: true,
+    }
+    )
       .then(response => {
         contacts.value = response.data;
+        console.log("contacts.value ",contacts.value)
       })
       .catch(err => {
         console.log(err);
       });
 
-    console.log("contyt", contacts.value)
     return {
       role,
       contacts,
+      jwt,
     };
   },
   data() {
@@ -75,7 +86,14 @@ export default {
   methods: {
     changeStatus(contact) {
       contact.status = 1
-      axios.put(`${WebApi.server}/admin/contact/changeStatus/` + parseInt(contact.id))
+      axios.put(`${WebApi.server}/admin/contact/changeStatus/` + parseInt(contact.id),parseInt(contact.id),
+          {
+            headers: {
+              Authorization: "Bearer " + this.jwt,
+            },
+            withCredentials: true,
+          }
+      )
     },
   },
   // components: { Detail, CategoryBox }

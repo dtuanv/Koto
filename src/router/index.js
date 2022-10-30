@@ -38,52 +38,58 @@ export default route(function ({ store, ssrContext }) {
       process.env.MODE === "ssr" ? void 0 : process.env.VUE_ROUTER_BASE
     ),
   });
+// console.log("Store ",store )
+  console.log("storin route", store.state.loginModule.loggedIn)
+  // console.log("storin route Roleeeee", store.state.loginModule.role)
+  // console.log("storin role route", store.state.cache)
 
   // the vue router defines all of the routes for the application,
   //  and contains a function that runs before each route change
   //   to prevent unauthenticated users from accessing restricted routes.
 
+            // test
+
   Router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
     const publicPages = [
       "/",
-      "/login",
+      "/loginPage",
       "/product",
       "/reservation",
       "/contact",
       "/thank",
-      "/onlyAdmin/createNewUser",
+      "/register",
       "/impressung",
       "/datenschutzErklaerung"
     ];
     const authRequired = !publicPages.includes(to.path);
-    const loggedIn = localStorage.getItem("user");
-    const tokenLocal = localStorage.getItem("onlyAdmin");
+    // const loggedIn = localStorage.getItem("user");
+    // const tokenLocal = localStorage.getItem("onlyAdmin");
 
     if (
-      authRequired &&
-      store.state.cache.token !=
-        "hgfdhhjfdskfsdfkslfkdslfjdsfjkjdskfdsjfkdsjfkdsjfkdsjfkdsjf"
-    ) {
-      return next("/login");
+      authRequired && !store.state.loginModule.loggedIn )
+     {
+      return next("/loginPage");
     }
-    if (
-      authRequired &&
-      tokenLocal != "sdhushfuihdufhsidiasjdjsakd???=*ÄÖLkksaijd.s"
-    ) {
-      return next("/login");
-    }
-    if (authRequired && !loggedIn) {
-      if (tokenLocal !== 1) {
-        return next("/login");
-      }
-    }
+    // if (
+    //   authRequired &&
+    //   tokenLocal != "sdhushfuihdufhsidiasjdjsakd???=*ÄÖLkksaijd.s"
+    // ) {
+    //   return next("/loginPage");
+    // }
+    // if (authRequired && !loggedIn) {
+    //   if (tokenLocal !== 1) {
+    //     return next("/loginPage");
+    //   }
+    // }
     // if (authRequired && !loggedIn && token !== 1) {
     //   return next('/login');
     // }
 
     next();
   });
+
+  // testend
 
   return Router;
 });

@@ -67,12 +67,23 @@ export default {
     const router = useRouter();
     const today = Date.now();
     const formattedString = ref(date.formatDate(today, "DD-MM-YYYY"));
+
     const role = computed({
-      get: () => $store.state.cache.role,
+      get: () => $store.state.loginModule.role,
+    });
+const jwt = computed(() => {
+      return $store.getters["loginModule/getJwt"];
     });
 
 
-    axios.get(`${WebApi.server}/countUnseenContact`)
+    axios.get(`${WebApi.server}/countUnseenContact`,
+       {
+            headers: {
+              Authorization: "Bearer " + jwt.value,
+            },
+            withCredentials: true,
+          }
+    )
       .then(response => {
         NumUnseen.value = response.data;
       })
@@ -80,7 +91,14 @@ export default {
         console.log(err);
       });
     // Reservation num
-    axios.get(`${WebApi.server}/admin/countUnseenReservation/` + formattedString.value)
+    axios.get(`${WebApi.server}/admin/countUnseenReservation/` + formattedString.value,
+       {
+            headers: {
+              Authorization: "Bearer " + jwt.value,
+            },
+            withCredentials: true,
+          }
+    )
       .then(response => {
         NumReservationUnseen.value = response.data;
       })

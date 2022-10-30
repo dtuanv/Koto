@@ -2,7 +2,7 @@
   <q-page padding class="flex justify-center q-mt-xl">
     <!-- content -->
     <q-card
-      :style="$q.screen.width > 400 && $q.screen.height > 700 ? 'background-color:bisque; width: 70vw; height: 45vh':'background-color:bisque; width: 70vw; height: 450px'">
+      :style="$q.screen.width > 450 && $q.screen.height > 700 ? 'background-color:bisque; width: 70vw; height: 45vh':'background-color:bisque; width: 70vw; height: 450px'">
       <q-card-section class="flex justify-center text-h4">Contact</q-card-section>
       <q-card-actions>
         <q-form @submit="onSubmit" style="width:100%">

@@ -39,12 +39,15 @@ const routes = [
         path: "/admin",
         name: "admin",
         component: () => import("src/pages/admin/Admin.vue"),
+        meta: { isRequireAuth: true },
+
       },
 
       {
         path: "/admin/message",
         name: "adminMessage",
         component: () => import("src/pages/admin/Message.vue"),
+        meta: { isRequireAuth: true },
       },
       {
         path: "/admin/bill",
@@ -70,37 +73,51 @@ const routes = [
         path: "/admin/product/add/:id",
         name: "addProduct",
         component: () => import("src/pages/product/AddProduct.vue"),
+        meta: { isRequireAuth: true },
+
       },
       {
         path: "/admin/product",
         name: "adminProduct",
         component: () => import("src/pages/admin/ProductAdmin.vue"),
+        meta: { isRequireAuth: true },
+
       },
 
       {
         path: "/admin/product/edit/:id",
         name: "editProductById",
         component: () => import("src/pages/product/AddProduct.vue"),
+        meta: { isRequireAuth: true },
+
       },
       {
         path: "/admin/category/edit",
         name: "editCategory",
         component: () => import("src/pages/product/EditCategory.vue"),
+        meta: { isRequireAuth: true },
+
       },
       {
         path: "/admin/product/editResource",
         name: "editProductResource",
         component: () => import("src/pages/product/ProductSrc.vue"),
+        meta: { isRequireAuth: true },
+
       },
       {
         path: "/admin/reservation",
         name: "adminResieveren",
         component: () => import("src/pages/admin/ReservierungManager.vue"),
+        meta: { isRequireAuth: true },
+
       },
       {
         path: "/onlyAdmin/createNewUser",
         name: "createNewUser",
         component: () => import("src/pages/admin/CreateUser.vue"),
+        meta: { isRequireAuth: true },
+
       },
 
       //  Admin end
@@ -109,7 +126,28 @@ const routes = [
         path: "/login",
         name: "login",
         component: () => import("src/pages/admin/Login.vue"),
+        meta: { isRequireAuth: true },
+
       },
+
+      {
+        path: "/loginPage",
+        name: "loginPage",
+        component: () => import("src/pages/admin/LoginPage.vue"),
+      },
+      {
+        path: "/register",
+        name: "register",
+        component: () => import("src/pages/admin/RegisterPage.vue"),
+      },
+
+      {
+        path: "/protected",
+        name: "protectedPage",
+        component: () => import("src/pages/admin/ProtectedHomePage.vue"),
+        meta: { isRequireAuth: true },
+      },
+
       {
         path: "/contact",
         name: "contact",

@@ -8,30 +8,30 @@
         <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
 
         <q-btn flat no-caps no-wrap class="q-ml-xs" to="/">
-          <q-avatar style="    width: 51px;
-    height: 39px;"><img src="/img/koto/KotoLogo.png" alt="" /></q-avatar>
+          <q-avatar style="width: 51px; height: 39px"
+            ><img src="/img/koto/KotoLogo.png" alt=""
+          /></q-avatar>
           <q-toolbar-title shrink class="text-weight-bold">
-            <div class="" >
-              <div style="font-family: cursive; font-size: 20px;color: darkslategray;" >
-              Koto AsianKitchen
+            <div class="">
+              <div style="font-family: cursive; font-size: 20px; color: darkslategray">
+                Koto AsianKitchen
+              </div>
             </div>
-            </div>
-
           </q-toolbar-title>
         </q-btn>
 
-        <q-tabs v-if="$q.screen.gt.sm" class="
-            GL__toolbar-link
-            q-ml-xs q-gutter-md
-            text-body2 text-weight-bold
-            row
-            items-center
-            no-wrap
-          ">
+        <q-tabs
+          v-if="$q.screen.gt.sm"
+          class="GL__toolbar-link q-ml-xs q-gutter-md text-body2 text-weight-bold row items-center no-wrap"
+        >
           <!-- <q-tabs v-if="true" class="GL__toolbar-link q-ml-xs q-gutter-md text-body2 text-weight-bold row items-center no-wrap" > -->
           <q-route-tab :to="'/'" label="Home" />
           <!-- <q-route-tab :to="{ name: 'customer' }" label="Customer" /> -->
-          <q-route-tab :to="{ name: 'product', params: { id: 1 } }" replace label="Product" />
+          <q-route-tab
+            :to="{ name: 'product', params: { id: 1 } }"
+            replace
+            label="Product"
+          />
         </q-tabs>
         <!-- to shoping cart -->
         <!-- <q-btn
@@ -44,15 +44,34 @@
             {{ cartItemCount }}
           </q-badge>
         </q-btn> -->
-        <q-btn v-if="role !== ''" class="absolute-top-right q-mt-sm q-mr-md"  color="red" label="Log Out"
-          @click="logOut" />
+        <q-btn
+          v-if="role === 'ADMIN' || role === 'USER'"
+          class="absolute-top-right q-mt-sm q-mr-md"
+          color="red"
+          label="Log Out"
+          @click="logout"
+        />
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="drawer" show-if-above :mini="!drawer || miniState" @click.capture="drawerClick" :width="200"
-      :breakpoint="500" bordered class="bg-grey-3">
+    <q-drawer
+      v-model="drawer"
+      show-if-above
+      :mini="!drawer || miniState"
+      @click.capture="drawerClick"
+      :width="200"
+      :breakpoint="500"
+      bordered
+      class="bg-grey-3"
+    >
       <q-scroll-area class="fit">
         <q-list padding>
+          <q-item clickable v-ripple v-if="role !== ''">
+            <q-item-section>
+            <div class="flex justify-center text-h5">Du bist: {{role}} </div>
+            </q-item-section>
+          </q-item>
+
           <q-item clickable v-ripple to="/product">
             <q-item-section avatar>
               <q-icon name="shopping_bag" />
@@ -65,7 +84,7 @@
               <q-icon name="book_online" />
             </q-item-section>
 
-            <q-item-section > Reservation </q-item-section>
+            <q-item-section> Reservation </q-item-section>
           </q-item>
 
           <q-item v-if="role == ''" clickable v-ripple to="/contact">
@@ -76,7 +95,12 @@
             <q-item-section> Contact </q-item-section>
           </q-item>
 
-          <q-item v-if="role !== ''" clickable v-ripple to="/admin">
+          <q-item
+            v-if="role === 'ADMIN' || role === 'USER'"
+            clickable
+            v-ripple
+            to="/admin"
+          >
             <q-item-section avatar>
               <q-icon name="person" />
             </q-item-section>
@@ -84,7 +108,17 @@
             <q-item-section> Admin </q-item-section>
           </q-item>
 
-          <q-item v-if="role != ''" clickable v-ripple @click="logOut">
+          <q-item v-if="role == ''" clickable v-ripple to="/loginPage">
+            <q-item-section avatar>
+              <q-icon name="login" />
+            </q-item-section>
+
+            <q-item-section> Login </q-item-section>
+          </q-item>
+
+
+
+          <q-item v-else clickable v-ripple @click.prevent="logout">
             <q-item-section avatar>
               <q-icon name="drafts" />
             </q-item-section>
@@ -92,13 +126,17 @@
             <q-item-section> LogOut </q-item-section>
           </q-item>
 
-          <q-item v-else clickable v-ripple to="/login">
-            <q-item-section avatar>
-              <q-icon name="drafts" />
-            </q-item-section>
 
-            <q-item-section> Login </q-item-section>
-          </q-item>
+
+
+
+          <!-- <q-item clickable v-ripple @click.prevent="logout">
+          <q-item-section avatar>
+            <q-icon color="primary" name="login" />
+          </q-item-section>
+
+          <q-item-section>Logout Page</q-item-section>
+        </q-item> -->
         </q-list>
       </q-scroll-area>
 
@@ -108,45 +146,62 @@
           to mini-mode
         -->
       <div class="q-mini-drawer-hide absolute" style="top: 15px; right: -17px">
-        <q-btn dense round unelevated color="accent" icon="chevron_left" @click="miniState = true" />
+        <q-btn
+          dense
+          round
+          unelevated
+          color="accent"
+          icon="chevron_left"
+          @click="miniState = true"
+        />
       </div>
     </q-drawer>
 
     <!-- (Optional) The Footer -->
 
     <q-footer>
-
       <div v-if="card_cookie">
-        <q-card style="background-color:aqua;height: 120px;">
-          <q-card-section style="padding-bottom:0px">
-            <div style="width:100%">
-              <div style="color:black" class="flex justify-center">
-                Wir verwenden Cookies, um unsere Website und unseren Service zu optimieren.
+        <q-card style="background-color: aqua; height: 120px">
+          <q-card-section style="padding-bottom: 0px">
+            <div style="width: 100%">
+              <div style="color: black" class="flex justify-center">
+                Wir verwenden Cookies, um unsere Website und unseren Service zu
+                optimieren.
               </div>
             </div>
-
           </q-card-section>
           <q-card-actions>
-
-            <div class="row" style="width:100%">
+            <div class="row" style="width: 100%">
               <div class=""></div>
               <div class="col-2">
-                <q-btn @click="card_cookie=false" label="Ablehnen" color="negative"></q-btn>
+                <q-btn
+                  @click="card_cookie = false"
+                  label="Ablehnen"
+                  color="negative"
+                ></q-btn>
               </div>
               <div class="col-6"></div>
               <div class="">
-                <q-btn class="" @click="card_cookie=false" color="positive" label="Akzeptieren"></q-btn>
-
+                <q-btn
+                  class=""
+                  @click="card_cookie = false"
+                  color="positive"
+                  label="Akzeptieren"
+                ></q-btn>
               </div>
-
             </div>
           </q-card-actions>
         </q-card>
       </div>
 
       <q-tabs switch-indicator>
-        <q-route-tab icon="restaurant_menu" :to="{ name: 'product', params: { id: 1 } }" replace label="Menü"
-          color="positive" />
+        <q-route-tab
+          icon="restaurant_menu"
+          :to="{ name: 'product', params: { id: 1 } }"
+          replace
+          label="Menü"
+          color="positive"
+        />
         <q-route-tab icon="book_online" to="/reservation" replace label="Reservierung" />
       </q-tabs>
     </q-footer>
@@ -158,7 +213,6 @@
 
     <q-page-container>
       <!-- This is where pages get injected -->
-
 
       <router-view />
       <!-- <q-page>Hih new</q-page> -->
@@ -211,14 +265,30 @@ export default {
     const $router = useRouter();
     const $store = useStore();
 
-
     const role = computed({
-      get: () => $store.state.cache.role,
+      get: () => $store.state.loginModule.role,
     });
+    console.log("Role in computed: ", role);
+
+    // const role = ref(localStorage.getItem("user"));
+
     // console.log("Role", role)
+    const logout = () => {
+      $store.dispatch("loginModule/doLogout");
+      $router.push("/product");
+      localStorage.removeItem("onlyAdmin");
+      localStorage.removeItem("user_role");
+      $store.dispatch("cache/logOut");
+      $q.notify({
+        message: "logOut",
 
-
+        color: "positive",
+        avatar: "/img/icon/hAnh.png",
+      });
+      $router.replace("/");
+    };
     return {
+      logout,
       amountItem,
       leftDrawerOpen,
       drawer: ref(false),
@@ -226,20 +296,20 @@ export default {
       card_cookie: ref(true),
 
       role,
-      logOut() {
-        localStorage.removeItem('user')
-        localStorage.removeItem('onlyAdmin')
-        $store.dispatch("cache/logOut")
-        $q.notify({
-          message: "logOut",
+      // logOut() {
+      //   localStorage.removeItem('user')
+      //   localStorage.removeItem('onlyAdmin')
+      //   $store.dispatch("cache/logOut")
+      //   $q.notify({
+      //     message: "logOut",
 
-          color: "positive",
-          avatar: "/img/icon/hAnh.png",
+      //     color: "positive",
+      //     avatar: "/img/icon/hAnh.png",
 
-        });
-        $router.replace("/")
-      }
-      ,
+      //   });
+      //   $router.replace("/")
+      // }
+      // ,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },

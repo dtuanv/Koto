@@ -286,7 +286,7 @@ export default {
     const router = useRouter();
 
     const role = computed({
-      get: () => $store.state.cache.role,
+      get: () => $store.state.loginModule.role,
     });
 
     const productCategory = [

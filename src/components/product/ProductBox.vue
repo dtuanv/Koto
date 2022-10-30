@@ -286,8 +286,11 @@ export default {
     const $q = useQuasar();
     const router = useRouter();
     const axios = require("axios");
+    const jwt = computed(() => {
+      return $store.getters["loginModule/getJwt"];
+    });
     const role = computed({
-      get: () => $store.state.cache.role,
+      get: () => $store.state.loginModule.role,
     });
     let countItem = ref(0);
     let countCart = ref(0);
@@ -350,7 +353,15 @@ export default {
         }).onOk(() => {
           console.log('>>>> OK')
 
-          axios.delete(`${WebApi.server}/admin/product/delete/` + product.id)
+          axios.delete(`${WebApi.server}/admin/product/delete/` + product.id,
+
+         {
+            headers: {
+              Authorization: "Bearer " + jwt.value,
+            },
+            withCredentials: true,
+          }
+          )
             .then(response => {
               window.localStorage.setItem("productId", product.id);
 

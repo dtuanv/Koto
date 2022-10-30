@@ -81,8 +81,11 @@ export default {
     const router = useRouter();
     const $store = useStore();
 
+const jwt = computed(() => {
+      return $store.getters["loginModule/getJwt"];
+    });
     const role = computed({
-      get: () => $store.state.cache.role,
+      get: () => $store.state.loginModule.role,
     });
 
 
@@ -102,7 +105,15 @@ export default {
       ]
     } else {
       axios
-        .get(`${WebApi.server}/admin/product/add/` + route.params.id + "/")
+        .get(`${WebApi.server}/admin/product/add/` + route.params.id + "/",
+
+         {
+            headers: {
+              Authorization: "Bearer " + jwt.value,
+            },
+            withCredentials: true,
+          }
+        )
         .then((response) => {
           product.value = response.data;
           subFoods.value = product.value.subFoods
@@ -169,9 +180,12 @@ export default {
               num: product.value.num,
               subFoods: this.subFoods,
             },
-            headers: {
+                headers: {
               "Content-Type": "application/json",
+
+              Authorization: "Bearer " + jwt.value,
             },
+             withCredentials: true,
           })
             .then(() => {
               $q.notify({
@@ -207,7 +221,10 @@ export default {
             },
             headers: {
               "Content-Type": "application/json",
+
+              Authorization: "Bearer " + jwt.value,
             },
+             withCredentials: true,
           })
             .then(() => {
               $q.notify({

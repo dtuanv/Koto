@@ -1,7 +1,10 @@
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
 import cache from './cache'
+import { loginModule } from "src/store/modules/LoginModule";
+import { isLoadingModule } from "src/store/modules/IsLoadingModule";
 
+/*
 
 // import example from './module-example'
 
@@ -18,7 +21,9 @@ export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
       // example
-      cache
+      cache,
+      loginModule,
+      isLoadingModule,
     },
 
     // enable strict mode (adds overhead!)

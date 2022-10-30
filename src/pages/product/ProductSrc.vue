@@ -57,11 +57,21 @@ export default {
   setup() {
     // console.log("Route: ", checkPath);
     const $store = useStore();
+    const jwt = computed(() => {
+      return $store.getters["loginModule/getJwt"];
+    });
 
     const role = computed({
-      get: () => $store.state.cache.role,
+      get: () => $store.state.loginModule.role,
     });
-    axios.get(`${WebApi.server}/product`)
+    axios.get(`${WebApi.server}/product`,
+          {
+            headers: {
+              Authorization: "Bearer " + jwt.value,
+            },
+            withCredentials: true,
+          }
+    )
       .then(response => {
         rows.value = response.data;
 
@@ -99,7 +109,14 @@ export default {
       }).onOk(() => {
         console.log('>>>> OK')
 
-        axios.delete(`${WebApi.server}/admin/product/delete/` + props.row.id)
+        axios.delete(`${WebApi.server}/admin/product/delete/` + props.row.id,
+          {
+            headers: {
+              Authorization: "Bearer " + jwt.value,
+            },
+            withCredentials: true,
+          }
+        )
           .then(response => {
             rows.value.splice(this.rows.indexOf(props.row), 1)
             this.$q.notify({

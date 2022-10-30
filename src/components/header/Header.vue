@@ -39,11 +39,13 @@
         <div class="row " style="margin-left: 12px;">
           <div style="color:blanchedalmond;font-size: 14px;padding-top: 16px;">Folge uns:</div>
           <div>
-            <q-btn flat style="    padding: 0px 0px 0px 0px;" href="https://www.facebook.com/profile.php?id=100087438932902">
+            <q-btn flat style="padding: 0px 0px 0px 0px;" href="https://www.facebook.com/profile.php?id=100087438932902">
               <q-avatar><img src="/img/icon/facebook.png " alt=""
                   :style="$q.screen.width > 500 && $q.screen.height > 700 ? 'height: 35px; width: 36px;margin-left: 9px;' : 'height: 8vw; width: 8vw'" />
               </q-avatar>
             </q-btn>
+
+
           </div>
           <div>
             <q-btn flat style="    padding: 0px 0px 0px 0px;" href="https://www.instagram.com/kotoasiankitchen/">

@@ -3,7 +3,10 @@ export const SET_PRODUCT = (state, product) => {
   state.products = product;
 
   state.products.forEach((product) => {
-    // let newSubFoods = product.subFoods.sort((a, b) => a.key - b.key);
+    // test
+    let newSubFoods = product.subFoods.sort((a, b) => a.key - b.key);
+    product.subFoods = newSubFoods
+    // test
 
     let check = product.subFoods.find((sf) => {
       return sf.price != undefined;
