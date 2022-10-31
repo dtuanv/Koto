@@ -68,7 +68,7 @@
         <q-list padding>
           <q-item clickable v-ripple v-if="role !== ''">
             <q-item-section>
-            <div class="flex justify-center text-h5">Du bist: {{role}} </div>
+              <div class="flex justify-center text-h5">Du bist: {{ role }}</div>
             </q-item-section>
           </q-item>
 
@@ -116,8 +116,6 @@
             <q-item-section> Login </q-item-section>
           </q-item>
 
-
-
           <q-item v-else clickable v-ripple @click.prevent="logout">
             <q-item-section avatar>
               <q-icon name="drafts" />
@@ -125,10 +123,6 @@
 
             <q-item-section> LogOut </q-item-section>
           </q-item>
-
-
-
-
 
           <!-- <q-item clickable v-ripple @click.prevent="logout">
           <q-item-section avatar>
@@ -172,7 +166,10 @@
           </q-card-section>
           <q-card-actions>
             <div class="row" style="width: 100%">
-              <div class=""></div>
+              <div
+                v-if="$q.screen.width > 400 && $q.screen.height > 700"
+                class="col-2"
+              ></div>
               <div class="col-2">
                 <q-btn
                   @click="card_cookie = false"

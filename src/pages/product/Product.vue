@@ -269,6 +269,30 @@
     </div>
     <!-- sashimi end -->
     <q-separator/>
+    <q-dialog v-model="dialog_hinweis">
+        <q-card style="" >
+          <q-card-section>
+          <div class="text-h5 flex flex-center" style="color:brown">
+          Hinweis
+          </div>
+          </q-card-section>
+          <q-card-actions >
+          <div class="flex flex-center">
+             <div>
+            Unsere Speisekarte gilt ab 09.11!!!!
+          </div>
+          <div>
+          Bitte konaktieren Sie per Telefon
+          </div>
+          <div>(06831 5053 643) zu bestellen.</div>
+
+          </div>
+          <div style="width:100%" class="flex flex-center q-mt-sm">Vielen Dank!</div>
+
+
+          </q-card-actions>
+        </q-card>
+    </q-dialog>
 
     <!-- <div class="col-6"></div> -->
   </q-page>
@@ -367,6 +391,7 @@ export default {
     });
     // console.log("sushiProducts", sushiProducts);
     return {
+      dialog_hinweis:ref(true),
       makiProducts,
       nigiriProducts,
       insideOutProducts,
