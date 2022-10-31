@@ -19,15 +19,23 @@
           <div class="col-12 flex justify-center q-mt-sm">
             <q-btn class="" style="font-family: inherit; color:darkblue" label="Vorspeisen"
               @click="goToVorspeisen"></q-btn>
-            <q-btn class="q-ml-sm" label="Haupgang" style="font-family: inherit; color: chocolate"
+            <q-btn class="q-ml-sm" label="Hauptgang" style="font-family: inherit; color: chocolate"
               @click="goToHauptgang"></q-btn>
 
             <q-btn class="q-ml-sm" label="Sushi Menü" style="font-family: inherit; color: blue" @click="goToSushiMix">
             </q-btn>
           </div>
-          <div class="col-12 flex justify-center q-mt-sm">
-            <q-btn class="q-ml-sm" style="font-family: inherit; color: lightseagreen" label="Sushi" @click="goToSushi">
+          <div class="row  q-mt-sm" style="width:100%">
+            <div class="col-2">
+
+            </div>
+          <div>
+               <q-btn class="q-ml-sm " style="font-family: inherit; color: lightseagreen;width:100px" label="Sushi" @click="goToSushi">
             </q-btn>
+          </div>
+         <div class="q-ml-sm">
+          <q-btn href="tel:+4968315053643" label="Tel: 068 315 053 643" style="color: darkgreen;">  </q-btn>
+         </div>
           </div>
         </div>
       </div>
@@ -282,9 +290,17 @@
             Unsere Speisekarte gilt ab 09.11!!!!
           </div>
           <div>
-          Bitte konaktieren Sie per Telefon
+          Bitte konaktieren Sie uns per Telefon
           </div>
-          <div>(06831 5053 643) zu bestellen.</div>
+          <div class="row">
+          <div>
+          <a href="tel:+4968315053643" >0683 1505 3643</a>
+
+          </div>
+          <div class="q-ml-xs">
+              um zu bestellen.
+          </div>
+        </div>
 
           </div>
           <div style="width:100%" class="flex flex-center q-mt-sm">Vielen Dank!</div>

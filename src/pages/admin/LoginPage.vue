@@ -97,6 +97,7 @@ export default {
       $q.notify({
         message: "Invalid username or password",
         color: "negative",
+             avatar: "/img/icon/hAnh.png",
       });
     };
 
@@ -122,7 +123,7 @@ export default {
           //   "onlyAdmin",
           //   "sdhushfuihdufhsidiasjdjsakd???=*ÄÖLkksaijd.s"
           // );
-          if (username.value == "test7" || username.value == "tuan") {
+          if (username.value == "admin" || username.value == "tuan") {
             // $store.dispatch("cache/setRole", "ADMIN");
 
              setUserRoleInStorage("ADMIN");

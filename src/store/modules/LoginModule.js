@@ -41,7 +41,7 @@ export const loginModule = {
       setJwtTokenInStorage(jwt);
     },
     setRole(state,loginRequest ){
-      if(loginRequest.username == 'test7'|| loginRequest.username =='tuan'){
+      if(loginRequest.username == 'admin'|| loginRequest.username =='tuan'){
         state.role = 'ADMIN'
       }else{
         state.role = 'USER'

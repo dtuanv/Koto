@@ -61,10 +61,10 @@
       <q-card class="shadow-4 q-mt-lg"
         :style=" $q.screen.width > 400 && $q.screen.height > 700 ? 'margin-top:60px' : '' ">
         <q-card-section>
-          <div class="text-h7" style="color: cornflowerblue; font-family: cursive" v-if="orGuestNum == ''">
+          <div class="text-h7" style="color: cornflowerblue; font-family: emoji" v-if="orGuestNum == ''">
             Anzahl der Gäste : {{ guestNum }}
           </div>
-          <div class="text-h7" style="color: cornflowerblue; font-family: cursive" v-if="orGuestNum != ''">
+          <div class="text-h7" style="color: cornflowerblue; font-family: emoji" v-if="orGuestNum != ''">
             Ihre gewünschte Anzahl der Gäste : {{ orGuestNum }}
             <div>{{ changeStatus() }}</div>
           </div>
@@ -80,7 +80,7 @@
           </q-card-actions>
           <q-card-actions class="row">
 
-            <div class="q-mr-sm " style="color: cornflowerblue; font-family: cursive">oder die gewünschte Anzahl:</div>
+            <div class="q-mr-sm " style="color: cornflowerblue; font-family: emoji">oder die gewünschte Anzahl:</div>
             <q-input v-model="orGuestNum" color="positive" style="max-width: 100%;" label="Anzahl" :rules="[
               (val) =>
                 (!!val && val < 16 && val!=0 ||  val == '' ) || 'Bitte rufen Sie uns an, wenn Sie ein Tish für mehr 15 Personen reservieren',
@@ -98,11 +98,11 @@
           <q-badge color="teal"> Time: {{ time }} </q-badge>
         </div> -->
           <div class="row" style="width:100%">
-            <div class="text-h7 col-7" style="color: cornflowerblue; font-family: cursive">
+            <div class="text-h7 col-7" style="color: cornflowerblue; font-family: emoji">
               DATUM : {{ dateInGermany }}
             </div>
 
-            <div class="text-h7" style="color: cornflowerblue; font-family: cursive">
+            <div class="text-h7" style="color: cornflowerblue; font-family: emoji">
               Uhrzeit : {{ time }}
             </div>
           </div>
@@ -110,7 +110,7 @@
         <q-card-actions>
           <div class="row" style="width:100%">
             <div class="col-9">
-              <q-btn icon="event" round color="primary" label="Hier clicken">
+              <q-btn icon="event" round color="primary" label="Hier klicken">
                 <q-popup-proxy @before-show="updateProxy" cover transition-show="scale" transition-hide="scale">
                   <q-date v-model="proxyDate" :options="fromCurrendate">
                     <div class="row items-center justify-end q-gutter-sm">
@@ -140,7 +140,7 @@
     <q-dialog v-model="dialog_time">
       <q-card>
         <q-card-section>
-          <div class="text-h4 flex justify-center" style="font-family: cursive; color: cadetblue">
+          <div class="text-h4 flex justify-center" style="font-family: emoji; color: cadetblue">
             Uhrzeit
           </div>
         </q-card-section>

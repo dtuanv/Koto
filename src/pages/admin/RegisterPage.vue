@@ -24,6 +24,8 @@
           lazy-rules
           :rules="[(val) => (val && val.length > 0) || 'Please write your password']"
         />
+        <q-input label="admin code: " v-model="code" :rules="[(val) => (val && val.length > 0) || 'Please write admin code']">
+        </q-input>
 
         <div>
           <q-btn
@@ -72,6 +74,7 @@ export default defineComponent({
     const registerService = new RegisterService();
     const username = ref(null);
     const password = ref(null);
+    const code = ref('')
     const ajaxBar = ref(null);
 
     const isLoading = computed(() => {
@@ -92,18 +95,29 @@ export default defineComponent({
 
     const notifyFailedRegister = () => {
       $q.notify({
-        message: "There is an user for that username",
+        message: "failed!!",
         color: "negative",
+         avatar: "/img/icon/hAnh.png",
       });
     };
 
     const submitNewRegister = async () => {
       try {
-        ajaxBar.value.start();
+
+        if(code.value ==='nuradminmoiduojckjdkhfhdangnha#sdsd/*/8988()&%pvaonha51515+784934.,nxzs2@3f³'){
+      ajaxBar.value.start();
         $store.dispatch("isLoadingModule/setIsLoadingToTrue");
         const registerRequest = new RegisterRequest(username.value, password.value);
         await registerService.doRegister(registerRequest);
         notifySuccessRegister();
+        }else{
+           $q.notify({
+        message: "invalid code..",
+        color: "negative",
+             avatar: "/img/icon/hAnh.png",
+      });
+        }
+
       } catch (error) {
         notifyFailedRegister();
         console.log(error);
@@ -114,6 +128,7 @@ export default defineComponent({
     };
 
     return {
+      code,
       username,
       password,
       resetForm,

@@ -84,7 +84,7 @@
               <q-icon name="book_online" />
             </q-item-section>
 
-            <q-item-section> Reservation </q-item-section>
+            <q-item-section> Reservierung </q-item-section>
           </q-item>
 
           <q-item v-if="role == ''" clickable v-ripple to="/contact">
@@ -92,7 +92,7 @@
               <q-icon name="send" />
             </q-item-section>
 
-            <q-item-section> Contact </q-item-section>
+            <q-item-section> Kontakt </q-item-section>
           </q-item>
 
           <q-item
@@ -167,7 +167,7 @@
           <q-card-actions>
             <div class="row" style="width: 100%">
               <div
-                v-if="$q.screen.width > 400 && $q.screen.height > 700"
+                v-if="$q.screen.width > 500 && $q.screen.height > 700"
                 class="col-2"
               ></div>
               <div class="col-2">

@@ -10,10 +10,10 @@
             </div>
             <div v-else style="width:145px"></div>
             <div v-if="product.price == ''">
-              <q-btn class="q-mt-sm q-ml-sm" color="green" @click="dialog_zutat = true" label="Zutat Anzeigen"></q-btn>
+              <q-btn class="q-mt-sm q-ml-sm" color="green" @click="dialog_zutat = true" label="Zutaten Anzeigen"></q-btn>
             </div>
             <div v-if="product.price !== '' && product.imageUrl == ''">
-              <q-btn class="q-mt-sm q-ml-sm" color="green" @click="dialog_zutat = true" label="Zutat Anzeigen"></q-btn>
+              <q-btn class="q-mt-sm q-ml-sm" color="green" @click="dialog_zutat = true" label="Zutaten Anzeigen"></q-btn>
             </div>
           </div>
           <div style="margin-left:12px;width: 63%;" class="text-subtitle2 ">

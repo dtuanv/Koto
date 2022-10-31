@@ -3,7 +3,7 @@
     <!-- content -->
     <q-card
       :style="$q.screen.width > 450 && $q.screen.height > 700 ? 'background-color:bisque; width: 70vw; height: 45vh':'background-color:bisque; width: 70vw; height: 450px'">
-      <q-card-section class="flex justify-center text-h4">Contact</q-card-section>
+      <q-card-section class="flex justify-center text-h4">Kontakt</q-card-section>
       <q-card-actions>
         <q-form @submit="onSubmit" style="width:100%">
           <q-input class="q-ml-sm" label="Name" v-model="contact.name" style="width: 100%"></q-input>

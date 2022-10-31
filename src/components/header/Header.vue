@@ -59,7 +59,7 @@
         </div>
 
         <div class="">
-          <q-btn flat style="text-decoration-line: underline;color:blanchedalmond;font-size: 11px;" label="Impressung"
+          <q-btn flat style="text-decoration-line: underline;color:blanchedalmond;font-size: 11px;" label="Impressum"
             class="" @click="dialog_impressung = true"></q-btn>
 
           <q-btn flat style="text-decoration-line: underline;color:blanchedalmond;font-size: 11px;"
