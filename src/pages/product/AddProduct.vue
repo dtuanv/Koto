@@ -214,7 +214,7 @@ const jwt = computed(() => {
               ingredient: product.value.ingredient,
               decription: product.value.decription,
               price: product.value.price,
-              imageUrl: product.value.imageUrl,
+             imageUrl: product.value.imageUrl !== "" ? product.value.category + '/' + product.value.imageUrl + '.png' : "",
               category: product.value.category,
               subFoods: this.subFoods,
               num: product.value.num,

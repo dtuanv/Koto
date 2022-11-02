@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <div class="text-h5 flex justify-center">Reservierung </div>
+    <div class="text-h5 flex justify-center">Reservierung</div>
     <!-- <div>
         <div class="q-pb-sm q-gutter-sm">
           <q-badge color="teal">
@@ -25,7 +25,12 @@
       <div class="col-2"></div>
       <div class="col-2">
         <q-btn icon="event" round color="primary">
-          <q-popup-proxy @before-show="updateProxy" cover transition-show="scale" transition-hide="scale">
+          <q-popup-proxy
+            @before-show="updateProxy"
+            cover
+            transition-show="scale"
+            transition-hide="scale"
+          >
             <q-date v-model="proxyDate" mask="DD-MM-YYYY">
               <div class="row items-center justify-end q-gutter-sm">
                 <q-btn label="Cancel" color="primary" flat v-close-popup />
@@ -36,18 +41,27 @@
         </q-btn>
       </div>
 
-      <div class="col-7" style="color:blue;font-size: 16px;">
+      <div class="col-7" style="color: blue; font-size: 16px">
         Datum: {{ formattedString }}
-
       </div>
     </div>
     <div class="q-mt-sm">
-      <div v-if="reservations.length === 0" class="flex justify-center">Es gibt am {{ formattedString }} keine Reservierung
+      <div v-if="reservations.length === 0" class="flex justify-center">
+        Es gibt am {{ formattedString }} keine Reservierung
       </div>
+      <q-separator></q-separator>
+      <div class="row">
+        <div class="col-3">
+         Es gibt noch :
+           </div>
+          <div class="col-4 q-pl-sm" style="color: chocolate;">{{ numUnseenReservation }} Reservierung </div>
+          <div class="col-5">von der 7 kommenden </div>
+       </div>
+
+        Tagen, die noch nicht "angekommen" klicken!
+
     </div>
-
-
-
+    <q-separator></q-separator>
 
     <div v-for="reservation in reservations" :key="reservation.id">
       <q-card class="q-mb-sm">
@@ -55,17 +69,20 @@
           <!-- <div v-if="reservation.time > '18:00'">{{ reservation.time }}</div> -->
           <div>{{ reservation.time }}</div>
 
-          <q-btn :label="reservation.status == 2 ? 'Ankommen' : 'Angekommen'" class="float-right"
-            @click="changeStatus(reservation)" :color="reservation.status == 2 ? 'red' : 'positive'"></q-btn>
+          <q-btn
+            :label="reservation.status == 2 ? 'Ankommen' : 'Angekommen'"
+            class="float-right"
+            @click="changeStatus(reservation)"
+            :color="reservation.status == 2 ? 'red' : 'positive'"
+          ></q-btn>
         </q-card-section>
         <q-card-actions>
           <div>
             <div class="q-mr-sm col-2">Name: {{ reservation.name }}</div>
-            <div>Telefonnummer: {{ reservation.mobil }} </div>
+            <div>Telefonnummer: {{ reservation.mobil }}</div>
             <div>Anzahl der Gäste: {{ reservation.guestNum }}</div>
             <div>Nachricht: {{ reservation.note }}</div>
           </div>
-
         </q-card-actions>
       </q-card>
     </div>
@@ -82,96 +99,117 @@ import ReservationBox from "/src/components/ReservationBox.vue";
 import { useQuasar } from "quasar";
 import { date } from "quasar";
 const reservations = ref([]);
+const numUnseenReservation = ref(0);
 export default {
-
   setup() {
     const $store = useStore();
     const today = Date.now();
     const formattedString = ref(date.formatDate(today, "DD-MM-YYYY"));
-    const proxyDate = ref('')
+
+    // console.log("check f",date.addToDate(today,7))
+    Date.prototype.addDays = function (days) {
+      var dateIn = new Date(this.valueOf());
+      dateIn.setDate(dateIn.getDate() + days);
+      return dateIn;
+    };
+
+    var dateNowOrig = new Date();
+    // console.log("dateCheck",dateCheck.getDate() )
+    const nextWeek = date.formatDate(dateNowOrig.addDays(7), "DD-MM-YYYY");
+    const dateNow = date.formatDate(dateNowOrig, "DD-MM-YYYY");
+    // console.log("Check date, ",date.formatDate(dateCheck.addDays(7), "DD-MM-YYYY") )
+    // console.log("Check date, ",date.formatDate(dateCheck, "DD-MM-YYYY") )
+
+    const proxyDate = ref("");
     const jwt = computed(() => {
       return $store.getters["loginModule/getJwt"];
     });
 
+    axios
+      .get(`${WebApi.server}/admin/reservation/countUnseen/` + dateNow + "/" + nextWeek, {
+        headers: {
+          Authorization: "Bearer " + jwt.value,
+        },
+        withCredentials: true,
+      })
+      .then((response) => {
+        numUnseenReservation.value = response.data;
+      });
 
-
-    axios.get(`${WebApi.server}/admin/reservation/` + formattedString.value,
-    {
-            headers: {
-              Authorization: "Bearer " + jwt.value,
-            },
-            withCredentials: true,
-          }
-    ).then((response) => {
-      reservations.value = response.data;
-      for (var i = 1; i < reservations.value.length; i++)
-        for (var j = 0; j < i; j++)
-          if (reservations.value[i].time < reservations.value[j].time) {
-            // console.log("check in array ", reservations.value[i].time < reservations.value[j].time)
-            var x = reservations.value[i];
-            reservations.value[i] = reservations.value[j];
-            reservations.value[j] = x;
-          }
-
-    });
+    axios
+      .get(`${WebApi.server}/admin/reservation/` + formattedString.value, {
+        headers: {
+          Authorization: "Bearer " + jwt.value,
+        },
+        withCredentials: true,
+      })
+      .then((response) => {
+        reservations.value = response.data;
+        for (var i = 1; i < reservations.value.length; i++)
+          for (var j = 0; j < i; j++)
+            if (reservations.value[i].time < reservations.value[j].time) {
+              // console.log("check in array ", reservations.value[i].time < reservations.value[j].time)
+              var x = reservations.value[i];
+              reservations.value[i] = reservations.value[j];
+              reservations.value[j] = x;
+            }
+      });
 
     return {
+      changeStatus(reservation) {
+        reservation.status = 1;
 
-    changeStatus(reservation) {
-      reservation.status = 1
-
-      axios.put(`${WebApi.server}/admin/reservation/changeStatus/`+reservation.id , reservation.id,
-         {
-            headers: {
-              Authorization: "Bearer " + jwt.value,
-            },
-            withCredentials: true,
-          }
-      )
-
-
-
-    },
-
-      jwt,
-      reservations,
-      formattedString,
-      proxyDate,
-
-      updateProxy() {
-        proxyDate.value = formattedString.value
-      },
-
-      save() {
-        formattedString.value = proxyDate.value
-        axios.get(`${WebApi.server}/admin/reservation/` + formattedString.value,
+        axios.put(
+          `${WebApi.server}/admin/reservation/changeStatus/` + reservation.id,
+          reservation.id,
           {
             headers: {
               Authorization: "Bearer " + jwt.value,
             },
             withCredentials: true,
           }
-        ).then((response) => {
-          reservations.value = response.data;
-          // console.log("reservations adrii",reservations.value[0].time)
-          // console.log("reservations adrii", reservations.value)
-          for (var i = 1; i < reservations.value.length; i++)
-            for (var j = 0; j < i; j++)
-              if (reservations.value[i].time < reservations.value[j].time) {
-                // console.log("check in array ", reservations.value [i].time < reservations.value [j].time)
-                var x = reservations.value[i];
-                reservations.value[i] = reservations.value[j];
-                reservations.value[j] = x;
-              }
+        );
+      },
 
-        });
-      }
+      jwt,
+      reservations,
+      numUnseenReservation,
+      formattedString,
+      dateNow,
+      nextWeek,
+      proxyDate,
+
+      updateProxy() {
+        proxyDate.value = formattedString.value;
+      },
+
+      save() {
+        formattedString.value = proxyDate.value;
+        axios
+          .get(`${WebApi.server}/admin/reservation/` + formattedString.value, {
+            headers: {
+              Authorization: "Bearer " + jwt.value,
+            },
+            withCredentials: true,
+          })
+          .then((response) => {
+            reservations.value = response.data;
+            // console.log("reservations adrii",reservations.value[0].time)
+            // console.log("reservations adrii", reservations.value)
+            for (var i = 1; i < reservations.value.length; i++)
+              for (var j = 0; j < i; j++)
+                if (reservations.value[i].time < reservations.value[j].time) {
+                  // console.log("check in array ", reservations.value [i].time < reservations.value [j].time)
+                  var x = reservations.value[i];
+                  reservations.value[i] = reservations.value[j];
+                  reservations.value[j] = x;
+                }
+          });
+      },
     };
-
   },
 
-   methods: {
-
+  methods: {
     // changeStatus(reservation) {
     //   console.log("Bearer  + jwt.value,",this.jwt )
     //   reservation.status = 1

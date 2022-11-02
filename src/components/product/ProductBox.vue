@@ -34,7 +34,7 @@
             <div class="q-ml-sm " style="font-size: 14px; width:90% ">{{ product.decription }}</div>
             <!-- button zutat begin -->
             <div v-if="product.price !== '' && product.imageUrl != ''" style="width: 70px;" class="q-mt-sm float-right">
-              <q-btn class="" color="green" @click="dialog_zutat = true" label="Zutat Anzeigen"></q-btn>
+              <q-btn class="" color="green" @click="dialog_zutat = true" label="Zutaten Anzeigen"></q-btn>
             </div>
             <!-- button zutat end -->
 
@@ -121,10 +121,10 @@
               <img :src="'/img/' + product.imageUrl" alt="" style="height: 25vw; width: 25vw" />
             </div>
             <div v-if="product.price == ''">
-              <q-btn class="q-mt-sm" color="green" @click="dialog_zutat = true" label="Zutat Anzeigen"></q-btn>
+              <q-btn class="q-mt-sm" color="green" @click="dialog_zutat = true" label="Zutaten Anzeigen"></q-btn>
             </div>
             <div v-if="product.price !== '' && product.imageUrl == ''">
-              <q-btn class="q-mt-sm" color="green" @click="dialog_zutat = true" label="Zutat Anzeigen"></q-btn>
+              <q-btn class="q-mt-sm" color="green" @click="dialog_zutat = true" label="Zutaten Anzeigen"></q-btn>
             </div>
           </div>
           <q-dialog v-model="dialog_zutat">
@@ -199,7 +199,7 @@
             <div class="q-ml-sm " style="font-size: 12px; ">{{ product.decription }}</div>
             <!-- button zutat begin -->
             <div v-if="product.price !== '' && product.imageUrl != ''" style="width: 70px;" class="q-mt-sm float-right">
-              <q-btn class="" color="green" @click="dialog_zutat = true" label="Zutat Anzeigen"></q-btn>
+              <q-btn class="" color="green" @click="dialog_zutat = true" label="Zutaten Anzeigen"></q-btn>
             </div>
             <!-- button zutat end -->
 
