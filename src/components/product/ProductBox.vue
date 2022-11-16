@@ -375,7 +375,6 @@ export default {
 
 
               })
-              console.log('is deleted: ')
             })
         }).onCancel(() => {
           console.log('>>>> Cancel')

@@ -11,7 +11,6 @@ function getInitialState(){
   const token = getJwtFromStorage();
   const role = getUserRoleFromStrorage();
 
-  console.log("Cheack time saved Token", token)
   if(isValueEmpty(token)){
     return {loggedIn: false, jwt: "",role:""};
 
@@ -53,7 +52,6 @@ export const loginModule = {
       removeJwtTokenFromStorage();
     },
     logout(state){
-      console.log("logout in store")
       state.loggedIn = false;
       state.jwt = null;
       state.role = "";
@@ -63,7 +61,6 @@ export const loginModule = {
   actions:{
     async doLogin({commit}, loginRequest){
       try {
-        console.log("lolgin request in modules", loginRequest);
         const response = await loginService.doLogin(loginRequest);
         const jwt = response.data.jwtToken;
         // console.log("TUan ckeck respone in dologin at modules ", jwt);
@@ -84,7 +81,6 @@ export const loginModule = {
       }
     },
     doLogout({commit}){
-      console.log("commit dologout")
       commit("logout");
     },
   },

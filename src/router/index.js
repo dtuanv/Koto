@@ -38,10 +38,7 @@ export default route(function ({ store, ssrContext }) {
       process.env.MODE === "ssr" ? void 0 : process.env.VUE_ROUTER_BASE
     ),
   });
-// console.log("Store ",store )
-  console.log("storin route", store.state.loginModule.loggedIn)
-  // console.log("storin route Roleeeee", store.state.loginModule.role)
-  // console.log("storin role route", store.state.cache)
+
 
   // the vue router defines all of the routes for the application,
   //  and contains a function that runs before each route change

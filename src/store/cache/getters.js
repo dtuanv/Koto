@@ -1,5 +1,4 @@
 export function getProduct (state) {
-  // console.log("Get Product")
     return state.products
 }
 export const cartItemCount = (state) => {
@@ -10,7 +9,6 @@ export const cartTotalPrice = (state) => {
   state.cart.forEach(item => {
     total += item.product.price * item.quantity
   })
-  // console.log("show test total ", total)
   return total
 }
 // export function getCustomer(state){

@@ -265,7 +265,6 @@ export default {
     const role = computed({
       get: () => $store.state.loginModule.role,
     });
-    console.log("Role in computed: ", role);
 
     // const role = ref(localStorage.getItem("user"));
 

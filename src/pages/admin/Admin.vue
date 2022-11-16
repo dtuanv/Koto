@@ -113,7 +113,6 @@ const jwt = computed(() => {
         localStorage.removeItem("user");
         localStorage.removeItem("onlyAdmin");
 
-        console.log("loggedIn logout", loggedIn);
         $q.notify({
           message: "logout",
 

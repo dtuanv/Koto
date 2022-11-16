@@ -69,7 +69,6 @@ export default {
     )
       .then(response => {
         contacts.value = response.data;
-        console.log("contacts.value ",contacts.value)
       })
       .catch(err => {
         console.log(err);

@@ -115,13 +115,10 @@ export const REMOVE_FROM_CART = (state, product) => {
   });
 };
 export const CHECK_OUT = (state) => {
-  // console.log("Check Out")
   return (state.cart = []);
 };
 export const CHANGE_GUEST_NUM = (state, orGuestNum) => {
-  // console.log("change in mutation")
   state.guestNum = orGuestNum;
-  // console.log( state.guestNum )
   return;
 };
 export const CHANGE_STATUS = (state, key, input) => {
@@ -139,12 +136,7 @@ export const RESET_STATUS = (state) => {
     orGuestNum: "",
   };
 
-  // let  updateStatus = state.reservations.find(re =>{
-  //     return re.icon==='east'
-  //   })
-  //   if(updateStatus){
-  //     updateStatus.status = false
-  //   }
+
   state.reservations.forEach((re) => {
     re.status = false;
   });

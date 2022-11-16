@@ -51,7 +51,6 @@ export default defineComponent({
     const getUserInfo = async () => {
       try {
         $store.dispatch("isLoadingModule/setIsLoadingToTrue");
-        console.log("JWT:" ,jwt)
         const response = await protectedService.getUserInfo(jwt.value);
         helloMsg.value = response.data;
       } catch (error) {
@@ -66,7 +65,6 @@ export default defineComponent({
       try {
         ajaxBar.value.start();
         $store.dispatch("isLoadingModule/setIsLoadingToTrue");
-        console.log("jwt value: ", jwt.value);
         const response = await protectedService.doSimplePostRequest(jwt.value);
         postRequestResponse.value = response.data;
       } catch (error) {

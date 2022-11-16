@@ -83,8 +83,7 @@ export default {
     const checkLoginStatus = () => {
       // const loginStatus = $store.getters["modules/getLoginStatus"];
       const loginStatus = $store.getters["loginModule/getLoginStatus"];
-      console.log("login status login: ", loginStatus);
-      console.log(" in Store: ", $store.getters);
+
       if (loginStatus.loggedIn) {
         // doLogout();
         $router.push("/");
