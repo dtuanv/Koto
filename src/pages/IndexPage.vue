@@ -16,14 +16,54 @@
       src="~assets/quasar-logo-vertical.svg"
       style="width: 200px; height: 200px"
     > -->
+    <q-dialog v-model="dialog_hinweis">
+        <q-card style="" >
+          <q-card-section>
+          <div class="text-h5 flex flex-center" style="color:brown">
+          Hinweis
+          </div>
+          </q-card-section>
+          <q-card-actions >
+          <div class="flex flex-center">
+            <div style=" width: 57vw;">
+            Im Rahmen der Neueröffnung wartet eine Überraschung auf Sie !
+          </div>
+
+          <div class="q-mt-sm">10% Rabatt für Selbstabholung !</div>
+          <div>
+          Bitte konaktieren Sie uns per Telefon
+          </div>
+          <div class="row">
+          <div>
+          <a href="tel:+4968315053643" >0683 1505 3643</a>
+
+          </div>
+          <div class="q-ml-xs">
+              um zu bestellen.
+          </div>
+        </div>
+
+          </div>
+          <div style="width:100%" class="flex flex-center q-mt-sm">Vielen Dank!</div>
+
+
+          </q-card-actions>
+        </q-card>
+    </q-dialog>
 
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
+import { ref, computed, nextTick } from "vue";
 
-export default defineComponent({
-  name: 'IndexPage'
-})
+export default {
+  name: 'IndexPage',
+  setup(){
+    return{
+      dialog_hinweis:ref(true),
+    }
+  }
+}
 </script>

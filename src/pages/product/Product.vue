@@ -286,9 +286,11 @@
           </q-card-section>
           <q-card-actions >
           <div class="flex flex-center">
-             <div>
-            Unsere Speisekarte gilt ab 09.11!!!!
+            <div style=" width: 57vw;">
+            Im Rahmen der Neueröffnung wartet eine Überraschung auf Sie !
           </div>
+
+          <div class="q-mt-sm">10% Rabatt für Selbstabholung !</div>
           <div>
           Bitte konaktieren Sie uns per Telefon
           </div>
