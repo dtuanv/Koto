@@ -36,11 +36,14 @@
 
     <q-btn v-if="role === 'ADMIN'" class="flex flex-center btn hoverButton" flat label="Admin Product" to="admin/product" />
     <q-separator />
+    <div>
+      <q-separator />
 
-    <!-- <q-btn class="flex flex-center hoverButton" flat label="Admin Gallery" to="/category" /> -->
-    <!-- <q-btn class="flex flex-center hoverButton" flat label="Order History" to="/admin/history" /> -->
-    <!-- <q-btn  class="absolute-top-right q-mt-sm q-mr-md" flat color="red" label="Log Out"
-      @click="logOut" /> -->
+    <q-btn v-if="role === 'ADMIN'" class="flex flex-center btn hoverButton" flat label="Hinweis" to="admin/notice" />
+    <q-separator />
+    </div>
+
+
   </q-page>
 </template>
 

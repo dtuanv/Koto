@@ -106,6 +106,13 @@ const routes = [
 
       },
       {
+        path: "/admin/notice",
+        name: "adminNotice",
+        component: () => import("src/pages/admin/NoticeAdmin.vue"),
+        meta: { isRequireAuth: true },
+
+      },
+      {
         path: "/admin/reservation",
         name: "adminResieveren",
         component: () => import("src/pages/admin/ReservierungManager.vue"),

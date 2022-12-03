@@ -277,7 +277,9 @@
     </div>
     <!-- sashimi end -->
     <q-separator/>
-    <q-dialog v-model="dialog_hinweis">
+
+
+    <!-- <q-dialog v-model="dialog_hinweis">
         <q-card style="" >
           <q-card-section>
           <div class="text-h5 flex flex-center" style="color:brown">
@@ -310,8 +312,29 @@
 
           </q-card-actions>
         </q-card>
-    </q-dialog>
+    </q-dialog> -->
 
+
+
+    <!-- new -->
+
+    <q-dialog v-model="hinweis_dialog" v-if="notice.status == 'on'">
+      <q-card style="width: 65vw; ">
+        <q-card-action>
+          <div class="flex flex-center text-h5" style="color:cadetblue;">Hinweis</div>
+
+        </q-card-action>
+        <q-separator></q-separator>
+        <q-card-selections>
+          <div class="q-pa-lg flex flex-center" >
+            <div>
+                {{ notice.description }}
+              </div>
+          </div>
+        </q-card-selections>
+      </q-card>
+
+    </q-dialog>
     <!-- <div class="col-6"></div> -->
   </q-page>
 </template>
@@ -408,6 +431,10 @@ export default {
       get: () => $store.state.cache.sashimiProducts,
     });
     // console.log("sushiProducts", sushiProducts);
+    const notice = ref({})
+    axios.get(`${WebApi.server}/getNotice/productPage`).then((response) =>{
+      notice.value = response.data
+    })
     return {
       dialog_hinweis:ref(true),
       makiProducts,
@@ -429,6 +456,9 @@ export default {
       vorspeiseProducts,
       hauptgangProducts,
       sushiMixProducts,
+      notice,
+      hinweis_dialog:ref(true),
+
     };
   },
   mounted() {
