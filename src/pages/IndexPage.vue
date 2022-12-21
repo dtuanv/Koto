@@ -59,7 +59,7 @@
         <q-card-selections>
           <div class="q-pa-lg flex flex-center" >
             <div>
-                {{ notice.description }}
+              <q-card-section  v-html="notice.description" />
               </div>
           </div>
         </q-card-selections>
